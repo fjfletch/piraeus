@@ -22,11 +22,12 @@ interface MCPStoreState {
   getLLMNode: (nodeId: string) => any;
 }
 
-export const useMCPStore = create<MCPStoreState>((set) => ({
+export const useMCPStore = create<MCPStoreState>((set, get) => ({
   currentMCP: null,
   nodes: [],
   edges: [],
   selectedNode: null,
+  llmNodes: {},
 
   setCurrentMCP: (mcp) => set({ currentMCP: mcp }),
 
