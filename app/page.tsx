@@ -228,32 +228,34 @@ export default function Home() {
           viewport={{ once: true }}
           className="container mx-auto max-w-4xl text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-6" style={{ color: '#033F63' }}>
-            Ready to Get Started?
-          </h2>
-          <p className="text-xl mb-10" style={{ color: '#28666E' }}>
-            Join developers building the future of AI integrations
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/auth/signup">
-              <Button size="lg" className="text-lg px-10 py-6 shadow-xl" style={{ backgroundColor: '#033F63' }}>
-                Create Free Account
-              </Button>
-            </Link>
-            <Link href="/marketplace">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-lg px-10 py-6 shadow-xl border-2"
-                style={{ 
-                  borderColor: '#28666E',
-                  color: '#033F63',
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)'
-                }}
-              >
-                Browse Marketplace
-              </Button>
-            </Link>
+          <div className="backdrop-blur-xl bg-white/35 border-2 border-white/50 rounded-3xl p-12 shadow-2xl">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6" style={{ color: '#033F63' }}>
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl mb-10" style={{ color: '#28666E' }}>
+              Join developers building the future of AI integrations
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Link href="/auth/signup">
+                <Button size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#033F63' }}>
+                  Create Free Account
+                </Button>
+              </Link>
+              <Link href="/marketplace">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow border-2 backdrop-blur-sm"
+                  style={{ 
+                    borderColor: '#28666E',
+                    color: '#033F63',
+                    backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                  }}
+                >
+                  Browse Marketplace
+                </Button>
+              </Link>
+            </div>
           </div>
         </motion.div>
       </section>
