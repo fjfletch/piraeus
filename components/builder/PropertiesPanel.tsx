@@ -105,10 +105,38 @@ ${mockResponse.tool_calls
 
       const api = currentMCP?.apis.find((a) => a.id === tool.apiId);
 
+      const handleDeleteTool = () => {
+        if (confirm('Are you sure you want to delete this tool?')) {
+          removeTool(toolId);
+          selectNode(null);
+          toast({
+            title: 'Success',
+            description: 'Tool deleted',
+          });
+        }
+      };
+
+      const handleEditTool = () => {
+        setEditingToolConfig(tool);
+        setIsEditingTool(true);
+      };
+
       return (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">🔧 Tool: {tool.displayName}</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">🔧 Tool: {tool.displayName}</CardTitle>
+              <div className="flex gap-2">
+                <Button size="sm" variant="outline" onClick={handleEditTool}>
+                  <Edit className="h-3 w-3 mr-1" />
+                  Edit
+                </Button>
+                <Button size="sm" variant="destructive" onClick={handleDeleteTool}>
+                  <Trash2 className="h-3 w-3 mr-1" />
+                  Delete
+                </Button>
+              </div>
+            </div>
           </CardHeader>
           <CardContent className="space-y-3">
             <div>
@@ -130,7 +158,7 @@ ${mockResponse.tool_calls
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">Endpoint</p>
-                <p className="font-mono text-xs">{tool.endpoint}</p>
+                <p className="font-mono text-xs break-all">{tool.endpoint}</p>
               </div>
             </div>
             <div>
@@ -142,9 +170,6 @@ ${mockResponse.tool_calls
                 className="font-mono text-xs"
               />
             </div>
-            <p className="text-xs text-muted-foreground">
-              💡 Edit this tool in the &apos;Tools&apos; tab in the left sidebar
-            </p>
           </CardContent>
         </Card>
       );
