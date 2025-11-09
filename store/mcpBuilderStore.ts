@@ -11,6 +11,20 @@ import {
   SelectedItem,
   DeploymentStatus
 } from '@/types/builder';
+import backendAPI from '@/lib/api/backend';
+import {
+  transformToolsFromBackend,
+  transformToolToBackend,
+  transformPromptsFromBackend,
+  transformPromptToBackend,
+  transformMCPConfigsFromBackend,
+  transformMCPConfigToBackend,
+  transformResponseConfigsFromBackend,
+  transformResponseConfigToBackend,
+  transformFlowFromBackend,
+  transformFlowToBackend,
+} from '@/lib/api/transformers';
+import { BackendTool, BackendPrompt, BackendMCPConfig, BackendResponseConfig, BackendFlow } from '@/lib/api/types';
 
 // ID Counters (outside store to persist across renders)
 let toolIdCounter = 4; // Starts after default tools
@@ -27,6 +41,19 @@ interface MCPBuilderStore {
   workflowSteps: WorkflowStep[];
   currentTab: TabType;
   selectedItem: SelectedItem | null;
+  
+  // Backend integration state
+  projectId: string;
+  isLoading: boolean;
+  isSyncing: boolean;
+  lastError: string | null;
+  currentFlowId: string | null; // UUID of current workflow in backend
+  
+  // Backend ID mappings (numeric_id -> UUID)
+  toolIdMap: Map<number, string>;
+  promptIdMap: Map<number, string>;
+  mcpConfigIdMap: Map<number, string>;
+  responseConfigIdMap: Map<number, string>;
 
   // ═══ TAB ACTIONS ═══
   setCurrentTab: (tab: TabType) => void;
