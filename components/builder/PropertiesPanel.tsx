@@ -14,6 +14,9 @@ import { useToast } from '@/components/ui/use-toast';
 import { Play, Loader2, X, Trash2, Edit } from 'lucide-react';
 import APIConfigModal from '@/components/modals/APIConfigModal';
 import ToolConfigModal from '@/components/modals/ToolConfigModal';
+import QueryNodeProperties from './QueryNodeProperties';
+import ResponseNodeProperties from './ResponseNodeProperties';
+import EdgeProperties from './EdgeProperties';
 
 export default function PropertiesPanel() {
   const { currentMCP, selectedNode, updateMCP, removeAPI, removeTool, updateAPI, updateTool, selectNode, updateLLMNode, getLLMNode } = useMCPStore();
