@@ -1,0 +1,540 @@
+2025-11-09 01:15:45.651 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.651 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/users
+2025-11-09 01:15:45.681 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 30.18ms
+2025-11-09 01:15:45.693 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.693 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: POST https://api.example.com/users
+2025-11-09 01:15:45.722 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 201 in 28.41ms
+2025-11-09 01:15:45.725 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.725 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/protected
+2025-11-09 01:15:45.753 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 27.96ms
+2025-11-09 01:15:45.756 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.756 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/search
+2025-11-09 01:15:45.785 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 28.85ms
+2025-11-09 01:15:45.788 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.788 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: PUT https://api.example.com/users/123
+2025-11-09 01:15:45.817 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 29.18ms
+2025-11-09 01:15:45.820 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.820 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: DELETE https://api.example.com/users/123
+2025-11-09 01:15:45.849 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 204 in 28.52ms
+2025-11-09 01:15:45.852 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:45.852 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: PATCH https://api.example.com/users/123
+2025-11-09 01:15:45.880 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 28.08ms
+2025-11-09 01:15:45.883 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=0.001s, max_retries=3
+2025-11-09 01:15:45.883 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://httpbin.org/delay/10
+2025-11-09 01:15:45.912 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:105 - HTTP request failed: 
+2025-11-09 01:15:46.916 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:105 - HTTP request failed: 
+2025-11-09 01:15:48.920 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:105 - HTTP request failed: 
+2025-11-09 01:15:48.921 | ERROR    | dynamic_tools.services.http_client:execute:189 - HTTP request timed out after 3038.38ms
+2025-11-09 01:15:48.924 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:48.924 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/unstable
+2025-11-09 01:15:48.954 | WARNING  | dynamic_tools.services.http_client:_execute_with_retry:90 - Server error 500 for GET https://api.example.com/unstable, will retry
+2025-11-09 01:15:48.954 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:98 - 5xx error, will retry: Server error '500 Internal Server Error' for url 'https://api.example.com/unstable'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2025-11-09 01:15:49.956 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 1032.08ms
+2025-11-09 01:15:49.960 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=2
+2025-11-09 01:15:49.961 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/broken
+2025-11-09 01:15:49.990 | WARNING  | dynamic_tools.services.http_client:_execute_with_retry:90 - Server error 500 for GET https://api.example.com/broken, will retry
+2025-11-09 01:15:49.990 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:98 - 5xx error, will retry: Server error '500 Internal Server Error' for url 'https://api.example.com/broken'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2025-11-09 01:15:50.992 | WARNING  | dynamic_tools.services.http_client:_execute_with_retry:90 - Server error 500 for GET https://api.example.com/broken, will retry
+2025-11-09 01:15:50.992 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:98 - 5xx error, will retry: Server error '500 Internal Server Error' for url 'https://api.example.com/broken'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2025-11-09 01:15:52.995 | WARNING  | dynamic_tools.services.http_client:_execute_with_retry:90 - Server error 500 for GET https://api.example.com/broken, will retry
+2025-11-09 01:15:52.996 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:98 - 5xx error, will retry: Server error '500 Internal Server Error' for url 'https://api.example.com/broken'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2025-11-09 01:15:52.996 | ERROR    | dynamic_tools.services.http_client:execute:194 - HTTP request failed after 3035.32ms: Server error '500 Internal Server Error' for url 'https://api.example.com/broken'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+2025-11-09 01:15:52.998 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:52.998 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/notfound
+2025-11-09 01:15:53.028 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 404 in 29.89ms
+2025-11-09 01:15:53.031 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.032 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/data
+2025-11-09 01:15:53.061 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 29.50ms
+2025-11-09 01:15:53.064 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.064 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: DELETE https://api.example.com/resource
+2025-11-09 01:15:53.093 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 204 in 28.53ms
+2025-11-09 01:15:53.096 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.096 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/text
+2025-11-09 01:15:53.124 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 28.51ms
+2025-11-09 01:15:53.128 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.128 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/data
+2025-11-09 01:15:53.157 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 28.62ms
+2025-11-09 01:15:53.160 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.160 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.example.com/test
+2025-11-09 01:15:53.189 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 29.40ms
+2025-11-09 01:15:53.192 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.192 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: HEAD https://api.example.com/resource
+2025-11-09 01:15:53.221 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 28.34ms
+2025-11-09 01:15:53.223 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 01:15:53.224 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: OPTIONS https://api.example.com/resource
+2025-11-09 01:15:53.252 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 28.28ms
+2025-11-09 01:16:01.838 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:01.839 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:01.881 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:01.882 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:01.882 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Explain what REST APIs are...
+2025-11-09 01:16:02.290 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:04.375 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:06.456 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:06.457 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:06.684 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:06.684 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:06.685 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get the current weather for New York...
+2025-11-09 01:16:06.890 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:09.049 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:11.198 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:11.198 | ERROR    | dynamic_tools.services.prompt_service:prompt_mcp:179 - MCP prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:11.361 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:11.361 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:11.362 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Say hello...
+2025-11-09 01:16:11.492 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:13.624 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:15.704 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:15.704 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:15.826 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:15.826 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:15.826 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Explain Python...
+2025-11-09 01:16:16.196 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:18.242 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:20.364 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:20.364 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:20.496 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:20.496 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:20.496 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Explain Python...
+2025-11-09 01:16:20.578 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:22.619 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:24.662 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:24.663 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:24.793 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:24.794 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:24.794 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Test retry...
+2025-11-09 01:16:24.877 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:26.951 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:29.010 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:29.011 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:29.133 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:29.133 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:29.134 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Test failure...
+2025-11-09 01:16:29.195 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:31.274 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:33.396 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:33.397 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:33.435 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:33.436 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:33.436 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get user data...
+2025-11-09 01:16:33.568 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:35.708 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:37.834 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:37.834 | ERROR    | dynamic_tools.services.prompt_service:prompt_mcp:179 - MCP prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:37.972 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:37.973 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:37.973 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Test...
+2025-11-09 01:16:38.066 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:40.126 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:42.183 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:42.184 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:42.307 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:42.307 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:42.308 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Test...
+2025-11-09 01:16:42.400 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:44.472 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:46.534 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:46.534 | ERROR    | dynamic_tools.services.prompt_service:prompt_normal:127 - Normal prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:46.659 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 01:16:46.659 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 01:16:46.659 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Create data...
+2025-11-09 01:16:46.766 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:48.881 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:51.017 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:16:51.018 | ERROR    | dynamic_tools.services.prompt_service:prompt_mcp:179 - MCP prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-11-09 01:18:40.997 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:07:46.852 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:08:02.732 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:08:32.790 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:09:02.834 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:09:32.950 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:10:03.017 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:10:33.067 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:11:03.130 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:11:33.197 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:12:03.263 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:12:33.325 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:13:03.385 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:13:33.430 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:14:03.482 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:14:33.541 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:15:03.596 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:15:33.652 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:16:03.726 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:16:33.790 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:17:03.849 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:17:33.915 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:18:03.959 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:18:34.021 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:19:04.083 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:19:34.129 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:20:42.735 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:292 - Workflow endpoint called: Get 5 random Fury cards...
+2025-11-09 17:20:42.792 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 17:20:42.793 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 17:20:42.793 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:20:42.793 | INFO     | dynamic_tools.services.workflow_orchestrator:__init__:47 - WorkflowOrchestrator initialized
+2025-11-09 17:20:42.793 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:64 - Starting workflow execution: Get 5 random Fury cards...
+2025-11-09 17:20:42.794 | WARNING  | dynamic_tools.core.registry:get_multiple:118 - Tool not found: get_riftbound_cards
+2025-11-09 17:20:42.794 | INFO     | dynamic_tools.core.registry:get_multiple:120 - Retrieved 0 tools, 1 missing
+2025-11-09 17:20:42.794 | WARNING  | dynamic_tools.services.workflow_orchestrator:_retrieve_tools:199 - Missing tools: ['get_riftbound_cards']
+2025-11-09 17:20:42.794 | ERROR    | dynamic_tools.services.workflow_orchestrator:execute_workflow:72 - Tools not found in registry: ['get_riftbound_cards']
+2025-11-09 17:20:42.794 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:317 - Workflow completed with status: error
+2025-11-09 17:20:46.792 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:21:16.873 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:21:46.933 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:22:41.726 | ERROR    | dynamic_tools.api.endpoints:register_tool:367 - Tool registration error: cannot import name 'create_api_tool' from 'dynamic_tools.factory.api_tool' (/app/src/dynamic_tools/factory/api_tool.py)
+2025-11-09 17:22:45.817 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:23:24.653 | INFO     | dynamic_tools.factory.tool_factory:create_from_config:25 - Creating tool from config: get_riftbound_cards
+2025-11-09 17:23:24.653 | INFO     | dynamic_tools.core.registry:register:58 - Registered tool: get_riftbound_cards
+2025-11-09 17:23:24.654 | INFO     | dynamic_tools.api.endpoints:register_tool:359 - Registered tool: get_riftbound_cards
+2025-11-09 17:23:44.242 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:23:51.106 | INFO     | dynamic_tools.factory.tool_factory:create_from_config:25 - Creating tool from config: get_riftbound_cards
+2025-11-09 17:23:51.106 | ERROR    | dynamic_tools.api.endpoints:register_tool:367 - Tool registration error: Tool 'get_riftbound_cards' already registered
+2025-11-09 17:23:51.234 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:296 - Workflow endpoint called: Get 5 random Fury cards...
+2025-11-09 17:23:51.252 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 17:23:51.253 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 17:23:51.253 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:23:51.253 | INFO     | dynamic_tools.services.workflow_orchestrator:__init__:47 - WorkflowOrchestrator initialized
+2025-11-09 17:23:51.254 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:64 - Starting workflow execution: Get 5 random Fury cards...
+2025-11-09 17:23:51.254 | INFO     | dynamic_tools.core.registry:get_multiple:120 - Retrieved 1 tools, 0 missing
+2025-11-09 17:23:51.255 | INFO     | dynamic_tools.services.workflow_orchestrator:_retrieve_tools:201 - Successfully retrieved all 1 tools
+2025-11-09 17:23:51.255 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:79 - Successfully retrieved 1 tools
+2025-11-09 17:23:51.255 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:111 - Calling LLM for tool selection and HTTP spec generation
+2025-11-09 17:23:51.256 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get 5 random Fury cards...
+2025-11-09 17:23:54.182 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 17:23:54.182 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:119 - LLM generated HTTP spec: GET https://api.riftbound.com/cards
+2025-11-09 17:23:54.183 | INFO     | dynamic_tools.services.workflow_orchestrator:_extract_tool_name_from_spec:295 - Matched tool 'get_riftbound_cards' via URL keyword 'riftbound'
+2025-11-09 17:23:54.183 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:123 - Identified selected tool: get_riftbound_cards
+2025-11-09 17:23:54.183 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:135 - Executing API call: GET https://api.riftbound.com/cards
+2025-11-09 17:23:54.183 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.riftbound.com/cards
+2025-11-09 17:23:54.241 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:105 - HTTP request failed: [Errno -2] Name or service not known
+2025-11-09 17:23:55.244 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:105 - HTTP request failed: [Errno -2] Name or service not known
+2025-11-09 17:23:57.249 | ERROR    | dynamic_tools.services.http_client:_execute_with_retry:105 - HTTP request failed: [Errno -2] Name or service not known
+2025-11-09 17:23:57.249 | ERROR    | dynamic_tools.services.http_client:execute:194 - HTTP request failed after 3065.98ms: [Errno -2] Name or service not known
+2025-11-09 17:23:57.250 | ERROR    | dynamic_tools.services.workflow_orchestrator:execute_workflow:140 - API execution failed: [Errno -2] Name or service not known
+2025-11-09 17:23:57.250 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:321 - Workflow completed with status: error
+2025-11-09 17:24:14.296 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:24:22.148 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:140 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:24:22.148 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:24:22.148 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:24:26.015 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 3864.30ms
+2025-11-09 17:24:26.019 | ERROR    | dynamic_tools.services.http_client:execute:199 - Unexpected error after 3867.35ms: 2 validation errors for HTTPResponseSpec
+body.dict[str,any]
+  Input should be a valid dictionary [type=dict_type, input_value=[{'name': 'Acceptable Los...11-05T01:15:23.947439'}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/dict_type
+body.str
+  Input should be a valid string [type=string_type, input_value=[{'name': 'Acceptable Los...11-05T01:15:23.947439'}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-11-09 17:24:26.021 | ERROR    | dynamic_tools.api.endpoints:execute_endpoint:160 - Execute endpoint error: 2 validation errors for HTTPResponseSpec
+body.dict[str,any]
+  Input should be a valid dictionary [type=dict_type, input_value=[{'name': 'Acceptable Los...11-05T01:15:23.947439'}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/dict_type
+body.str
+  Input should be a valid string [type=string_type, input_value=[{'name': 'Acceptable Los...11-05T01:15:23.947439'}], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.12/v/string_type
+2025-11-09 17:24:44.357 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:25:06.015 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:140 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:25:06.016 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:25:06.016 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:25:06.359 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 342.14ms
+2025-11-09 17:25:06.360 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:151 - HTTP request executed successfully: 200
+2025-11-09 17:25:14.419 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:25:24.490 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:140 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:25:24.491 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:25:24.491 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:25:24.706 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 214.13ms
+2025-11-09 17:25:24.707 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:151 - HTTP request executed successfully: 200
+2025-11-09 17:25:33.472 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:140 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:25:33.472 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:25:33.472 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:25:33.700 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 226.87ms
+2025-11-09 17:25:33.701 | INFO     | dynamic_tools.api.endpoints:execute_endpoint:151 - HTTP request executed successfully: 200
+2025-11-09 17:25:44.486 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:26:14.547 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:26:44.616 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:27:14.671 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:27:44.739 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:28:11.426 | INFO     | dynamic_tools.factory.tool_factory:create_from_config:25 - Creating tool from config: get_riftbound_cards
+2025-11-09 17:28:11.426 | INFO     | dynamic_tools.core.registry:register:58 - Registered tool: get_riftbound_cards
+2025-11-09 17:28:11.426 | INFO     | dynamic_tools.api.endpoints:register_tool:359 - Registered tool: get_riftbound_cards
+2025-11-09 17:28:11.494 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:296 - Workflow endpoint called: Get 5 random Fury cards...
+2025-11-09 17:28:11.517 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 17:28:11.518 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 17:28:11.518 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:28:11.518 | INFO     | dynamic_tools.services.workflow_orchestrator:__init__:47 - WorkflowOrchestrator initialized
+2025-11-09 17:28:11.518 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:64 - Starting workflow execution: Get 5 random Fury cards...
+2025-11-09 17:28:11.519 | INFO     | dynamic_tools.core.registry:get_multiple:120 - Retrieved 1 tools, 0 missing
+2025-11-09 17:28:11.519 | INFO     | dynamic_tools.services.workflow_orchestrator:_retrieve_tools:201 - Successfully retrieved all 1 tools
+2025-11-09 17:28:11.519 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:79 - Successfully retrieved 1 tools
+2025-11-09 17:28:11.519 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:111 - Calling LLM for tool selection and HTTP spec generation
+2025-11-09 17:28:11.520 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get 5 random Fury cards...
+2025-11-09 17:28:15.148 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 17:28:15.149 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:119 - LLM generated HTTP spec: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:15.150 | INFO     | dynamic_tools.services.workflow_orchestrator:_extract_tool_name_from_spec:322 - Matched tool 'get_riftbound_cards' via URL keyword 'riftbound'
+2025-11-09 17:28:15.150 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:123 - Identified selected tool: get_riftbound_cards
+2025-11-09 17:28:15.150 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:135 - Executing API call: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:15.150 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:15.399 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 247.05ms
+2025-11-09 17:28:15.399 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:137 - API call completed: 200
+2025-11-09 17:28:15.400 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:173 - Workflow completed successfully
+2025-11-09 17:28:15.400 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:321 - Workflow completed with status: success
+2025-11-09 17:28:16.673 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:28:43.279 | INFO     | dynamic_tools.factory.tool_factory:create_from_config:25 - Creating tool from config: get_riftbound_cards
+2025-11-09 17:28:43.280 | ERROR    | dynamic_tools.api.endpoints:register_tool:367 - Tool registration error: Tool 'get_riftbound_cards' already registered
+2025-11-09 17:28:43.403 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:296 - Workflow endpoint called: Get 5 random Fury cards from the Riftbound API...
+2025-11-09 17:28:43.408 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 17:28:43.408 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 17:28:43.409 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:28:43.409 | INFO     | dynamic_tools.services.workflow_orchestrator:__init__:47 - WorkflowOrchestrator initialized
+2025-11-09 17:28:43.409 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:64 - Starting workflow execution: Get 5 random Fury cards from the Riftbound API...
+2025-11-09 17:28:43.409 | INFO     | dynamic_tools.core.registry:get_multiple:120 - Retrieved 1 tools, 0 missing
+2025-11-09 17:28:43.409 | INFO     | dynamic_tools.services.workflow_orchestrator:_retrieve_tools:201 - Successfully retrieved all 1 tools
+2025-11-09 17:28:43.410 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:79 - Successfully retrieved 1 tools
+2025-11-09 17:28:43.410 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:111 - Calling LLM for tool selection and HTTP spec generation
+2025-11-09 17:28:43.410 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get 5 random Fury cards from the Riftbound API...
+2025-11-09 17:28:45.217 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 17:28:45.218 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:119 - LLM generated HTTP spec: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:45.218 | INFO     | dynamic_tools.services.workflow_orchestrator:_extract_tool_name_from_spec:322 - Matched tool 'get_riftbound_cards' via URL keyword 'riftbound'
+2025-11-09 17:28:45.218 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:123 - Identified selected tool: get_riftbound_cards
+2025-11-09 17:28:45.219 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:135 - Executing API call: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:45.219 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:45.415 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 195.73ms
+2025-11-09 17:28:45.415 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:137 - API call completed: 200
+2025-11-09 17:28:45.415 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:173 - Workflow completed successfully
+2025-11-09 17:28:45.416 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:321 - Workflow completed with status: success
+2025-11-09 17:28:46.744 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:28:56.052 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:296 - Workflow endpoint called: Get cards from Riftbound...
+2025-11-09 17:28:56.056 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 17:28:56.057 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 17:28:56.057 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 17:28:56.057 | INFO     | dynamic_tools.services.workflow_orchestrator:__init__:47 - WorkflowOrchestrator initialized
+2025-11-09 17:28:56.058 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:64 - Starting workflow execution: Get cards from Riftbound...
+2025-11-09 17:28:56.058 | INFO     | dynamic_tools.core.registry:get_multiple:120 - Retrieved 1 tools, 0 missing
+2025-11-09 17:28:56.058 | INFO     | dynamic_tools.services.workflow_orchestrator:_retrieve_tools:201 - Successfully retrieved all 1 tools
+2025-11-09 17:28:56.058 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:79 - Successfully retrieved 1 tools
+2025-11-09 17:28:56.058 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:111 - Calling LLM for tool selection and HTTP spec generation
+2025-11-09 17:28:56.059 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get cards from Riftbound...
+2025-11-09 17:28:58.328 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 17:28:58.328 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:119 - LLM generated HTTP spec: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:58.329 | INFO     | dynamic_tools.services.workflow_orchestrator:_extract_tool_name_from_spec:322 - Matched tool 'get_riftbound_cards' via URL keyword 'riftbound'
+2025-11-09 17:28:58.330 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:123 - Identified selected tool: get_riftbound_cards
+2025-11-09 17:28:58.330 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:135 - Executing API call: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:58.330 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://riftbound-top-decks-api-git-main-stevenabouchedids-projects.vercel.app/api/cards
+2025-11-09 17:28:58.660 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 200 in 326.36ms
+2025-11-09 17:28:58.661 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:137 - API call completed: 200
+2025-11-09 17:28:58.661 | INFO     | dynamic_tools.services.workflow_orchestrator:execute_workflow:173 - Workflow completed successfully
+2025-11-09 17:28:58.662 | INFO     | dynamic_tools.api.endpoints:workflow_endpoint:321 - Workflow completed with status: success
+2025-11-09 17:29:16.829 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:29:46.872 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:30:16.931 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:30:47.001 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:31:17.068 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:31:47.114 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:32:17.179 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:32:47.241 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:33:17.290 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:33:47.339 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:34:17.381 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:34:47.431 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:35:17.475 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:35:47.538 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:36:17.601 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:36:47.675 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:37:17.738 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:37:47.787 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:38:17.835 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:38:47.893 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:39:17.950 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:39:48.021 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:40:18.062 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:40:48.117 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:41:18.181 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:41:48.233 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:42:18.296 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:42:56.498 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:43:26.628 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:43:56.694 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:44:26.745 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:44:56.805 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:45:26.865 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:46:13.139 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:46:43.189 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:47:13.256 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:47:43.311 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:48:13.363 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:48:43.413 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:49:13.460 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:49:43.515 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:50:13.575 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:50:43.633 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:51:13.689 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:51:43.747 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:52:13.805 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:52:43.857 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:53:13.924 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:53:43.988 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:54:14.051 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:54:44.110 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:55:14.168 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:55:44.248 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 17:56:14.315 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:56:44.379 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:57:14.440 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:57:44.506 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:58:14.549 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:58:44.616 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:59:14.669 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 17:59:44.750 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:00:14.818 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:00:44.881 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:01:50.982 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:02:21.065 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:02:26.652 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.657 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.662 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.670 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.679 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.689 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.697 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.703 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.709 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.720 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.725 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.897 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:26.902 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:02:51.141 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:03:21.218 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:03:59.380 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.385 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.389 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.393 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.397 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.401 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.406 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.410 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.415 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.419 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.424 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.428 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:03:59.432 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:04:08.276 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:04:15.888 | INFO     | dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:04:20.864 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:04:50.978 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:05:21.044 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:05:51.118 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:06:21.187 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:06:51.253 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:07:21.313 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:07:51.380 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:08:21.446 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:08:51.512 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:09:30.518 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:09:38.588 | INFO     | dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:09:49.609 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:10:06.216 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.221 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.226 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.230 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.234 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.238 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.239 | ERROR    | src.dynamic_tools.services.supabase_service:get_tools:252 - Error fetching tools: 1 validation error for Tool
+numeric_id
+  Field required [type=missing, input_value={'id': 'fa0b4a59-3b3c-466...-11-09T18:10:06.236937'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.239 | ERROR    | src.dynamic_tools.api.database_endpoints:list_tools:368 - Error listing tools: 1 validation error for Tool
+numeric_id
+  Field required [type=missing, input_value={'id': 'fa0b4a59-3b3c-466...-11-09T18:10:06.236937'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.413 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.414 | ERROR    | src.dynamic_tools.services.supabase_service:create_tool:275 - Error creating tool: 1 validation error for Tool
+numeric_id
+  Field required [type=missing, input_value={'id': 'd8bb217f-f12a-4e2...-11-09T18:10:06.411153'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.414 | ERROR    | src.dynamic_tools.api.database_endpoints:create_tool:417 - Error creating tool: 1 validation error for Tool
+numeric_id
+  Field required [type=missing, input_value={'id': 'd8bb217f-f12a-4e2...-11-09T18:10:06.411153'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.427 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.428 | ERROR    | src.dynamic_tools.services.supabase_service:create_mcp_config:158 - Error creating MCP config: 1 validation error for MCPConfig
+numeric_id
+  Field required [type=missing, input_value={'id': '4d28f9b6-cb50-48d...-11-09T18:10:06.425632'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.429 | ERROR    | src.dynamic_tools.api.database_endpoints:create_mcp_config:213 - Error creating MCP config: 1 validation error for MCPConfig
+numeric_id
+  Field required [type=missing, input_value={'id': '4d28f9b6-cb50-48d...-11-09T18:10:06.425632'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.442 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.454 | ERROR    | src.dynamic_tools.services.supabase_service:update_mcp_config:171 - Error updating MCP config 99f7f6c3-e417-4392-95d1-2225ce91e44a: 1 validation error for MCPConfig
+numeric_id
+  Field required [type=missing, input_value={'id': '4bdc2a97-f4c4-403...-11-09T18:10:06.440564'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.454 | ERROR    | src.dynamic_tools.api.database_endpoints:update_mcp_config:230 - Error updating MCP config 99f7f6c3-e417-4392-95d1-2225ce91e44a: 1 validation error for MCPConfig
+numeric_id
+  Field required [type=missing, input_value={'id': '4bdc2a97-f4c4-403...-11-09T18:10:06.440564'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.466 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.466 | ERROR    | src.dynamic_tools.services.supabase_service:create_response_config:216 - Error creating response config: 1 validation error for ResponseConfig
+numeric_id
+  Field required [type=missing, input_value={'id': '12b955de-b93d-433...-11-09T18:10:06.464566'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.466 | ERROR    | src.dynamic_tools.api.database_endpoints:create_response_config:315 - Error creating response config: 1 validation error for ResponseConfig
+numeric_id
+  Field required [type=missing, input_value={'id': '12b955de-b93d-433...-11-09T18:10:06.464566'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.477 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.478 | ERROR    | src.dynamic_tools.services.supabase_service:create_prompt:337 - Error creating prompt: 1 validation error for Prompt
+numeric_id
+  Field required [type=missing, input_value={'id': '2b993722-41ef-434...-11-09T18:10:06.476352'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.478 | ERROR    | src.dynamic_tools.api.database_endpoints:create_prompt:519 - Error creating prompt: 1 validation error for Prompt
+numeric_id
+  Field required [type=missing, input_value={'id': '2b993722-41ef-434...-11-09T18:10:06.476352'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.490 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:06.491 | ERROR    | src.dynamic_tools.services.supabase_service:create_flow:399 - Error creating flow: 1 validation error for Flow
+numeric_id
+  Field required [type=missing, input_value={'id': 'f2ff7713-a42b-48e...-11-09T18:10:06.489186'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.491 | ERROR    | src.dynamic_tools.api.database_endpoints:create_flow:621 - Error creating flow: 1 validation error for Flow
+numeric_id
+  Field required [type=missing, input_value={'id': 'f2ff7713-a42b-48e...-11-09T18:10:06.489186'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+2025-11-09 18:10:06.504 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:10:19.672 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:10:49.746 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:11:19.824 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:11:51.224 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.229 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.234 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.238 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.242 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.246 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.250 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.254 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.258 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.262 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.266 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.271 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:11:51.276 | INFO     | src.dynamic_tools.services.supabase_service:__init__:33 - SupabaseService initialized
+2025-11-09 18:12:11.645 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:12:41.791 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:13:11.857 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:13:41.930 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:14:11.991 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:14:42.061 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:15:12.113 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:15:42.171 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:16:12.230 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:16:42.279 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:17:12.350 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:17:42.411 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:18:12.477 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:18:42.530 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:19:12.578 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested
+2025-11-09 18:19:42.625 | INFO     | dynamic_tools.api.app:health_check:44 - Health check requested

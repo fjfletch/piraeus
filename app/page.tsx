@@ -96,7 +96,7 @@ export default function Home() {
               Build powerful AI integrations visually. No code required. Piraeus makes it easy to expose APIs as tools that LLMs can use.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <Link href="/builder/new">
+              <Link href="/builder-v6">
                 <Button size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#033F63' }}>
                   Create Now
                 </Button>
