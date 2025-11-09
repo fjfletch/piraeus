@@ -52,18 +52,22 @@ async function proxyRequest(
   pathSegments: string[],
   method: string
 ) {
-  // Build target URL
-  const path = pathSegments.join('/');
-  const searchParams = request.nextUrl.searchParams.toString();
-  const targetUrl = `${AWS_BACKEND_URL}/${path}${searchParams ? `?${searchParams}` : ''}`;
-
-  console.log(`[Proxy] ${method} ${targetUrl}`);
-
   try {
+    // Build target URL
+    const path = pathSegments.join('/');
+    const searchParams = request.nextUrl.searchParams.toString();
+    const targetUrl = `${AWS_BACKEND_URL}/${path}${searchParams ? `?${searchParams}` : ''}`;
+
+    console.log(`[Proxy] ${method} ${targetUrl} (segments: ${JSON.stringify(pathSegments)})`);
+
     // Get request body if present
     let body = undefined;
     if (method !== 'GET' && method !== 'DELETE') {
-      body = await request.text();
+      try {
+        body = await request.text();
+      } catch (e) {
+        console.error('[Proxy] Error reading body:', e);
+      }
     }
 
     // Forward the request to AWS backend
@@ -73,7 +77,10 @@ async function proxyRequest(
         'Content-Type': 'application/json',
       },
       body: body || undefined,
+      signal: AbortSignal.timeout(30000), // 30 second timeout
     });
+
+    console.log(`[Proxy] Response: ${response.status}`);
 
     // Get response data
     const data = await response.text();
@@ -91,7 +98,7 @@ async function proxyRequest(
   } catch (error: any) {
     console.error('[Proxy] Error:', error);
     return NextResponse.json(
-      { error: 'Proxy error', details: error.message },
+      { error: 'Proxy error', details: error.message, stack: error.stack },
       { status: 500 }
     );
   }
