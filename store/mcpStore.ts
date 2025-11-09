@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { MCPIntegration, APIConfig, MCPTool, FlowNode, FlowEdge } from '@/types/mcp';
+import { canConnect } from '@/lib/flowValidation';
 
 interface MCPStoreState {
   currentMCP: MCPIntegration | null;
