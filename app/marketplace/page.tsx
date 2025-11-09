@@ -75,7 +75,7 @@ export default function Marketplace() {
             <Input
               type="search"
               placeholder="Search MCPs..."
-              className="pl-10"
+              className="pl-10 bg-white"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
