@@ -189,6 +189,18 @@ export default function FlowCanvas() {
         });
         return;
       }
+
+      // Determine node types based on ID patterns and type property
+      const getNodeType = (node: Node) => {
+        if (node.id.startsWith('tool-')) return 'tool';
+        if (node.id === 'input' || node.id.startsWith('query-')) return 'query';
+        if (node.id === 'output' || node.id.startsWith('response-')) return 'response';
+        if (node.id === 'llm' || node.id.startsWith('llm-')) return 'llm';
+        return node.type || 'default';
+      };
+
+      const sourceType = getNodeType(sourceNode);
+      const targetType = getNodeType(targetNode);
       
       // Check for duplicate connection
       if (connectionExists(params.source, params.target, edges as any)) {
@@ -201,8 +213,8 @@ export default function FlowCanvas() {
       }
       
       // Validate connection type
-      if (!canConnect(sourceNode.type, targetNode.type)) {
-        const errorMsg = getConnectionErrorMessage(sourceNode.type, targetNode.type);
+      if (!canConnect(sourceType, targetType)) {
+        const errorMsg = getConnectionErrorMessage(sourceType, targetType);
         toast({
           title: "Invalid Connection",
           description: errorMsg,
@@ -212,10 +224,10 @@ export default function FlowCanvas() {
       }
       
       // Special validation for LLM → Tool connections
-      if (sourceNode.type === 'llm' && targetNode.type === 'tool') {
+      if (sourceType === 'llm' && targetType === 'tool') {
         const toolValidation = validateToolConnection(
-          sourceNode,
-          targetNode,
+          sourceNode as any,
+          targetNode as any,
           currentMCP?.tools || []
         );
         
