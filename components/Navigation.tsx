@@ -29,7 +29,7 @@ export function Navigation() {
       <div className="container mx-auto flex h-16 items-center px-4">
         <Link href="/" className="flex items-center gap-2 mr-6">
           <img 
-            src="https://customer-assets.emergentagent.com/job_no-code-llm/artifacts/3qnepw83_Screenshot_2025-11-08_at_8.58.22_PM-removebg-preview.png" 
+            src="https://customer-assets.emergentagent.com/job_no-code-llm/artifacts/xbsi69r0_Screenshot_2025-11-08_at_10.53.35_PM-removebg-preview.png" 
             alt="Piraeus Logo" 
             className="h-8 w-auto"
           />
