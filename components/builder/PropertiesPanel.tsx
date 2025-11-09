@@ -256,36 +256,72 @@ ${mockResponse.tool_calls
 
     // LLM node
     if (selectedNode.id === 'llm') {
+      const [model, setModel] = useState(currentMCP?.configuration.model || 'gpt-3.5-turbo');
+      const [temperature, setTemperature] = useState(currentMCP?.configuration.temperature || 0.7);
+      const [maxTokens, setMaxTokens] = useState(currentMCP?.configuration.maxTokens || 2000);
+
       return (
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">🤖 LLM Configuration</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-4">
             <div>
-              <p className="text-xs text-muted-foreground">Model</p>
-              <p className="text-sm">{currentMCP?.configuration.model}</p>
+              <Label className="text-xs">Model</Label>
+              <Select
+                value={model}
+                onValueChange={(value) => {
+                  setModel(value);
+                  updateMCP({
+                    configuration: { ...currentMCP!.configuration, model: value },
+                  });
+                }}
+              >
+                <SelectTrigger className="text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gpt-4">GPT-4</SelectItem>
+                  <SelectItem value="gpt-4-turbo">GPT-4 Turbo</SelectItem>
+                  <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
+                  <SelectItem value="claude-3-opus">Claude 3 Opus</SelectItem>
+                  <SelectItem value="claude-3-sonnet">Claude 3 Sonnet</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Temperature</p>
-              <p className="text-sm">{currentMCP?.configuration.temperature}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Max Tokens</p>
-              <p className="text-sm">{currentMCP?.configuration.maxTokens}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground mb-1">System Prompt</p>
-              <Textarea
-                value={currentMCP?.configuration.globalPrompt || ''}
-                readOnly
-                rows={4}
-                className="text-xs"
+              <Label className="text-xs">Temperature: {temperature}</Label>
+              <input
+                type="range"
+                min="0"
+                max="2"
+                step="0.1"
+                value={temperature}
+                onChange={(e) => {
+                  const val = parseFloat(e.target.value);
+                  setTemperature(val);
+                  updateMCP({
+                    configuration: { ...currentMCP!.configuration, temperature: val },
+                  });
+                }}
+                className="w-full"
               />
             </div>
-            <p className="text-xs text-muted-foreground">
-              💡 Edit LLM settings in the &apos;Configuration&apos; tab in the left sidebar
-            </p>
+            <div>
+              <Label className="text-xs">Max Tokens</Label>
+              <Input
+                type="number"
+                value={maxTokens}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value);
+                  setMaxTokens(val);
+                  updateMCP({
+                    configuration: { ...currentMCP!.configuration, maxTokens: val },
+                  });
+                }}
+                className="text-sm"
+              />
+            </div>
           </CardContent>
         </Card>
       );
