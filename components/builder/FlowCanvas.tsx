@@ -101,12 +101,20 @@ export default function FlowCanvas() {
       const toolNodeId = `tool-${tool.id}`;
       newNodes.push({
         id: toolNodeId,
-        position: { x: 50 + index * 160, y: 420 },
+        position: { x: 50 + index * 180, y: 420 },
         data: {
           label: `🔧 ${tool.displayName}\n${tool.method} ${tool.endpoint}`,
           toolId: tool.id,
         },
-        style: { backgroundColor: '#ddd6fe', border: '2px solid #8b5cf6' },
+        style: { 
+          backgroundColor: '#ddd6fe', 
+          border: '2px solid #8b5cf6',
+          borderRadius: '8px',
+          padding: '12px',
+          fontWeight: 500,
+          minWidth: '160px',
+        },
+        draggable: true,
       });
 
       // Edge from LLM to tool
@@ -114,6 +122,8 @@ export default function FlowCanvas() {
         id: `llm-${toolNodeId}`,
         source: 'llm',
         target: toolNodeId,
+        type: 'smoothstep',
+        animated: false,
       });
 
       // Edge from tool to API (if connected)
@@ -124,7 +134,8 @@ export default function FlowCanvas() {
           source: toolNodeId,
           target: `api-${connectedAPI.id}`,
           type: 'smoothstep',
-          style: { strokeDasharray: '5 5' },
+          style: { strokeDasharray: '5 5', stroke: '#f59e0b' },
+          label: 'calls',
         });
       }
 
@@ -133,6 +144,7 @@ export default function FlowCanvas() {
         id: `${toolNodeId}-output`,
         source: toolNodeId,
         target: 'output',
+        type: 'smoothstep',
       });
     });
 
@@ -142,7 +154,14 @@ export default function FlowCanvas() {
       type: 'output',
       position: { x: 250, y: 580 },
       data: { label: '💬 Response to User' },
-      style: { backgroundColor: '#f0fdf4', border: '2px solid #22c55e' },
+      style: { 
+        backgroundColor: '#f0fdf4', 
+        border: '2px solid #22c55e',
+        borderRadius: '8px',
+        padding: '12px',
+        fontWeight: 500,
+      },
+      draggable: true,
     });
 
     // If no tools, connect LLM directly to output
