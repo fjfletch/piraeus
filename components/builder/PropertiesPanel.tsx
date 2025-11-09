@@ -437,10 +437,73 @@ ${mockResponse.tool_calls
               </Select>
               {llmMode === 'mcp' && (
                 <p className="text-xs text-muted-foreground mt-2">
-                  💡 Connect tools to this LLM node to enable tool calling
+                  💡 Select which tools this LLM can access below
                 </p>
               )}
             </div>
+
+            {/* Available Tools Section */}
+            {llmMode === 'mcp' && (
+              <div className="border-t pt-4">
+                <Label className="text-xs font-semibold">Available Tools</Label>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Select tools this LLM can call during execution
+                </p>
+                <div className="space-y-2 max-h-48 overflow-y-auto">
+                  {currentMCP?.tools && currentMCP.tools.length > 0 ? (
+                    currentMCP.tools.map((tool) => (
+                      <label
+                        key={tool.id}
+                        className="flex items-start gap-2 p-2 rounded hover:bg-muted cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={availableToolIds.includes(tool.id)}
+                          onChange={(e) => {
+                            const newToolIds = e.target.checked
+                              ? [...availableToolIds, tool.id]
+                              : availableToolIds.filter(id => id !== tool.id);
+                            setAvailableToolIds(newToolIds);
+                            updateLLMNode(selectedNode.id, {
+                              mode: llmMode,
+                              model,
+                              temperature,
+                              maxTokens,
+                              systemPrompt,
+                              availableToolIds: newToolIds,
+                            });
+                            toast({
+                              title: 'Tools Updated',
+                              description: e.target.checked 
+                                ? `Added ${tool.displayName}` 
+                                : `Removed ${tool.displayName}`,
+                            });
+                          }}
+                          className="mt-1"
+                        />
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">{tool.displayName}</p>
+                          <p className="text-xs text-muted-foreground">{tool.description}</p>
+                        </div>
+                      </label>
+                    ))
+                  ) : (
+                    <div className="text-xs text-muted-foreground text-center py-4">
+                      No tools configured yet. Add tools in the sidebar to make them available.
+                    </div>
+                  )}
+                </div>
+                <div className="mt-2 text-xs text-muted-foreground">
+                  {availableToolIds.length > 0 ? (
+                    <span className="text-purple-600 font-medium">
+                      ✓ {availableToolIds.length} tool{availableToolIds.length !== 1 ? 's' : ''} selected
+                    </span>
+                  ) : (
+                    <span>No tools selected</span>
+                  )}
+                </div>
+              </div>
+            )}
 
             <div className="border-t pt-4">
               <Label className="text-xs font-semibold">Model</Label>
