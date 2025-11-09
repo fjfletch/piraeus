@@ -77,32 +77,34 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="container mx-auto max-w-5xl text-center"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6" style={{ color: '#033F63' }}>
-            Provide your agents with the tools they need
-          </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto" style={{ color: '#28666E' }}>
-            Build powerful AI integrations visually. No code required. Piraeus makes it easy to expose APIs as tools that LLMs can use.
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link href="/builder/new">
-              <Button size="lg" className="text-lg px-10 py-6 shadow-xl" style={{ backgroundColor: '#033F63' }}>
-                Explore Now
-              </Button>
-            </Link>
-            <Link href="/docs">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-lg px-10 py-6 shadow-xl border-2"
-                style={{ 
-                  borderColor: '#28666E',
-                  color: '#033F63',
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)'
-                }}
-              >
-                Learn More
-              </Button>
-            </Link>
+          <div className="backdrop-blur-lg bg-white/30 border border-white/40 rounded-3xl p-12 shadow-2xl">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6" style={{ color: '#033F63' }}>
+              Provide your agents with the tools they need
+            </h1>
+            <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto" style={{ color: '#28666E' }}>
+              Build powerful AI integrations visually. No code required. Piraeus makes it easy to expose APIs as tools that LLMs can use.
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Link href="/builder/new">
+                <Button size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#033F63' }}>
+                  Explore Now
+                </Button>
+              </Link>
+              <Link href="/docs">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow border-2 backdrop-blur-sm"
+                  style={{ 
+                    borderColor: '#28666E',
+                    color: '#033F63',
+                    backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                  }}
+                >
+                  Learn More
+                </Button>
+              </Link>
+            </div>
           </div>
         </motion.div>
       </section>
