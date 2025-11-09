@@ -34,10 +34,8 @@ export default function Marketplace() {
   };
 
   const handlePreview = (mcpId: string, mcpName: string) => {
-    toast({
-      title: "Opening Preview",
-      description: `Loading ${mcpName}...`
-    });
+    setSelectedMCPId(mcpId);
+    setIsDetailModalOpen(true);
   };
 
   const filteredMCPs = mockMCPs.filter(mcp => {
