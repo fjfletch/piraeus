@@ -86,12 +86,7 @@ export default function BuilderV6Page() {
         {/* Right Inspector - 400px (only for workflow tab) */}
         {currentTab === 'workflow' && (
           <div className="w-[400px] border-l bg-background overflow-y-auto">
-            <div className="p-4">
-              <div className="text-sm font-semibold mb-2">Inspector</div>
-              <div className="text-sm text-muted-foreground">
-                Workflow inspector panel
-              </div>
-            </div>
+            <Inspector />
           </div>
         )}
       </div>
