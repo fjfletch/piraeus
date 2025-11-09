@@ -220,7 +220,8 @@ export default function FlowCanvas() {
           type: 'default',
           position,
           data: {
-            label: `🤖 LLM Decision\n${currentMCP?.configuration.model || 'GPT-4'}`,
+            label: `🤖 LLM Decision\nNormal Prompt`,
+            mode: 'normal',
           },
           style: {
             backgroundColor: '#e0f2fe',
