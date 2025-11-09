@@ -63,16 +63,15 @@ function ParticleSphere({ scrollProgress }: { scrollProgress: number }) {
     return new Float32Array(originalPositions);
   }, [originalPositions]);
   
-  // Set dynamic usage for position attribute
+  // Animate particles based on scroll
   useFrame(({ clock }) => {
     if (!pointsRef.current) return;
     
     // Set usage on first frame
     const posAttr = pointsRef.current.geometry.attributes.position;
-    if (posAttr && !posAttr.usage) {
+    if (posAttr && posAttr.usage !== THREE.DynamicDrawUsage) {
       posAttr.usage = THREE.DynamicDrawUsage;
     }
-    if (!pointsRef.current) return;
     
     const time = clock.getElapsedTime();
     const geometry = pointsRef.current.geometry;
