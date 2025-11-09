@@ -19,6 +19,7 @@ export function Navigation() {
     { href: "/dashboard", label: "Dashboard" },
     { href: "/my-mcps", label: "My MCPs" },
     { href: "/marketplace", label: "Marketplace" },
+    { href: "/about", label: "About" },
     { href: "/docs", label: "Documentation" },
     { href: "/developer", label: "API" },
   ];
