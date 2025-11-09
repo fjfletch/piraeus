@@ -199,18 +199,7 @@ export namespace WorkflowTab {
         {/* Workflow Steps */}
         <div className="space-y-4 max-w-3xl">
           {workflowSteps.length === 0 ? (
-            <div
-              onDrop={(e) => handleDrop(e)}
-              onDragOver={(e) => e.preventDefault()}
-              className="border-2 border-dashed border-border rounded-lg p-12 text-center"
-            >
-              <p className="text-muted-foreground mb-2">
-                Drag an MCP here to start your workflow
-              </p>
-              <p className="text-sm text-muted-foreground">
-                First step must be an MCP configuration
-              </p>
-            </div>
+            <AddStepDropZone onDrop={(e) => handleDrop(e)} afterStepId={undefined} />
           ) : (
             <>
               {workflowSteps.map((step, index) => (
@@ -235,12 +224,11 @@ export namespace WorkflowTab {
                   )}
 
                   {/* Add Step Drop Zone */}
-                  <div
-                    onDrop={(e) => handleDrop(e, step.id)}
-                    onDragOver={(e) => e.preventDefault()}
-                    className="h-12 flex items-center justify-center"
-                  >
-                    <div className="w-full border-t border-dashed border-border" />
+                  <div className="py-2">
+                    <AddStepDropZone
+                      onDrop={(e) => handleDrop(e, step.id)}
+                      afterStepId={step.id}
+                    />
                   </div>
                 </div>
               ))}
