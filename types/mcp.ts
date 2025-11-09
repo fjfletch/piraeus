@@ -15,6 +15,7 @@ export interface MCPIntegration {
   prompts: MCPPrompt[];
   resources: MCPResource[];
   configuration: MCPConfiguration;
+  flow: FlowConfiguration;
 }
 
 export interface APIConfig {
