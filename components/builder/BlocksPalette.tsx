@@ -37,10 +37,60 @@ export default function BlocksPalette() {
 
         <ScrollArea className="flex-1 p-4">
           <div className="space-y-6">
+            {/* Core Building Blocks */}
+            <div>
+              <h4 className="text-xs font-semibold mb-2 text-muted-foreground uppercase">
+                Core Blocks
+              </h4>
+              <div className="space-y-2">
+                <Card
+                  className="p-3 cursor-move hover:bg-muted/50 transition-colors border-2"
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, 'user-query', {})}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🎤</span>
+                    <div className="flex-1">
+                      <p className="text-xs font-medium">User Query</p>
+                      <p className="text-xs text-muted-foreground">Start of flow</p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card
+                  className="p-3 cursor-move hover:bg-muted/50 transition-colors border-2"
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, 'llm-decision', {})}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🤖</span>
+                    <div className="flex-1">
+                      <p className="text-xs font-medium">LLM Decision</p>
+                      <p className="text-xs text-muted-foreground">AI processing</p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card
+                  className="p-3 cursor-move hover:bg-muted/50 transition-colors border-2"
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, 'response', {})}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">💬</span>
+                    <div className="flex-1">
+                      <p className="text-xs font-medium">Response</p>
+                      <p className="text-xs text-muted-foreground">End of flow</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
             {/* Quick Actions */}
             <div>
               <h4 className="text-xs font-semibold mb-2 text-muted-foreground uppercase">
-                Quick Add
+                Configuration
               </h4>
               <div className="space-y-2">
                 <Button
@@ -50,17 +100,29 @@ export default function BlocksPalette() {
                   onClick={() => setIsAPIModalOpen(true)}
                 >
                   <Plus className="h-3 w-3 mr-2" />
-                  New API
+                  Configure API
                 </Button>
+                <p className="text-xs text-muted-foreground px-1">
+                  APIs are used to define Tools
+                </p>
+              </div>
+            </div>
+
+            {/* Tools Section */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-xs font-semibold text-muted-foreground uppercase">
+                  Tools ({currentMCP?.tools.length || 0})
+                </h4>
                 <Button
                   size="sm"
-                  variant="outline"
-                  className="w-full justify-start"
+                  variant="ghost"
+                  className="h-6 px-2"
                   onClick={() => {
                     if (currentMCP?.apis.length === 0) {
                       toast({
                         title: 'No APIs',
-                        description: 'Add an API first before creating tools',
+                        description: 'Configure an API first',
                         variant: 'destructive',
                       });
                       return;
@@ -68,10 +130,12 @@ export default function BlocksPalette() {
                     setIsToolModalOpen(true);
                   }}
                 >
-                  <Plus className="h-3 w-3 mr-2" />
-                  New Tool
+                  <Plus className="h-3 w-3" />
                 </Button>
               </div>
+              <p className="text-xs text-muted-foreground mb-2 px-1">
+                Drag tools to attach to LLMs
+              </p>
             </div>
 
             {/* Existing APIs */}
