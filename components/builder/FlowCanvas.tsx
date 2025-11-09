@@ -82,9 +82,17 @@ export default function FlowCanvas() {
       const apiNodeId = `api-${api.id}`;
       newNodes.push({
         id: apiNodeId,
-        position: { x: 100 + index * 150, y: 280 },
+        position: { x: 100 + index * 180, y: 280 },
         data: { label: `📡 ${api.name}\n${api.routes.length} routes`, apiId: api.id },
-        style: { backgroundColor: '#fef3c7', border: '2px solid #f59e0b' },
+        style: { 
+          backgroundColor: '#fef3c7', 
+          border: '2px solid #f59e0b',
+          borderRadius: '8px',
+          padding: '12px',
+          fontWeight: 500,
+          minWidth: '150px',
+        },
+        draggable: true,
       });
     });
 
