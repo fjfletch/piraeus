@@ -118,13 +118,28 @@ ${mockResponse.tool_calls
   };
 
   const renderNodeProperties = () => {
+    // Show edge properties if edge is selected
+    if (selectedEdge) {
+      return <EdgeProperties edge={selectedEdge} />;
+    }
+
     if (!selectedNode) {
       return (
         <div className="text-center py-12 text-muted-foreground">
-          <p className="text-sm">👈 Click on a node in the flow diagram</p>
+          <p className="text-sm">👈 Click on a node or connection</p>
           <p className="text-sm">to view its properties</p>
         </div>
       );
+    }
+
+    // Query node properties
+    if (selectedNode.type === 'query') {
+      return <QueryNodeProperties node={selectedNode} />;
+    }
+
+    // Response node properties
+    if (selectedNode.type === 'response') {
+      return <ResponseNodeProperties node={selectedNode} />;
     }
 
     // Tool node
