@@ -101,6 +101,41 @@ interface MCPBuilderStore {
   getMCPConfigById: (id: number) => SavedMCPConfig | undefined;
   getResponseConfigById: (id: number) => SavedResponseConfig | undefined;
   getWorkflowStepById: (stepId: string) => WorkflowStep | undefined;
+  
+  // ═══ BACKEND INTEGRATION ═══
+  setProjectId: (projectId: string) => void;
+  setLoading: (loading: boolean) => void;
+  setSyncing: (syncing: boolean) => void;
+  setError: (error: string | null) => void;
+  
+  // Load all data from backend
+  loadAllFromBackend: () => Promise<void>;
+  
+  // Batch setters (for loading from backend)
+  setTools: (tools: Tool[], idMap: Map<number, string>) => void;
+  setPrompts: (prompts: SavedPrompt[], idMap: Map<number, string>) => void;
+  setMCPConfigs: (configs: SavedMCPConfig[], idMap: Map<number, string>) => void;
+  setResponseConfigs: (configs: SavedResponseConfig[], idMap: Map<number, string>) => void;
+  setWorkflowSteps: (steps: WorkflowStep[], flowId: string | null) => void;
+  
+  // Backend sync methods (async versions)
+  syncAddTool: (tool: Omit<Tool, 'id'>) => Promise<number | null>;
+  syncUpdateTool: (id: number, updates: Partial<Tool>) => Promise<void>;
+  syncDeleteTool: (id: number) => Promise<void>;
+  
+  syncAddPrompt: (prompt: Omit<SavedPrompt, 'id'>) => Promise<number | null>;
+  syncUpdatePrompt: (id: number, updates: Partial<SavedPrompt>) => Promise<void>;
+  syncDeletePrompt: (id: number) => Promise<void>;
+  
+  syncAddMCPConfig: (config: Omit<SavedMCPConfig, 'id'>) => Promise<number | null>;
+  syncUpdateMCPConfig: (id: number, updates: Partial<SavedMCPConfig>) => Promise<void>;
+  syncDeleteMCPConfig: (id: number) => Promise<void>;
+  
+  syncAddResponseConfig: (config: Omit<SavedResponseConfig, 'id'>) => Promise<number | null>;
+  syncUpdateResponseConfig: (id: number, updates: Partial<SavedResponseConfig>) => Promise<void>;
+  syncDeleteResponseConfig: (id: number) => Promise<void>;
+  
+  syncSaveWorkflow: (name: string) => Promise<void>;
 }
 
 // Default tools
