@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Bot, Send, Wrench } from 'lucide-react';
+import { TestingPanel } from './TestingPanel';
 
 export function Inspector() {
   const {
