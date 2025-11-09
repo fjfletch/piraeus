@@ -68,7 +68,8 @@ export default function BuilderV6Page() {
           {currentTab === 'tools' && <ToolsTab.Sidebar />}
           {currentTab === 'prompts' && <PromptsTab.Sidebar />}
           {currentTab === 'mcps' && <MCPsTab.Sidebar />}
-          {currentTab !== 'tools' && currentTab !== 'prompts' && currentTab !== 'mcps' && (
+          {currentTab === 'responses' && <ResponsesTab.Sidebar />}
+          {currentTab !== 'tools' && currentTab !== 'prompts' && currentTab !== 'mcps' && currentTab !== 'responses' && (
             <div className="p-4">
               <div className="text-sm text-muted-foreground">
                 Sidebar for {currentTab}
@@ -82,7 +83,8 @@ export default function BuilderV6Page() {
           {currentTab === 'tools' && <ToolsTab.Canvas />}
           {currentTab === 'prompts' && <PromptsTab.Canvas />}
           {currentTab === 'mcps' && <MCPsTab.Canvas />}
-          {currentTab !== 'tools' && currentTab !== 'prompts' && currentTab !== 'mcps' && (
+          {currentTab === 'responses' && <ResponsesTab.Canvas />}
+          {currentTab !== 'tools' && currentTab !== 'prompts' && currentTab !== 'mcps' && currentTab !== 'responses' && (
             <div className="p-6">
               <div className="text-2xl font-bold mb-2 capitalize">{currentTab}</div>
               <div className="text-muted-foreground">
