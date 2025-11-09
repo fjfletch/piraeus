@@ -152,6 +152,14 @@ export default function Marketplace() {
           </div>
         )}
       </div>
+
+      {/* MCP Detail Modal */}
+      <MCPDetailModal
+        open={isDetailModalOpen}
+        onOpenChange={setIsDetailModalOpen}
+        mcpId={selectedMCPId}
+        onUseMCP={handleUseMCP}
+      />
     </div>
   );
 }
