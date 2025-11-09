@@ -103,7 +103,7 @@ export default function MyMCPs() {
             <Input
               type="search"
               placeholder="Search your MCPs..."
-              className="pl-10"
+              className="pl-10 bg-white"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
