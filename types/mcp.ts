@@ -141,6 +141,21 @@ export interface FlowEdge {
   source: string;
   target: string;
   type?: string;
+  data?: {
+    label?: string; // User-friendly label for the connection
+    condition?: {
+      type: 'always' | 'on-success' | 'on-error' | 'custom';
+      expression?: string; // JSONPath or custom expression for 'custom' type
+    };
+    priority?: number; // Execution order (lower = higher priority)
+    description?: string; // Optional description
+  };
+  animated?: boolean; // Visual: animated edge
+  style?: {
+    stroke?: string;
+    strokeWidth?: number;
+    strokeDasharray?: string;
+  };
 }
 
 export interface FlowConfiguration {
