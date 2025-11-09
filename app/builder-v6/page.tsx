@@ -9,6 +9,8 @@ import { ToolsTab } from '@/components/builder-v6/ToolsTab';
 import { PromptsTab } from '@/components/builder-v6/PromptsTab';
 import { MCPsTab } from '@/components/builder-v6/MCPsTab';
 import { ResponsesTab } from '@/components/builder-v6/ResponsesTab';
+import { WorkflowTab } from '@/components/builder-v6/WorkflowTab';
+import { Inspector } from '@/components/builder-v6/Inspector';
 import { useToast } from '@/hooks/use-toast';
 
 export default function BuilderV6Page() {
