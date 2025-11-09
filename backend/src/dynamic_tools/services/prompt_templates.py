@@ -117,4 +117,51 @@ Be precise and follow the API documentation exactly."""
             response_format_prompt=response_format_prompt
         )
         return system_prompt, user_prompt
+    
+    @staticmethod
+    def workflow_tool_selection_prompt(
+        instructions: str,
+        tools_context: str
+    ) -> tuple[str, str]:
+        """Generate prompt for tool selection in workflow mode.
+        
+        This method creates a specialized prompt for the MCP workflow that
+        instructs the LLM to:
+        1. Analyze the available tools
+        2. Select the most appropriate tool for the user's request
+        3. Extract required parameters from the user instructions
+        4. Generate a complete HTTPRequestSpec
+        
+        Args:
+            instructions: User's natural language instructions
+            tools_context: Formatted string describing available tools
+            
+        Returns:
+            Tuple of (system_prompt, user_prompt)
+        """
+        system_prompt = """You are an intelligent API orchestration assistant. Your task is to:
+
+1. Analyze the available tools and their capabilities
+2. Select the MOST APPROPRIATE tool based on the user's request
+3. Extract required parameters from the user's instructions
+4. Generate a complete and valid HTTP request specification
+
+IMPORTANT GUIDELINES:
+- Choose the tool that best matches the user's intent
+- Extract parameter values directly from the user's instructions
+- If a parameter is not explicitly provided, use reasonable defaults or omit optional parameters
+- Generate the complete URL by combining the base URL with any required path parameters
+- Include all necessary headers, query parameters, and request body as specified by the tool
+- Ensure the HTTP method matches the tool's requirements
+- For authentication, use placeholder values like "[API_KEY]" if not provided
+
+Always respond with a valid HTTPRequestSpec that can be executed immediately."""
+
+        user_prompt = f"""User Request: {instructions}
+
+{tools_context}
+
+Based on the user's request and the available tools above, generate a complete HTTP request specification that will accomplish the user's goal. Select the most appropriate tool and extract all necessary parameters from the user's request."""
+
+        return system_prompt, user_prompt
 

@@ -8,11 +8,15 @@ from ..models.api_requests import (
     PromptResponse,
     MCPPromptRequest,
     ExecuteRequest,
-    ExecuteResponse
+    ExecuteResponse,
+    WorkflowRequest,
+    WorkflowResponse
 )
 from ..models.http_spec import HTTPRequestSpec
 from ..services.prompt_service import PromptService
 from ..services.http_client import HTTPClientService
+from ..services.workflow_orchestrator import WorkflowOrchestrator
+from ..core.registry import ToolRegistry
 from ..config.settings import Settings, get_settings
 
 # Create API router
@@ -223,3 +227,102 @@ async def prompt_execute_endpoint(
             error=str(e)
         )
 
+
+
+@router.post(
+    "/workflow",
+    response_model=WorkflowResponse,
+    summary="Complete MCP Workflow",
+    description="Execute full workflow: tool selection, API execution, optional formatting",
+    tags=["Workflow", "MCP"],
+)
+async def workflow_endpoint(
+    request: WorkflowRequest,
+    settings: Settings = Depends(get_settings)
+) -> WorkflowResponse:
+    """Execute complete MCP workflow.
+    
+    This endpoint orchestrates the full MCP workflow:
+    1. Retrieve specified tools from registry
+    2. Generate tool context for LLM
+    3. LLM selects appropriate tool and generates HTTP spec
+    4. Execute the API call
+    5. Optionally format the response for human consumption
+    6. Return comprehensive results
+    
+    Args:
+        request: WorkflowRequest with user instructions, tool IDs, and options
+        settings: Application settings (injected)
+        
+    Returns:
+        WorkflowResponse with execution results or error information
+        
+    Examples:
+        Request:
+        ```json
+        {
+            "user_instructions": "Get the stock price for Apple",
+            "tool_ids": ["get_stock_quote"],
+            "format_response": true,
+            "response_format_instructions": "Keep it brief"
+        }
+        ```
+        
+        Success Response:
+        ```json
+        {
+            "status": "success",
+            "selected_tool": "get_stock_quote",
+            "http_spec": {"method": "GET", "url": "..."},
+            "raw_response": {"status_code": 200, "body": {...}},
+            "formatted_response": "The stock price for Apple is $150.25"
+        }
+        ```
+        
+        Error Response:
+        ```json
+        {
+            "status": "error",
+            "error": "Tools not found: ['invalid_tool']",
+            "error_stage": "tool_retrieval"
+        }
+        ```
+    """
+    try:
+        logger.info(f"Workflow endpoint called: {request.user_instructions[:50]}...")
+        
+        # Initialize services
+        tool_registry = ToolRegistry()
+        
+        prompt_service = PromptService(
+            api_key=settings.openai_api_key,
+            max_retries=settings.llm_max_retries
+        )
+        
+        http_client = HTTPClientService(
+            timeout=settings.http_timeout,
+            max_retries=settings.http_max_retries
+        )
+        
+        # Create orchestrator
+        orchestrator = WorkflowOrchestrator(
+            tool_registry=tool_registry,
+            prompt_service=prompt_service,
+            http_client=http_client
+        )
+        
+        # Execute workflow
+        response = await orchestrator.execute_workflow(request)
+        
+        logger.info(f"Workflow completed with status: {response.status}")
+        return response
+        
+    except Exception as e:
+        logger.error(f"Workflow endpoint error: {e}")
+        
+        # Return error response (still 200 OK, but with status="error")
+        return WorkflowResponse(
+            status="error",
+            error=f"Unexpected workflow error: {str(e)}",
+            error_stage="llm_selection"  # Default stage for unexpected errors
+        )

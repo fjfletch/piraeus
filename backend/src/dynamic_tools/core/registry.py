@@ -95,6 +95,31 @@ class ToolRegistry:
 
         return self._tools[tool_name]
 
+    def get_multiple(self, tool_names: list[str]) -> tuple[list[BaseTool | Callable], list[str]]:
+        """Get multiple tools by name.
+
+        Args:
+            tool_names: List of tool names to retrieve
+
+        Returns:
+            Tuple of (found_tools, missing_names) where:
+            - found_tools: List of tools that were found
+            - missing_names: List of tool names that were not found
+        """
+        found_tools: list[BaseTool | Callable] = []
+        missing_names: list[str] = []
+
+        for tool_name in tool_names:
+            if tool_name in self._tools:
+                found_tools.append(self._tools[tool_name])
+                logger.debug(f"Found tool: {tool_name}")
+            else:
+                missing_names.append(tool_name)
+                logger.warning(f"Tool not found: {tool_name}")
+
+        logger.info(f"Retrieved {len(found_tools)} tools, {len(missing_names)} missing")
+        return found_tools, missing_names
+
     def get_definition(self, tool_name: str) -> ToolDefinition:
         """Get a tool's definition by name.
 

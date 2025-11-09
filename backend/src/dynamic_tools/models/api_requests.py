@@ -198,3 +198,136 @@ class ExecuteResponse(BaseModel):
         }
     }
 
+
+class WorkflowRequest(BaseModel):
+    """Model for complete MCP workflow execution requests.
+    
+    This model represents a request to execute the full MCP workflow,
+    including tool selection, API execution, and optional response formatting.
+    
+    Attributes:
+        user_instructions: Natural language instructions for what to accomplish
+        tool_ids: List of tool identifiers to make available for selection
+        format_response: Whether to format the raw API response using LLM
+        response_format_instructions: Custom instructions for response formatting
+    """
+    
+    user_instructions: str = Field(
+        ...,
+        description="Natural language instructions for what to accomplish",
+        min_length=1
+    )
+    tool_ids: list[str] = Field(
+        ...,
+        description="List of tool identifiers to make available for selection",
+        min_length=1
+    )
+    format_response: bool = Field(
+        default=False,
+        description="Whether to format the raw API response using LLM"
+    )
+    response_format_instructions: Optional[str] = Field(
+        default=None,
+        description="Custom instructions for response formatting"
+    )
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "user_instructions": "Get the current stock price for Apple",
+                    "tool_ids": ["get_stock_quote", "get_company_info"],
+                    "format_response": True,
+                    "response_format_instructions": "Provide a brief summary with the price"
+                },
+                {
+                    "user_instructions": "Fetch weather data for San Francisco",
+                    "tool_ids": ["get_weather"],
+                    "format_response": False
+                }
+            ]
+        }
+    }
+
+
+class WorkflowResponse(BaseModel):
+    """Model for workflow execution results.
+    
+    This model represents the complete result of executing an MCP workflow,
+    including tool selection, API execution, and optional formatting.
+    
+    Attributes:
+        status: Overall workflow execution status
+        selected_tool: Name of the tool selected by LLM (present on success)
+        http_spec: Generated HTTP request specification (present on success)
+        raw_response: Raw API response data (present on success)
+        formatted_response: LLM-formatted response (present when format_response=true)
+        error: Error message (present on error)
+        error_stage: Stage where error occurred (present on error)
+    """
+    
+    status: Literal["success", "error"] = Field(
+        ...,
+        description="Overall workflow execution status"
+    )
+    selected_tool: Optional[str] = Field(
+        default=None,
+        description="Name of the tool selected by LLM (present on success)"
+    )
+    http_spec: Optional[dict] = Field(
+        default=None,
+        description="Generated HTTP request specification (present on success)"
+    )
+    raw_response: Optional[dict] = Field(
+        default=None,
+        description="Raw API response data (present on success)"
+    )
+    formatted_response: Optional[str] = Field(
+        default=None,
+        description="LLM-formatted response (present when format_response=true)"
+    )
+    error: Optional[str] = Field(
+        default=None,
+        description="Error message (present on error)"
+    )
+    error_stage: Optional[Literal[
+        "tool_retrieval",
+        "tool_context_generation",
+        "llm_selection",
+        "api_execution",
+        "response_formatting"
+    ]] = Field(
+        default=None,
+        description="Stage where error occurred (present on error)"
+    )
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "status": "success",
+                    "selected_tool": "get_stock_quote",
+                    "http_spec": {
+                        "method": "GET",
+                        "url": "https://www.alphavantage.co/query",
+                        "query_params": {
+                            "function": "GLOBAL_QUOTE",
+                            "symbol": "AAPL"
+                        }
+                    },
+                    "raw_response": {
+                        "status_code": 200,
+                        "body": {"Global Quote": {"01. symbol": "AAPL", "05. price": "150.25"}},
+                        "execution_time_ms": 234.5
+                    },
+                    "formatted_response": "The current stock price for Apple (AAPL) is $150.25."
+                },
+                {
+                    "status": "error",
+                    "error": "Tools not found in registry: ['invalid_tool']",
+                    "error_stage": "tool_retrieval"
+                }
+            ]
+        }
+    }
+
