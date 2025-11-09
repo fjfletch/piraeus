@@ -22,6 +22,8 @@ interface MCPStoreState {
   updateTool: (toolId: string, updates: Partial<MCPTool>) => void;
   removeTool: (toolId: string) => void;
   selectNode: (node: FlowNode | null) => void;
+  selectEdge: (edge: FlowEdge | null) => void;
+  updateEdge: (edgeId: string, updates: Partial<FlowEdge>) => void;
   updateLLMNode: (nodeId: string, config: any) => void;
   getLLMNode: (nodeId: string) => any;
   // New flow management actions
