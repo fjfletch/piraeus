@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -15,10 +15,12 @@ import ReactFlow, {
   Connection,
   EdgeChange,
   applyEdgeChanges,
+  useReactFlow,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { useMCPStore } from '@/store/mcpStore';
 import { useToast } from '@/components/ui/use-toast';
+import BlocksPalette from './BlocksPalette';
 
 export default function FlowCanvas() {
   const { currentMCP, selectNode } = useMCPStore();
