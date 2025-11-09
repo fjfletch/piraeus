@@ -412,5 +412,34 @@ ${mockResponse.tool_calls
         </Card>
       </TabsContent>
     </Tabs>
+
+      <APIConfigModal
+        open={isEditingAPI}
+        onOpenChange={setIsEditingAPI}
+        onSave={(config) => {
+          updateAPI(config.id, config);
+          setIsEditingAPI(false);
+          toast({
+            title: 'Success',
+            description: 'API updated',
+          });
+        }}
+        existingAPI={editingAPIConfig}
+      />
+
+      <ToolConfigModal
+        open={isEditingTool}
+        onOpenChange={setIsEditingTool}
+        onSave={(config) => {
+          updateTool(config.id, config);
+          setIsEditingTool(false);
+          toast({
+            title: 'Success',
+            description: 'Tool updated',
+          });
+        }}
+        existingTool={editingToolConfig}
+      />
+    </>
   );
 }
