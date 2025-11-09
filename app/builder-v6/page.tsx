@@ -7,6 +7,7 @@ import { Header } from '@/components/builder-v6/Header';
 import { TabBar } from '@/components/builder-v6/TabBar';
 import { ToolsTab } from '@/components/builder-v6/ToolsTab';
 import { PromptsTab } from '@/components/builder-v6/PromptsTab';
+import { MCPsTab } from '@/components/builder-v6/MCPsTab';
 import { useToast } from '@/hooks/use-toast';
 
 export default function BuilderV6Page() {
