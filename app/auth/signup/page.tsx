@@ -75,7 +75,7 @@ export default function SignupPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <img 
-            src="https://customer-assets.emergentagent.com/job_no-code-llm/artifacts/cua0n8i5_Screenshot%202025-11-08%20at%208.46.19%20PM.png" 
+            src="https://customer-assets.emergentagent.com/job_no-code-llm/artifacts/3qnepw83_Screenshot_2025-11-08_at_8.58.22_PM-removebg-preview.png" 
             alt="Piraeus Logo" 
             className="h-12 w-auto mx-auto mb-4"
           />
