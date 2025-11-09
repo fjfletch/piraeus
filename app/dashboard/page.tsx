@@ -55,8 +55,8 @@ export default function Dashboard() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold">Dashboard</h1>
-            <p className="text-muted-foreground mt-1">Welcome back! Here's an overview of your MCPs</p>
+            <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+            <p className="text-white/80 mt-1">Welcome back! Here's an overview of your MCPs</p>
           </div>
           <Link href="/builder/new">
             <Button size="lg">
