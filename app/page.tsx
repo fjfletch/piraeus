@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Zap, Code, TestTube, Share2, Star } from "lucide-react";
+import { Zap, Code, TestTube, Share2, Star, Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/Navigation";
 import { mockMCPs } from "@/lib/mock-data";
+import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
+
+const ParticleBackground = dynamic(() => import('@/components/ParticleBackground'), {
+  ssr: false,
+});
 
 export default function Home() {
   const features = [
