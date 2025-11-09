@@ -132,7 +132,7 @@ export default function About() {
               Empowering developers and businesses to build the future of AI
             </p>
             <p className="text-lg leading-relaxed text-center max-w-3xl mx-auto" style={{ color: '#033F63' }}>
-              At Piraeus, we believe that AI integration shouldn't be a barrier. Whether you're a startup building your first AI feature or an enterprise scaling AI across your organization, we provide the tools and platform to make it happen. Our visual builder removes the complexity, while our robust API and marketplace ecosystem ensures you have everything you need to succeed.
+              At Piraeus, we believe building MCPs shouldn't be hard. Our mission is to make it effortless for you and your agents to discover, connect, and deploy the tools you need. We're creating a digital bazaar — a vibrant hub where developers and agents in a post-agent world can easily trade, share, and build the capabilities that power the next generation of intelligent systems.
             </p>
           </div>
         </motion.div>
