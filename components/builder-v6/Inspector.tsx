@@ -185,16 +185,7 @@ export function Inspector() {
 
   // Testing Panel
   if (selectedItem.type === 'testing') {
-    return (
-      <div className="h-full overflow-y-auto">
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-2">Testing Panel</h3>
-          <p className="text-sm text-muted-foreground">
-            Test panel will be implemented here
-          </p>
-        </div>
-      </div>
-    );
+    return <TestingPanel />;
   }
 
   return null;
