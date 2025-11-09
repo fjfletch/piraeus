@@ -270,28 +270,59 @@ export default function FlowCanvas() {
       }
 
       let newNode: Node | null = null;
+      const uniqueId = `${type}-${Date.now()}`;
 
-      if (type === 'api') {
-        const api = blockData as any;
+      if (type === 'user-query') {
         newNode = {
-          id: `api-${api.id}`,
-          type: 'default',
+          id: uniqueId,
+          type: 'input',
           position,
-          data: { label: `📡 ${api.name}\n${api.routes.length} routes`, apiId: api.id },
+          data: { label: '🎤 User Query' },
           style: {
-            backgroundColor: '#fef3c7',
-            border: '2px solid #f59e0b',
+            backgroundColor: '#f0f9ff',
+            border: '2px solid #0ea5e9',
             borderRadius: '8px',
             padding: '12px',
             fontWeight: 500,
-            minWidth: '150px',
+          },
+          draggable: true,
+        };
+      } else if (type === 'llm-decision') {
+        newNode = {
+          id: uniqueId,
+          type: 'default',
+          position,
+          data: {
+            label: `🤖 LLM Decision\n${currentMCP?.configuration.model || 'GPT-4'}`,
+          },
+          style: {
+            backgroundColor: '#e0f2fe',
+            border: '2px solid #0284c7',
+            borderRadius: '8px',
+            padding: '12px',
+            fontWeight: 500,
+          },
+          draggable: true,
+        };
+      } else if (type === 'response') {
+        newNode = {
+          id: uniqueId,
+          type: 'output',
+          position,
+          data: { label: '💬 Response to User' },
+          style: {
+            backgroundColor: '#f0fdf4',
+            border: '2px solid #22c55e',
+            borderRadius: '8px',
+            padding: '12px',
+            fontWeight: 500,
           },
           draggable: true,
         };
       } else if (type === 'tool') {
         const tool = blockData as any;
         newNode = {
-          id: `tool-${tool.id}`,
+          id: `${uniqueId}-${tool.id}`,
           type: 'default',
           position,
           data: {
@@ -311,7 +342,7 @@ export default function FlowCanvas() {
       } else if (type === 'prompt') {
         const prompt = blockData as any;
         newNode = {
-          id: `prompt-${prompt.id}`,
+          id: `${uniqueId}-${prompt.id}`,
           type: 'default',
           position,
           data: {
@@ -334,11 +365,11 @@ export default function FlowCanvas() {
         setNodes((nds) => nds.concat(newNode as Node));
         toast({
           title: 'Block Added',
-          description: `${type.charAt(0).toUpperCase() + type.slice(1)} added to canvas`,
+          description: `${type.charAt(0).toUpperCase() + type.slice(1).replace('-', ' ')} added to canvas`,
         });
       }
     },
-    [reactFlowInstance, setNodes, toast]
+    [reactFlowInstance, setNodes, toast, currentMCP]
   );
 
   if (!currentMCP) {
