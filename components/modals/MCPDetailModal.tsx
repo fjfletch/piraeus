@@ -198,8 +198,21 @@ export function MCPDetailModal({ open, onOpenChange, mcpId, onUseMCP }: MCPDetai
                   )}
                 </div>
               </DialogDescription>
-            </DialogHeader>
+            )}
+        </DialogHeader>
 
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <span className="ml-3 text-muted-foreground">Loading MCP details...</span>
+          </div>
+        ) : error ? (
+          <div className="py-12 text-center">
+            <p className="text-red-600 mb-4">{error}</p>
+            <Button onClick={() => mcpId && fetchMCPDetails(mcpId)}>Retry</Button>
+          </div>
+        ) : mcpDetails ? (
+          <>
             <Tabs defaultValue="overview" className="w-full">
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
