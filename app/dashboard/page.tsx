@@ -142,7 +142,7 @@ export default function Dashboard() {
           <h2 className="text-2xl font-bold mb-4 text-white">Featured Community MCPs</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {communityMCPs.map((mcp) => (
-              <Card key={mcp.id} className="hover:shadow-lg transition-shadow">
+              <Card key={mcp.id} className="hover:shadow-lg transition-shadow bg-white/90 backdrop-blur-sm border-white/30">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <span className="text-2xl">{mcp.emoji}</span>
