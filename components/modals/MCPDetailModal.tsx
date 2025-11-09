@@ -179,7 +179,7 @@ export function MCPDetailModal({ open, onOpenChange, mcpId, onUseMCP }: MCPDetai
             <DialogHeader>
               <DialogTitle className="text-3xl flex items-center gap-2">
                 <span className="text-3xl">{mcpDetails.emoji}</span>
-                {mcpDetails.name}
+                <span>{mcpDetails.name}</span>
               </DialogTitle>
               <DialogDescription>
                 <div className="flex items-center gap-4 mt-2 flex-wrap">
