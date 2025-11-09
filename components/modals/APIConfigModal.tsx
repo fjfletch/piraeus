@@ -106,9 +106,10 @@ export default function APIConfigModal({
       ...routes,
       {
         id: Date.now().toString() + Math.random(),
-        method: 'GET',
+        method: 'POST',
         path: '/api/',
         description: '',
+        body: '',
       },
     ]);
   };
