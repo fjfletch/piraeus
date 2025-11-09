@@ -154,7 +154,7 @@ export default function Marketplace() {
                       className="flex-1"
                       onClick={() => handlePreview(mcp.id, mcp.name)}
                     >
-                      Preview
+                      More Info
                     </Button>
                   </div>
                 </CardContent>
