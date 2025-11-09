@@ -71,7 +71,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <ParticleBackgroundScrollReactive scrollY={scrollY} />
+      <ParticlesSphere3D scrollY={scrollY} />
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center px-4 relative">
