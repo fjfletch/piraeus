@@ -1,105 +1,73 @@
 "use client";
 
-import Link from "next/link";
 import { Search, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function Navigation() {
+export function Navigation() {
+  const pathname = usePathname();
+
+  const navLinks = [
+    { href: "/dashboard", label: "Dashboard" },
+    { href: "/my-mcps", label: "My MCPs" },
+    { href: "/marketplace", label: "Marketplace" },
+    { href: "/docs", label: "Documentation" },
+    { href: "/api", label: "API" },
+  ];
+
   return (
-    <nav className="border-b">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-md"></div>
-          <span className="font-bold text-lg">MCP Platform</span>
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center px-4">
+        <Link href="/" className="flex items-center gap-2 mr-6">
+          <div className="h-8 w-8 rounded bg-primary" />
+          <span className="font-semibold text-lg">MCP Platform</span>
         </Link>
 
-        {/* Search Bar */}
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+        <div className="flex-1 max-w-md mx-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search MCPs..."
+              placeholder="Search..."
               className="pl-10"
             />
           </div>
         </div>
 
-        {/* Navigation Links */}
-        <div className="hidden lg:flex items-center gap-6">
-          <Link
-            href="/dashboard"
-            className="text-sm font-medium hover:text-primary transition-colors"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/my-mcps"
-            className="text-sm font-medium hover:text-primary transition-colors"
-          >
-            My MCPs
-          </Link>
-          <Link
-            href="/marketplace"
-            className="text-sm font-medium hover:text-primary transition-colors"
-          >
-            Marketplace
-          </Link>
-          <Link
-            href="/docs"
-            className="text-sm font-medium hover:text-primary transition-colors"
-          >
-            Documentation
-          </Link>
-          <Link
-            href="/api"
-            className="text-sm font-medium hover:text-primary transition-colors"
-          >
-            API
-          </Link>
+        <div className="flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href}>
+              <Button
+                variant={pathname === link.href ? "secondary" : "ghost"}
+                size="sm"
+              >
+                {link.label}
+              </Button>
+            </Link>
+          ))}
         </div>
 
-        {/* User Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
+            <Button variant="ghost" size="icon" className="ml-4">
               <User className="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href="/profile" className="w-full">
-                Profile
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href="/settings" className="w-full">
-                Settings
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href="/billing" className="w-full">
-                Billing
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href="/auth/login" className="w-full">
-                Log out
-              </Link>
-            </DropdownMenuItem>
+            <DropdownMenuItem>Log out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
