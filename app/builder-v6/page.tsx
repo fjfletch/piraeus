@@ -71,13 +71,7 @@ export default function BuilderV6Page() {
           {currentTab === 'prompts' && <PromptsTab.Sidebar />}
           {currentTab === 'mcps' && <MCPsTab.Sidebar />}
           {currentTab === 'responses' && <ResponsesTab.Sidebar />}
-          {currentTab !== 'tools' && currentTab !== 'prompts' && currentTab !== 'mcps' && currentTab !== 'responses' && (
-            <div className="p-4">
-              <div className="text-sm text-muted-foreground">
-                Sidebar for {currentTab}
-              </div>
-            </div>
-          )}
+          {currentTab === 'workflow' && <WorkflowTab.Sidebar />}
         </div>
 
         {/* Center Canvas - Flexible */}
@@ -86,14 +80,7 @@ export default function BuilderV6Page() {
           {currentTab === 'prompts' && <PromptsTab.Canvas />}
           {currentTab === 'mcps' && <MCPsTab.Canvas />}
           {currentTab === 'responses' && <ResponsesTab.Canvas />}
-          {currentTab !== 'tools' && currentTab !== 'prompts' && currentTab !== 'mcps' && currentTab !== 'responses' && (
-            <div className="p-6">
-              <div className="text-2xl font-bold mb-2 capitalize">{currentTab}</div>
-              <div className="text-muted-foreground">
-                Canvas area for {currentTab} tab (content coming in next phases)
-              </div>
-            </div>
-          )}
+          {currentTab === 'workflow' && <WorkflowTab.Canvas />}
         </div>
 
         {/* Right Inspector - 400px (only for workflow tab) */}
