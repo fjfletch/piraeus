@@ -54,6 +54,7 @@ export default function PropertiesPanel() {
       setTemperature(nodeConfig.temperature);
       setMaxTokens(nodeConfig.maxTokens);
       setSystemPrompt(nodeConfig.systemPrompt || '');
+      setAvailableToolIds(nodeConfig.availableToolIds || []);
     }
   }, [currentMCP, selectedNode, getLLMNode]);
 
