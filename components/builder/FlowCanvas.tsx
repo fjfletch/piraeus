@@ -22,6 +22,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 export default function FlowCanvas() {
   const { currentMCP, selectNode } = useMCPStore();
+  const { toast } = useToast();
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
