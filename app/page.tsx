@@ -97,49 +97,10 @@ export default function Home() {
           </svg>
         </div>
 
-        {/* Connecting lines - drawn with SVG that moves with boats */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 5 }}>
-          {/* Line from large boat (back) to boat 1 (front) */}
-          <line className="tow-line" stroke="#654321" strokeWidth="2" strokeDasharray="5,5" opacity="0.6">
-            <animate attributeName="x1" dur="10s" repeatCount="indefinite" 
-              values="13%;13%;13%;13%;13%" />
-            <animate attributeName="y1" dur="10s" repeatCount="indefinite" 
-              values="88%;86%;82%;86%;88%" />
-            <animate attributeName="x2" dur="10s" repeatCount="indefinite" 
-              values="72%;72%;72%;72%;72%" />
-            <animate attributeName="y2" dur="10s" repeatCount="indefinite" 
-              values="82%;80%;76%;80%;82%" />
-          </line>
-          
-          {/* Line from large boat to boat 2 */}
-          <line className="tow-line" stroke="#654321" strokeWidth="2" strokeDasharray="5,5" opacity="0.6">
-            <animate attributeName="x1" dur="10s" repeatCount="indefinite" 
-              values="13%;13%;13%;13%;13%" />
-            <animate attributeName="y1" dur="10s" repeatCount="indefinite" 
-              values="88%;86%;82%;86%;88%" />
-            <animate attributeName="x2" dur="10s" repeatCount="indefinite" 
-              values="80%;80%;80%;80%;80%" />
-            <animate attributeName="y2" dur="10s" repeatCount="indefinite" 
-              values="91%;89%;85%;89%;91%" />
-          </line>
-          
-          {/* Line from large boat to boat 3 */}
-          <line className="tow-line" stroke="#654321" strokeWidth="2" strokeDasharray="5,5" opacity="0.6">
-            <animate attributeName="x1" dur="10s" repeatCount="indefinite" 
-              values="13%;13%;13%;13%;13%" />
-            <animate attributeName="y1" dur="10s" repeatCount="indefinite" 
-              values="88%;86%;82%;86%;88%" />
-            <animate attributeName="x2" dur="10s" repeatCount="indefinite" 
-              values="85%;85%;85%;85%;85%" />
-            <animate attributeName="y2" dur="10s" repeatCount="indefinite" 
-              values="96%;94%;90%;94%;96%" />
-          </line>
-        </svg>
-
         {/* Small boat 1 - randomly placed in bottom right */}
-        <div id="boat1" className="absolute right-[15%] md:right-[18%]" style={{ 
-          bottom: 'calc(8% + 0px)',
-          animation: 'waveMotion 10s ease-in-out infinite'
+        <div id="boat1" className="absolute right-[22%] md:right-[25%]" style={{ 
+          bottom: 'calc(9% + 0px)',
+          animation: 'waveMotion1 8.5s ease-in-out infinite'
         }}>
           <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
             <path d="M20,70 L80,70 L75,85 L25,85 Z" fill="#8B4513" stroke="#654321" strokeWidth="2"/>
@@ -151,9 +112,9 @@ export default function Home() {
         </div>
 
         {/* Small boat 2 - randomly placed */}
-        <div id="boat2" className="absolute right-[8%] md:right-[10%]" style={{ 
-          bottom: 'calc(3% + 0px)',
-          animation: 'waveMotion 10s ease-in-out infinite'
+        <div id="boat2" className="absolute right-[12%] md:right-[14%]" style={{ 
+          bottom: 'calc(4% + 0px)',
+          animation: 'waveMotion2 11s ease-in-out infinite'
         }}>
           <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
             <path d="M20,70 L80,70 L75,85 L25,85 Z" fill="#8B4513" stroke="#654321" strokeWidth="2"/>
@@ -165,9 +126,9 @@ export default function Home() {
         </div>
 
         {/* Small boat 3 - randomly placed */}
-        <div id="boat3" className="absolute right-[3%] md:right-[5%]" style={{ 
-          bottom: 'calc(0% + 0px)',
-          animation: 'waveMotion 10s ease-in-out infinite'
+        <div id="boat3" className="absolute right-[5%] md:right-[7%]" style={{ 
+          bottom: 'calc(1% + 0px)',
+          animation: 'waveMotion3 9.5s ease-in-out infinite'
         }}>
           <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
             <path d="M20,70 L80,70 L75,85 L25,85 Z" fill="#8B4513" stroke="#654321" strokeWidth="2"/>
