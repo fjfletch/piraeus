@@ -56,13 +56,15 @@ export default function FlowCanvas() {
       draggable: true,
     });
 
-    // LLM node
+    // LLM node - get config from store
+    const llmConfig = llmNodes['llm'] || { mode: 'normal' };
+    const llmModeLabel = llmConfig.mode === 'mcp' ? '🔧 MCP Tool Calling' : '💬 Normal Prompt';
     newNodes.push({
       id: 'llm',
       position: { x: 220, y: 150 },
       data: {
-        label: `🤖 LLM Decision\nNormal Prompt`,
-        mode: 'normal',
+        label: `🤖 LLM Decision\n${llmModeLabel}`,
+        mode: llmConfig.mode,
       },
       style: { 
         backgroundColor: '#e0f2fe', 
