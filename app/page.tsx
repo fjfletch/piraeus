@@ -128,7 +128,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="container mx-auto max-w-5xl"
         >
-          <Card className="backdrop-blur-xl bg-white/40 border-2 border-white/50 shadow-2xl" style={{ borderColor: 'rgba(124, 152, 133, 0.3)' }}>
+          <Card className="backdrop-blur-xl bg-white/20 border-2 border-white/30 shadow-2xl" style={{ borderColor: 'rgba(124, 152, 133, 0.2)' }}>
             <CardHeader className="text-center pb-8">
               <CardTitle className="text-5xl mb-4">
                 <span style={{ color: '#033F63' }}>Built With </span>
