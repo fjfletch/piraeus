@@ -193,37 +193,32 @@ export default function Home() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-wrap gap-3 justify-center mb-12">
-                {techStack.map((tech, index) => (
-                  <Badge 
-                    key={index} 
-                    variant="secondary" 
-                    className="text-base px-6 py-2 backdrop-blur-md border border-white/30"
-                    style={{ 
-                      backgroundColor: 'rgba(181, 182, 130, 0.5)',
-                      color: '#033F63',
-                      fontWeight: '600'
-                    }}
-                  >
-                    {tech}
-                  </Badge>
+              {/* Example MCP Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {mockMCPs.slice(0, 3).map((mcp) => (
+                  <Card key={mcp.id} className="flex flex-col bg-white/90 backdrop-blur-sm border-white/30 shadow-lg hover:shadow-2xl transition-shadow">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <span className="text-2xl">{mcp.emoji}</span>
+                        <span className="text-lg">{mcp.name}</span>
+                      </CardTitle>
+                      <CardDescription>{mcp.description}</CardDescription>
+                      <div className="text-sm text-muted-foreground mt-2">by @{mcp.author}</div>
+                    </CardHeader>
+                    <CardContent className="mt-auto">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <span className="text-sm">{mcp.stars}</span>
+                          <span className="text-sm text-muted-foreground">({mcp.reviews})</span>
+                        </div>
+                        <span className="text-sm text-muted-foreground">
+                          {((mcp.uses || 0) / 1000).toFixed(1)}k uses
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
-              </div>
-              
-              {/* Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <div className="text-center">
-                  <div className="text-5xl font-bold mb-2" style={{ color: '#033F63' }}>5000+</div>
-                  <div className="text-lg" style={{ color: '#28666E' }}>Particles Rendered</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-5xl font-bold mb-2" style={{ color: '#033F63' }}>60fps</div>
-                  <div className="text-lg" style={{ color: '#28666E' }}>Smooth Performance</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-5xl font-bold mb-2" style={{ color: '#033F63' }}>100%</div>
-                  <div className="text-lg" style={{ color: '#28666E' }}>Canvas Powered</div>
-                </div>
               </div>
             </CardContent>
           </Card>
