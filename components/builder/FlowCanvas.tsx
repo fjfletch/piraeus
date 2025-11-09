@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useMemo } from 'react';
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -22,6 +22,8 @@ import { useMCPStore } from '@/store/mcpStore';
 import { useToast } from '@/components/ui/use-toast';
 import { canConnect, getConnectionErrorMessage, connectionExists, validateToolConnection } from '@/lib/flowValidation';
 import BlocksPalette from './BlocksPalette';
+import { LLMNode } from '@/components/flow/LLMNode';
+import { ToolNode } from '@/components/flow/ToolNode';
 
 export default function FlowCanvas() {
   const { currentMCP, selectNode, llmNodes } = useMCPStore();
