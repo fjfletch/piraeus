@@ -306,7 +306,7 @@ export default function BuilderSidebar() {
 
           {currentMCP.tools.length === 0 ? (
             <div className="text-center py-8 text-muted-foreground text-sm">
-              <Tool className="h-8 w-8 mx-auto mb-2 opacity-50" />
+              <Wrench className="h-8 w-8 mx-auto mb-2 opacity-50" />
               <p>No tools created yet.</p>
               <p>Click &apos;Create Tool&apos; to add one.</p>
             </div>
