@@ -54,10 +54,18 @@ export default function Marketplace() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Airbrush gradient background */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#033f63] via-[#28666e] to-[#7c9885]"></div>
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-[#b5b682] opacity-30 blur-[120px]"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-[#fedc97] opacity-40 blur-[100px]"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#7c9885] opacity-20 blur-[150px]"></div>
+      </div>
+      
       <Navigation />
       
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl relative">
         <h1 className="text-3xl font-bold mb-6">MCP Marketplace</h1>
 
         {/* Search Bar */}
