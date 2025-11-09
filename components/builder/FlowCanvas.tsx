@@ -331,15 +331,19 @@ export default function FlowCanvas() {
           <Controls />
           <MiniMap />
           <Background variant={BackgroundVariant.Dots} />
-          <Panel position="top-right" className="bg-background/90 p-3 rounded-lg border shadow-lg">
-            <div className="text-sm max-w-xs">
-              <p className="font-semibold mb-2">💡 Interactive Canvas</p>
+          <Panel position="top-right" className="bg-background/90 p-3 rounded-lg border shadow-lg max-w-xs">
+            <div className="text-sm">
+              <p className="font-semibold mb-2">💡 MCP Flow Builder</p>
               <div className="text-xs text-muted-foreground space-y-1">
-                <p>• <strong>Drag blocks</strong> from left palette to canvas</p>
-                <p>• <strong>Click nodes</strong> to edit in Properties panel</p>
-                <p>• <strong>Drag nodes</strong> to reposition</p>
-                <p>• <strong>Connect nodes</strong> by dragging between them</p>
-                <p>• <strong>Delete connections</strong> with Delete key</p>
+                <p><strong>Flow Logic:</strong></p>
+                <p>• Query → LLM → Response</p>
+                <p>• Tools attach to LLMs (not in main flow)</p>
+                <p>• APIs define Tools (config only)</p>
+                <p className="pt-2"><strong>Actions:</strong></p>
+                <p>• Drag Core Blocks from palette</p>
+                <p>• Connect by dragging between nodes</p>
+                <p>• Click nodes to edit properties</p>
+                <p>• Delete connections with Delete key</p>
               </div>
             </div>
           </Panel>
