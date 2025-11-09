@@ -116,14 +116,6 @@ export default function BuilderPage() {
       {/* Header */}
       <div className="border-b bg-background px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-          
           <Input
             value={mcpName}
             onChange={(e) => setMcpName(e.target.value)}
