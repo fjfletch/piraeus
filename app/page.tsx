@@ -41,35 +41,7 @@ export default function Home() {
     },
   ];
 
-  const featuredMCPs = [
-    {
-      emoji: "💳",
-      name: "Stripe Payment Gateway",
-      description: "Process payments, manage subscriptions, and handle refunds",
-      author: "@johndoe",
-      stars: 4.8,
-      reviews: 124,
-      uses: 2300,
-    },
-    {
-      emoji: "🌤️",
-      name: "Weather API",
-      description: "Get real-time weather data and forecasts for any location",
-      author: "@weatherdev",
-      stars: 4.6,
-      reviews: 89,
-      uses: 1800,
-    },
-    {
-      emoji: "🐙",
-      name: "GitHub Integration",
-      description: "Manage repositories, issues, and pull requests",
-      author: "@devtools",
-      stars: 4.9,
-      reviews: 156,
-      uses: 3200,
-    },
-  ];
+  const featuredMCPs = mockMCPs.slice(0, 3);
 
   return (
     <div className="min-h-screen flex flex-col">
