@@ -73,12 +73,12 @@ export default function ParticleSphereCanvas({ scrollY }: { scrollY: number }) {
     geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
 
     const material = new THREE.PointsMaterial({
-      size: 0.5,
+      size: 0.6,
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
       sizeAttenuation: true,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       depthWrite: false,
     });
 
