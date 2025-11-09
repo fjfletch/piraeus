@@ -109,7 +109,7 @@ export default function MyMCPs() {
             />
           </div>
           <select
-            className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+            className="h-10 rounded-md border border-white/30 bg-white/90 backdrop-blur-sm px-3 text-sm"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           >
