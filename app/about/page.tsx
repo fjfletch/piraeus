@@ -53,28 +53,8 @@ export default function About() {
       answer: "Piraeus is designed for developers, product teams, and businesses of all sizes. Whether you're a startup building your first AI feature or an enterprise scaling AI across your organization, Piraeus provides the tools you need."
     },
     {
-      question: "How does the visual builder work?",
-      answer: "The visual builder uses a drag-and-drop interface powered by React Flow. You can connect API nodes to LLM nodes, configure properties, and test integrations in real-time without writing code. The builder generates the integration logic automatically."
-    },
-    {
-      question: "What integrations are supported?",
-      answer: "Piraeus supports a wide range of integrations including various LLM providers (OpenAI, Anthropic, Google), custom APIs, webhooks, and popular third-party services. You can also create custom MCPs (Model Context Protocols) to extend functionality."
-    },
-    {
-      question: "Can I share my integrations with others?",
-      answer: "Yes! The Piraeus Marketplace allows you to share your MCPs (Model Context Protocols) with the community. You can browse, download, and customize integrations created by other users."
-    },
-    {
-      question: "Is there API access available?",
-      answer: "Yes, Piraeus provides a comprehensive Developer API Portal where you can manage API keys, monitor usage statistics, and access documentation for programmatic access to your integrations."
-    },
-    {
-      question: "How do I get started?",
-      answer: "Simply sign up for an account, explore the marketplace for pre-built integrations, or start building your own using the visual builder. Our documentation provides step-by-step guides to help you get started quickly."
-    },
-    {
-      question: "What is the pricing model?",
-      answer: "Piraeus offers flexible pricing plans to suit different needs. We provide a free tier for getting started, with paid plans that scale based on usage, number of integrations, and advanced features. Contact us for enterprise pricing."
+      question: "What's planned for the future?",
+      answer: "We eventually want to have users able to upload their own MCPs they create in order to facilitate the marketplace emphasis of our idea, which unfortunately we could not complete within the time frame. We also have ideas of how we could scale up for both large community and enterprise capabilities."
     }
   ];
 
