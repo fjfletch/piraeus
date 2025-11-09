@@ -83,7 +83,7 @@ function Particles({ count = 5000, scrollY }: { count?: number; scrollY: number 
   });
 
   return (
-    <points ref={mesh}>
+    <points ref={mesh as any}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
