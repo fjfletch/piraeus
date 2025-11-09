@@ -120,8 +120,9 @@ export default function Home() {
         </div>
 
         {/* Small boat 1 - randomly placed in bottom right */}
-        <div id="boat1" className="absolute right-[22%] md:right-[25%]" style={{ 
-          bottom: 'calc(9% + 0px)',
+        <div id="boat1" className="absolute" style={{ 
+          right: `${boat1Pos.right}%`,
+          bottom: `${boat1Pos.bottom}%`,
           animation: 'waveMotion1 8.5s ease-in-out infinite'
         }}>
           <svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="md:w-16 md:h-16">
