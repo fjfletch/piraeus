@@ -63,12 +63,12 @@ export namespace ToolsTab {
               <div className="flex items-start gap-2">
                 <Wrench className="h-4 w-4 mt-0.5 text-muted-foreground flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <div className="font-medium text-sm mb-1">{tool.name}</div>
-                  <div className="text-xs text-muted-foreground">
-                    <Badge variant="outline" className="mr-1">
+                  <div className="font-medium text-sm mb-1 truncate">{tool.name}</div>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Badge variant="outline" className="flex-shrink-0">
                       {tool.method}
                     </Badge>
-                    <span className="truncate">{tool.url}</span>
+                    <span className="truncate block">{tool.url}</span>
                   </div>
                 </div>
               </div>
