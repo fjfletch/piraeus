@@ -66,7 +66,7 @@ function CollapsibleSection({
 
 export function ToolModal({ open, onOpenChange, toolId }: ToolModalProps) {
   const { toast } = useToast();
-  const { tools, addTool, updateTool, deleteTool, getToolById } = useMCPBuilderStore();
+  const { tools, syncAddTool, syncUpdateTool, syncDeleteTool, getToolById, isSyncing } = useMCPBuilderStore();
   
   const [localTool, setLocalTool] = useState<Omit<Tool, 'id'> | null>(null);
   const [collapsedSections, setCollapsedSections] = useState({
@@ -113,34 +113,43 @@ export function ToolModal({ open, onOpenChange, toolId }: ToolModalProps) {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!localTool) return;
 
     if (toolId === null) {
       // Add new tool
-      addTool(localTool);
-      toast({
-        title: 'Tool Created',
-        description: `${localTool.name} has been created successfully`,
-      });
+      const newId = await syncAddTool(localTool);
+      if (newId) {
+        toast({
+          title: 'Tool Created',
+          description: `${localTool.name} has been saved to backend`,
+        });
+        onOpenChange(false);
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to save tool to backend',
+          variant: 'destructive',
+        });
+      }
     } else {
       // Update existing tool
-      updateTool(toolId, localTool);
+      await syncUpdateTool(toolId, localTool);
       toast({
         title: 'Tool Updated',
-        description: `${localTool.name} has been updated successfully`,
+        description: `${localTool.name} has been synced to backend`,
       });
+      onOpenChange(false);
     }
-    onOpenChange(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (toolId !== null) {
       const tool = getToolById(toolId);
-      deleteTool(toolId);
+      await syncDeleteTool(toolId);
       toast({
         title: 'Tool Deleted',
-        description: `${tool?.name} has been deleted`,
+        description: `${tool?.name} has been deleted from backend`,
         variant: 'destructive',
       });
       onOpenChange(false);
@@ -388,8 +397,8 @@ export function ToolModal({ open, onOpenChange, toolId }: ToolModalProps) {
             >
               Cancel
             </Button>
-            <Button type="button" onClick={handleSave}>
-              Save Tool
+            <Button type="button" onClick={handleSave} disabled={isSyncing}>
+              {isSyncing ? 'Saving...' : 'Save Tool'}
             </Button>
           </div>
         </DialogFooter>

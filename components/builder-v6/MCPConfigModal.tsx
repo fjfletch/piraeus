@@ -46,11 +46,12 @@ export function MCPConfigModal({
   const {
     tools,
     savedPrompts,
-    addMCPConfig,
-    updateMCPConfig,
-    deleteMCPConfig,
+    syncAddMCPConfig,
+    syncUpdateMCPConfig,
+    syncDeleteMCPConfig,
     getMCPConfigById,
     getToolById,
+    isSyncing,
   } = useMCPBuilderStore();
 
   const [localConfig, setLocalConfig] = useState<Omit<SavedMCPConfig, 'id'> | null>(null);
@@ -103,7 +104,7 @@ export function MCPConfigModal({
     }
   }, [open, configId, getMCPConfigById]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!localConfig) return;
 
     if (!localConfig.name.trim()) {
@@ -117,24 +118,32 @@ export function MCPConfigModal({
 
     if (configId === null) {
       // Add new config
-      const newId = addMCPConfig(localConfig);
-      toast({
-        title: 'MCP Configuration Created',
-        description: `${localConfig.name} has been created successfully`,
-      });
-      onOpenChange(false);
+      const newId = await syncAddMCPConfig(localConfig);
+      if (newId) {
+        toast({
+          title: 'MCP Configuration Created',
+          description: `${localConfig.name} has been saved to backend`,
+        });
+        onOpenChange(false);
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to save MCP configuration to backend',
+          variant: 'destructive',
+        });
+      }
     } else {
       // Update existing config
-      updateMCPConfig(configId, localConfig);
+      await syncUpdateMCPConfig(configId, localConfig);
       toast({
         title: 'MCP Configuration Updated',
-        description: `${localConfig.name} has been updated successfully`,
+        description: `${localConfig.name} has been synced to backend`,
       });
       onOpenChange(false);
     }
   };
 
-  const handleSaveAndDeploy = () => {
+  const handleSaveAndDeploy = async () => {
     if (!localConfig) return;
 
     if (!localConfig.name.trim()) {
@@ -150,10 +159,10 @@ export function MCPConfigModal({
 
     if (configId === null) {
       // Add new config
-      finalConfigId = addMCPConfig(localConfig);
+      finalConfigId = await syncAddMCPConfig(localConfig);
     } else {
       // Update existing config
-      updateMCPConfig(configId, localConfig);
+      await syncUpdateMCPConfig(configId, localConfig);
     }
 
     onOpenChange(false);
@@ -164,13 +173,13 @@ export function MCPConfigModal({
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (configId !== null) {
       const config = getMCPConfigById(configId);
-      deleteMCPConfig(configId);
+      await syncDeleteMCPConfig(configId);
       toast({
         title: 'MCP Configuration Deleted',
-        description: `${config?.name} has been deleted`,
+        description: `${config?.name} has been deleted from backend`,
         variant: 'destructive',
       });
       onOpenChange(false);
@@ -441,12 +450,12 @@ export function MCPConfigModal({
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
                 Cancel
               </Button>
-              <Button type="button" variant="outline" onClick={handleSave}>
-                Save
+              <Button type="button" variant="outline" onClick={handleSave} disabled={isSyncing}>
+                {isSyncing ? 'Saving...' : 'Save'}
               </Button>
-              <Button type="button" onClick={handleSaveAndDeploy}>
+              <Button type="button" onClick={handleSaveAndDeploy} disabled={isSyncing}>
                 <Rocket className="h-4 w-4 mr-2" />
-                Deploy
+                {isSyncing ? 'Deploying...' : 'Deploy'}
               </Button>
             </div>
           </DialogFooter>

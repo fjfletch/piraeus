@@ -5,7 +5,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
-const AWS_BACKEND_URL = 'http://3.136.147.20:8000';
+// Backend URL - defaults to AWS, can be overridden with BACKEND_URL env var for local development
+const BACKEND_URL = process.env.BACKEND_URL || 'http://3.136.147.20:8000';
 
 export async function GET(
   request: NextRequest,
@@ -56,7 +57,7 @@ async function proxyRequest(
     // Build target URL
     const path = pathSegments.join('/');
     const searchParams = request.nextUrl.searchParams.toString();
-    const targetUrl = `${AWS_BACKEND_URL}/${path}${searchParams ? `?${searchParams}` : ''}`;
+    const targetUrl = `${BACKEND_URL}/${path}${searchParams ? `?${searchParams}` : ''}`;
 
     console.log(`[Proxy] ${method} ${targetUrl} (segments: ${JSON.stringify(pathSegments)})`);
 

@@ -15,7 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function BuilderV6Page() {
   const { toast } = useToast();
-  const { currentTab, loadAllFromBackend, isLoading: storeLoading } = useMCPBuilderStore();
+  const { currentTab, loadAllFromBackend, syncSaveWorkflow, isLoading: storeLoading, isSyncing } = useMCPBuilderStore();
   
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -62,17 +62,24 @@ export default function BuilderV6Page() {
     loadData();
   }, []);
 
-  // Save handler
-  const handleSave = () => {
+  // Save handler - saves workflow to backend
+  const handleSave = async () => {
     setIsSaving(true);
-    // Simulate save operation
-    setTimeout(() => {
-      setIsSaving(false);
+    try {
+      await syncSaveWorkflow('My Workflow');
       toast({
         title: 'Saved',
-        description: 'Your project has been saved successfully'
+        description: 'Your workflow has been saved to backend'
       });
-    }, 1000);
+    } catch (error) {
+      toast({
+        title: 'Save Failed',
+        description: 'Failed to save workflow to backend',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   // Publish handler
@@ -90,7 +97,7 @@ export default function BuilderV6Page() {
       <Header
         onSave={handleSave}
         onDeploy={handlePublish}
-        isSaving={isSaving}
+        isSaving={isSaving || isSyncing}
       />
 
       {/* Tab Bar */}
