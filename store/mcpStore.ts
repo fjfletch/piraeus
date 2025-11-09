@@ -153,4 +153,158 @@ export const useMCPStore = create<MCPStoreState>((set, get) => ({
       systemPrompt: state.currentMCP?.configuration.globalPrompt || '',
     };
   },
+
+  // Flow management actions
+  addFlowNode: (node) =>
+    set((state) => ({
+      flowNodes: [...state.flowNodes, node],
+      currentMCP: state.currentMCP
+        ? {
+            ...state.currentMCP,
+            flow: {
+              nodes: [...state.flowNodes, node],
+              edges: state.flowEdges,
+            },
+            updatedAt: new Date().toISOString(),
+          }
+        : null,
+    })),
+
+  updateFlowNode: (nodeId, updates) =>
+    set((state) => {
+      const updatedNodes = state.flowNodes.map((node) =>
+        node.id === nodeId ? { ...node, ...updates } : node
+      );
+      return {
+        flowNodes: updatedNodes,
+        currentMCP: state.currentMCP
+          ? {
+              ...state.currentMCP,
+              flow: {
+                nodes: updatedNodes,
+                edges: state.flowEdges,
+              },
+              updatedAt: new Date().toISOString(),
+            }
+          : null,
+      };
+    }),
+
+  removeFlowNode: (nodeId) =>
+    set((state) => {
+      const filteredNodes = state.flowNodes.filter((node) => node.id !== nodeId);
+      const filteredEdges = state.flowEdges.filter(
+        (edge) => edge.source !== nodeId && edge.target !== nodeId
+      );
+      return {
+        flowNodes: filteredNodes,
+        flowEdges: filteredEdges,
+        selectedNode: state.selectedNode?.id === nodeId ? null : state.selectedNode,
+        currentMCP: state.currentMCP
+          ? {
+              ...state.currentMCP,
+              flow: {
+                nodes: filteredNodes,
+                edges: filteredEdges,
+              },
+              updatedAt: new Date().toISOString(),
+            }
+          : null,
+      };
+    }),
+
+  addFlowEdge: (edge) =>
+    set((state) => ({
+      flowEdges: [...state.flowEdges, edge],
+      currentMCP: state.currentMCP
+        ? {
+            ...state.currentMCP,
+            flow: {
+              nodes: state.flowNodes,
+              edges: [...state.flowEdges, edge],
+            },
+            updatedAt: new Date().toISOString(),
+          }
+        : null,
+    })),
+
+  removeFlowEdge: (edgeId) =>
+    set((state) => {
+      const filteredEdges = state.flowEdges.filter((edge) => edge.id !== edgeId);
+      return {
+        flowEdges: filteredEdges,
+        currentMCP: state.currentMCP
+          ? {
+              ...state.currentMCP,
+              flow: {
+                nodes: state.flowNodes,
+                edges: filteredEdges,
+              },
+              updatedAt: new Date().toISOString(),
+            }
+          : null,
+      };
+    }),
+
+  validateFlowConnection: (sourceId, targetId) => {
+    const state = get();
+    const sourceNode = state.flowNodes.find((n) => n.id === sourceId);
+    const targetNode = state.flowNodes.find((n) => n.id === targetId);
+
+    if (!sourceNode || !targetNode) return false;
+
+    return canConnect(sourceNode.type, targetNode.type);
+  },
+
+  getNodeById: (nodeId) => {
+    const state = get();
+    return state.flowNodes.find((n) => n.id === nodeId) || null;
+  },
+
+  getConnectedNodes: (nodeId) => {
+    const state = get();
+    const incoming: FlowNode[] = [];
+    const outgoing: FlowNode[] = [];
+
+    state.flowEdges.forEach((edge) => {
+      if (edge.target === nodeId) {
+        const sourceNode = state.flowNodes.find((n) => n.id === edge.source);
+        if (sourceNode) incoming.push(sourceNode);
+      }
+      if (edge.source === nodeId) {
+        const targetNode = state.flowNodes.find((n) => n.id === edge.target);
+        if (targetNode) outgoing.push(targetNode);
+      }
+    });
+
+    return { incoming, outgoing };
+  },
+
+  setFlowNodes: (nodes) =>
+    set((state) => ({
+      flowNodes: nodes,
+      currentMCP: state.currentMCP
+        ? {
+            ...state.currentMCP,
+            flow: {
+              nodes,
+              edges: state.flowEdges,
+            },
+          }
+        : null,
+    })),
+
+  setFlowEdges: (edges) =>
+    set((state) => ({
+      flowEdges: edges,
+      currentMCP: state.currentMCP
+        ? {
+            ...state.currentMCP,
+            flow: {
+              nodes: state.flowNodes,
+              edges,
+            },
+          }
+        : null,
+    })),
 }));
