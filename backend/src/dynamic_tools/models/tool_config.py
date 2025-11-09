@@ -19,8 +19,8 @@ class ApiConfig(BaseModel):
     base_url: str = Field(description="Base URL for the API endpoint")
     path: str = Field(default="", description="Path to append to base URL")
     method: HttpMethod = Field(default=HttpMethod.GET)
-    headers: dict[str, str] = Field(default_factory=dict, description="Static headers")
-    params: dict[str, str] = Field(default_factory=dict, description="Static query parameters")
+    headers: dict[str, str] | None = Field(default_factory=dict, description="Static headers")
+    params: dict[str, str] | None = Field(default_factory=dict, description="Static query parameters")
     auth: AuthConfig = Field(default_factory=AuthConfig)
     timeout: float = Field(default=30.0, description="Request timeout in seconds")
 

@@ -11,9 +11,10 @@ services:
       - ./tests:/app/tests
       - ./logs:/app/logs
     environment:
-      - OPENAI-SECRET=${OPENAI_API_KEY}
-      - CLAUDE-SECRET=${CLAUDE_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY:-demo}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
       - DEBUG=true
       - LOG_LEVEL=DEBUG
     env_file:

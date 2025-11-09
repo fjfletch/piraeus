@@ -49,13 +49,21 @@ class Settings(BaseSettings):
     # API Keys
     openai_api_key: str = Field(
         ...,
-        alias="OPENAI-SECRET",
         description="OpenAI API key (required)"
     )
     claude_api_key: Optional[str] = Field(
         default=None,
-        alias="CLAUDE-SECRET",
         description="Claude API key (optional)"
+    )
+    
+    # Supabase Configuration
+    supabase_url: Optional[str] = Field(
+        default=None,
+        description="Supabase project URL"
+    )
+    supabase_key: Optional[str] = Field(
+        default=None,
+        description="Supabase API key"
     )
     
     # HTTP Client settings

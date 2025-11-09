@@ -446,3 +446,364 @@ OPENAI-SECRET
 2025-11-09 04:52:54.443 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
 2025-11-09 04:53:24.501 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
 2025-11-09 04:53:54.563 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:54:24.631 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:54:54.696 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:55:24.779 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:55:54.863 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:56:24.932 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:56:55.002 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:57:25.066 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:57:55.135 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:58:25.205 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:58:55.294 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:59:25.365 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 04:59:55.443 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:00:25.505 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:00:55.571 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:01:25.644 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:01:55.711 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:02:25.782 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:14:02.533 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:14:32.605 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:15:30.872 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:16:00.926 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:16:30.990 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:17:07.278 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:17:37.404 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:18:07.492 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:18:58.414 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:19:57.113 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:20:27.227 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:20:57.322 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:22:58.462 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:23:28.617 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:23:58.730 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:24:28.847 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:24:58.945 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:25:29.057 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:25:59.138 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:26:29.222 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:26:59.325 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:27:29.475 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:27:59.748 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:28:29.911 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:29:00.043 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:29:30.115 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:30:00.180 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:30:30.291 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:31:00.444 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:31:30.519 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:32:00.687 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:32:30.767 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:33:00.833 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:33:30.909 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:34:01.033 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:34:31.195 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:35:01.278 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:35:31.926 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:36:01.988 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:36:32.059 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:37:02.146 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:37:32.217 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:38:02.364 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:38:32.434 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:39:02.498 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:39:32.560 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:40:02.730 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:40:32.871 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:41:02.948 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:41:33.090 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:42:03.245 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:42:33.316 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:43:03.384 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:43:33.520 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:44:03.577 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:44:33.647 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:45:03.778 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:45:33.849 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:46:03.913 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:46:33.972 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:47:04.030 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:47:34.101 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:48:04.175 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:48:34.266 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:49:04.366 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:49:34.435 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:50:04.578 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:50:34.647 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:51:04.764 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:51:34.838 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:52:04.910 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:52:35.024 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:53:05.095 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:53:35.156 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:54:05.269 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:54:35.327 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:55:05.394 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:55:35.538 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:56:05.620 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:56:35.683 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:57:05.836 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:57:36.004 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:58:06.139 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:58:36.234 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:59:06.317 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 05:59:36.466 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:00:06.607 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:00:36.724 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:01:06.839 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:01:36.952 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:02:07.024 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:02:37.099 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:03:07.199 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:03:37.329 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:04:07.398 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:04:37.565 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:05:07.629 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:05:37.700 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:06:07.779 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:06:37.844 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:07:07.988 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:07:38.107 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:08:08.177 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:08:38.238 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:09:08.313 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:09:38.381 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:10:08.479 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:10:38.546 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:11:08.667 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:11:16.018 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:11:38.727 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:12:08.801 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:12:38.862 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:13:08.921 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:13:38.984 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:14:09.051 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:14:39.136 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:15:09.206 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:15:39.279 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:16:09.376 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:16:39.550 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:17:09.672 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:17:39.744 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:18:09.826 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:18:39.941 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:19:10.018 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:19:40.084 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:20:10.220 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:20:40.310 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:21:10.449 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:21:40.510 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:22:10.568 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:22:40.653 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:23:10.803 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:23:40.883 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:24:10.953 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:24:41.013 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:25:11.151 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:25:41.277 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:26:11.337 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:26:41.417 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:27:11.482 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:27:41.629 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:28:11.692 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:28:41.754 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:29:24.030 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:29:42.517 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:30:12.592 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:30:42.740 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:31:12.865 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:31:42.943 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:32:13.012 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:32:43.102 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:33:13.197 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:33:43.269 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:34:13.334 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:34:43.414 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:35:13.564 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:35:43.626 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:36:13.709 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:36:43.824 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:37:13.887 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:37:43.958 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:38:14.065 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:38:44.210 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:39:14.336 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:39:44.440 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:40:14.598 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:40:44.776 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:41:14.844 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:41:44.968 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:42:15.132 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:42:45.227 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:43:15.369 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:43:46.561 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:48:01.207 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:49:18.324 | INFO     | dynamic_tools.api.endpoints:prompt_endpoint:48 - Processing prompt: Explain what REST APIs are...
+2025-11-09 06:49:18.401 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 06:49:18.402 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 06:49:18.403 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Explain what REST APIs are...
+2025-11-09 06:49:24.693 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 06:49:24.693 | INFO     | dynamic_tools.api.endpoints:prompt_endpoint:59 - Prompt processed successfully
+2025-11-09 06:49:34.937 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:50:05.025 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:50:35.086 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:50:39.293 | INFO     | dynamic_tools.api.endpoints:prompt_mcp_endpoint:101 - Processing MCP prompt: Get the current weather for New York City...
+2025-11-09 06:50:39.320 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 06:50:39.320 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 06:50:39.320 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get the current weather for New York City...
+2025-11-09 06:50:41.644 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 06:50:41.644 | INFO     | dynamic_tools.api.endpoints:prompt_mcp_endpoint:112 - MCP prompt processed successfully
+2025-11-09 06:51:05.159 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:51:35.239 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:52:05.306 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:52:35.366 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:52:37.506 | INFO     | dynamic_tools.api.endpoints:prompt_execute_endpoint:195 - Starting prompt-execute flow: Get the current weather for New York City...
+2025-11-09 06:52:37.506 | INFO     | dynamic_tools.api.endpoints:prompt_execute_endpoint:198 - Step 1: Generating HTTP spec...
+2025-11-09 06:52:37.531 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 06:52:37.532 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 06:52:37.532 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Get the current weather for New York City...
+2025-11-09 06:52:40.385 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 06:52:40.385 | INFO     | dynamic_tools.api.endpoints:prompt_execute_endpoint:210 - Generated HTTP spec: GET https://api.openweathermap.org/data/2.5/weather?q=New%20York%20City&appid={key}
+2025-11-09 06:52:40.385 | INFO     | dynamic_tools.api.endpoints:prompt_execute_endpoint:213 - Step 2: Executing HTTP request...
+2025-11-09 06:52:40.385 | INFO     | dynamic_tools.services.http_client:__init__:37 - HTTPClientService initialized with timeout=30.0s, max_retries=3
+2025-11-09 06:52:40.385 | INFO     | dynamic_tools.services.http_client:execute:122 - Executing HTTP request: GET https://api.openweathermap.org/data/2.5/weather?q=New%20York%20City&appid={key}
+2025-11-09 06:52:40.485 | INFO     | dynamic_tools.services.http_client:execute:178 - HTTP request completed: 401 in 99.96ms
+2025-11-09 06:52:40.486 | INFO     | dynamic_tools.api.endpoints:prompt_execute_endpoint:220 - Prompt-execute flow completed: 401
+2025-11-09 06:53:02.860 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:271 - Generating tool config for: get_weather
+2025-11-09 06:53:02.872 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 06:53:02.873 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 06:53:02.873 | INFO     | dynamic_tools.services.tool_generator:__init__:38 - ToolConfigGenerator initialized
+2025-11-09 06:53:02.873 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:72 - Starting tool config generation for: get_weather
+2025-11-09 06:53:02.873 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:76 - Step 1/5: Generating HTTP request specification...
+2025-11-09 06:53:02.874 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Generate HTTP request specification for: Get curre...
+2025-11-09 06:53:05.284 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 06:53:05.284 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:84 - Step 2/5: Extracting API configuration...
+2025-11-09 06:53:05.284 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:89 - Step 3/5: Generating input schema...
+2025-11-09 06:53:05.285 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the input parameters of...
+2025-11-09 06:53:05.449 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:53:08.317 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 06:53:08.317 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:98 - Step 4/5: Generating output schema...
+2025-11-09 06:53:08.317 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the output/response of ...
+2025-11-09 06:53:12.030 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 06:53:12.031 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:107 - Step 5/5: Generating field mappings...
+2025-11-09 06:53:12.032 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:129 - ✅ Successfully generated tool config for: get_weather
+2025-11-09 06:53:12.033 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:289 - ✅ Successfully generated tool config: get_weather
+2025-11-09 06:53:35.523 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:54:05.595 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:54:37.618 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:55:07.687 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:55:37.768 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:56:07.830 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:56:37.896 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:57:07.963 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:57:38.039 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:58:45.692 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:59:15.756 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 06:59:45.848 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:00:15.922 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:00:45.997 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:01:16.084 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:01:46.165 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:01:52.694 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:01:52.756 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:272 - Generating tool config for: weather_tool
+2025-11-09 07:01:52.864 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 07:01:52.865 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 07:01:52.865 | INFO     | dynamic_tools.services.tool_generator:__init__:38 - ToolConfigGenerator initialized
+2025-11-09 07:01:52.866 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:72 - Starting tool config generation for: weather_tool
+2025-11-09 07:01:52.866 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:76 - Step 1/5: Generating HTTP request specification...
+2025-11-09 07:01:52.866 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Generate HTTP request specification for: Get curre...
+2025-11-09 07:01:56.021 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 07:01:56.022 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:84 - Step 2/5: Extracting API configuration...
+2025-11-09 07:01:56.022 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:89 - Step 3/5: Generating input schema...
+2025-11-09 07:01:56.023 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the input parameters of...
+2025-11-09 07:02:00.465 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 07:02:00.465 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:98 - Step 4/5: Generating output schema...
+2025-11-09 07:02:00.465 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the output/response of ...
+2025-11-09 07:02:08.867 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 07:02:08.868 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:107 - Step 5/5: Generating field mappings...
+2025-11-09 07:02:08.869 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:129 - ✅ Successfully generated tool config for: weather_tool
+2025-11-09 07:02:08.870 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:290 - ✅ Successfully generated tool config: weather_tool
+2025-11-09 07:02:08.876 | INFO     | dynamic_tools.services.supabase_service:__init__:38 - Initializing SupabaseService
+2025-11-09 07:02:08.877 | INFO     | dynamic_tools.services.supabase_service:create_tool:64 - Creating tool in DB: weather_tool
+2025-11-09 07:02:10.515 | ERROR    | dynamic_tools.api.endpoints:create_tool:359 - Failed to create tool: cannot import name 'mcp_supabase_execute_sql' from 'dynamic_tools.mcp_components.tools' (/app/src/dynamic_tools/mcp_components/tools.py)
+2025-11-09 07:02:16.310 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:02:46.379 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:03:41.244 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:03:44.168 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:03:44.204 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:272 - Generating tool config for: weather_tool
+2025-11-09 07:03:44.376 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 07:03:44.377 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 07:03:44.377 | INFO     | dynamic_tools.services.tool_generator:__init__:38 - ToolConfigGenerator initialized
+2025-11-09 07:03:44.377 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:72 - Starting tool config generation for: weather_tool
+2025-11-09 07:03:44.377 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:76 - Step 1/5: Generating HTTP request specification...
+2025-11-09 07:03:44.378 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Generate HTTP request specification for: Get curre...
+2025-11-09 07:03:47.065 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 07:03:47.065 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:84 - Step 2/5: Extracting API configuration...
+2025-11-09 07:03:47.065 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:89 - Step 3/5: Generating input schema...
+2025-11-09 07:03:47.066 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the input parameters of...
+2025-11-09 07:03:50.961 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 07:03:50.961 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:98 - Step 4/5: Generating output schema...
+2025-11-09 07:03:50.961 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the output/response of ...
+2025-11-09 07:03:52.379 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:03:57.931 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 07:03:57.931 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:107 - Step 5/5: Generating field mappings...
+2025-11-09 07:03:57.931 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:129 - ✅ Successfully generated tool config for: weather_tool
+2025-11-09 07:03:57.931 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:290 - ✅ Successfully generated tool config: weather_tool
+2025-11-09 07:03:57.946 | INFO     | dynamic_tools.services.supabase_service:__init__:38 - ✅ SupabaseService initialized
+2025-11-09 07:03:57.946 | INFO     | dynamic_tools.services.supabase_service:create_tool:64 - Creating tool in DB: weather_tool
+2025-11-09 07:03:58.126 | ERROR    | dynamic_tools.services.supabase_service:create_tool:83 - Failed to create tool: {'message': 'JSON could not be generated', 'code': 401, 'hint': 'Refer to full message for details', 'details': 'b\'{"message":"Invalid API key","hint":"Double check your Supabase `anon` or `service_role` API key."}\''}
+2025-11-09 07:03:58.127 | ERROR    | dynamic_tools.api.endpoints:create_tool:359 - Failed to create tool: {'message': 'JSON could not be generated', 'code': 401, 'hint': 'Refer to full message for details', 'details': 'b\'{"message":"Invalid API key","hint":"Double check your Supabase `anon` or `service_role` API key."}\''}
+2025-11-09 07:04:22.454 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:04:52.538 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:05:22.605 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:05:52.676 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:06:22.749 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:06:52.835 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:07:45.147 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:08:20.462 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:08:20.504 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:272 - Generating tool config for: weather_tool
+2025-11-09 07:08:20.684 | INFO     | dynamic_tools.core.orchestrator:__init__:46 - AIOrchestrator initialized with model: gpt-4o-mini
+2025-11-09 07:08:20.685 | INFO     | dynamic_tools.services.prompt_service:__init__:43 - PromptService initialized
+2025-11-09 07:08:20.685 | INFO     | dynamic_tools.services.tool_generator:__init__:38 - ToolConfigGenerator initialized
+2025-11-09 07:08:20.685 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:72 - Starting tool config generation for: weather_tool
+2025-11-09 07:08:20.685 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:76 - Step 1/5: Generating HTTP request specification...
+2025-11-09 07:08:20.685 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:145 - Processing MCP prompt: Generate HTTP request specification for: Get curre...
+2025-11-09 07:08:23.484 | INFO     | dynamic_tools.services.prompt_service:prompt_mcp:173 - MCP prompt completed successfully
+2025-11-09 07:08:23.485 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:84 - Step 2/5: Extracting API configuration...
+2025-11-09 07:08:23.485 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:89 - Step 3/5: Generating input schema...
+2025-11-09 07:08:23.486 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the input parameters of...
+2025-11-09 07:08:26.002 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 07:08:26.002 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:98 - Step 4/5: Generating output schema...
+2025-11-09 07:08:26.002 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:102 - Processing normal prompt: Generate a JSON Schema for the output/response of ...
+2025-11-09 07:08:32.249 | INFO     | dynamic_tools.services.prompt_service:prompt_normal:121 - Normal prompt completed successfully
+2025-11-09 07:08:32.250 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:107 - Step 5/5: Generating field mappings...
+2025-11-09 07:08:32.250 | INFO     | dynamic_tools.services.tool_generator:generate_tool_config:129 - ✅ Successfully generated tool config for: weather_tool
+2025-11-09 07:08:32.250 | INFO     | dynamic_tools.api.endpoints:generate_tool_config_endpoint:290 - ✅ Successfully generated tool config: weather_tool
+2025-11-09 07:08:32.266 | INFO     | dynamic_tools.services.supabase_service:__init__:38 - ✅ SupabaseService initialized
+2025-11-09 07:08:32.266 | INFO     | dynamic_tools.services.supabase_service:create_tool:64 - Creating tool in DB: weather_tool
+2025-11-09 07:08:33.019 | INFO     | dynamic_tools.services.supabase_service:create_tool:74 - ✅ Tool created: weather_tool
+2025-11-09 07:08:33.023 | INFO     | dynamic_tools.services.supabase_service:get_tool:95 - Retrieving tool from DB: weather_tool
+2025-11-09 07:08:33.092 | INFO     | dynamic_tools.services.supabase_service:get_tool:101 - ✅ Tool found: weather_tool
+2025-11-09 07:08:33.100 | INFO     | dynamic_tools.services.supabase_service:list_tools:125 - Listing tools from DB (limit=None, offset=0)
+2025-11-09 07:08:33.209 | INFO     | dynamic_tools.services.supabase_service:list_tools:143 - ✅ Found 1 tools (total: 1)
+2025-11-09 07:08:44.105 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:09:14.170 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:09:42.502 | INFO     | dynamic_tools.services.supabase_service:create_tool:64 - Creating tool in DB: string
+2025-11-09 07:09:42.652 | INFO     | dynamic_tools.services.supabase_service:create_tool:74 - ✅ Tool created: string
+2025-11-09 07:09:44.232 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:10:14.326 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:10:44.395 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:11:14.473 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:11:44.541 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:12:14.618 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:12:44.685 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:13:14.767 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:13:44.833 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:14:14.913 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:14:44.988 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:15:15.049 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:15:45.144 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:16:15.210 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:16:45.284 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 07:17:15.353 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
