@@ -202,13 +202,12 @@ export default function BlocksPalette() {
 
             {/* Empty State */}
             {currentMCP &&
-              currentMCP.apis.length === 0 &&
               currentMCP.tools.length === 0 &&
               currentMCP.prompts.length === 0 && (
                 <div className="text-center py-8 text-muted-foreground">
-                  <p className="text-xs mb-3">No blocks yet</p>
+                  <p className="text-xs mb-3">Start building</p>
                   <p className="text-xs">
-                    Click &quot;New API&quot; or &quot;New Tool&quot; to get started
+                    Drag Core Blocks to canvas or configure APIs and Tools
                   </p>
                 </div>
               )}
