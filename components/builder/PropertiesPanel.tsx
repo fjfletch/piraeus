@@ -126,9 +126,19 @@ ${mockResponse.tool_calls
 
     // Tool node
     if (selectedNode.id.startsWith('tool-')) {
-      const toolId = selectedNode.id.replace('tool-', '');
+      // Get tool ID from node data instead of parsing node ID
+      const toolId = selectedNode.data?.toolId;
       const tool = currentMCP?.tools.find((t) => t.id === toolId);
-      if (!tool) return <p>Tool not found</p>;
+      if (!tool) {
+        return (
+          <Card>
+            <CardContent className="p-6 text-center text-muted-foreground">
+              <p className="text-sm">Tool not found in configuration</p>
+              <p className="text-xs mt-2">The tool may have been deleted or the data is corrupted.</p>
+            </CardContent>
+          </Card>
+        );
+      }
 
       const api = currentMCP?.apis.find((a) => a.id === tool.apiId);
 
