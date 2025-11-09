@@ -113,4 +113,23 @@ export const useMCPStore = create<MCPStoreState>((set, get) => ({
     })),
 
   selectNode: (node) => set({ selectedNode: node }),
+
+  updateLLMNode: (nodeId, config) =>
+    set((state) => ({
+      llmNodes: {
+        ...state.llmNodes,
+        [nodeId]: config,
+      },
+    })),
+
+  getLLMNode: (nodeId) => {
+    const state = get();
+    return state.llmNodes[nodeId] || {
+      mode: 'normal',
+      model: state.currentMCP?.configuration.model || 'gpt-3.5-turbo',
+      temperature: state.currentMCP?.configuration.temperature || 0.7,
+      maxTokens: state.currentMCP?.configuration.maxTokens || 2000,
+      systemPrompt: state.currentMCP?.configuration.globalPrompt || '',
+    };
+  },
 }));
