@@ -74,7 +74,11 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-muted/30">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="h-12 w-12 rounded bg-primary mx-auto mb-4" />
+          <img 
+            src="https://customer-assets.emergentagent.com/job_no-code-llm/artifacts/cua0n8i5_Screenshot%202025-11-08%20at%208.46.19%20PM.png" 
+            alt="Piraeus Logo" 
+            className="h-12 w-auto mx-auto mb-4"
+          />
           <CardTitle className="text-2xl">Create Your Account</CardTitle>
           <CardDescription>Start building AI integrations in minutes</CardDescription>
         </CardHeader>
