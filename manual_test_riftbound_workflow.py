@@ -139,8 +139,6 @@ class RiftboundWorkflowTester:
         print("TEST 1: Get Riftbound Cards (No Formatting)")
         print("="*80)
         
-        # Since we can't actually filter by domain in the API, we'll ask the LLM
-        # to generate a request to get all cards, then we can filter in the formatted response
         workflow_request = {
             "user_instructions": "Get all cards from the Riftbound API",
             "tool_ids": ["get_riftbound_cards"],
@@ -150,35 +148,46 @@ class RiftboundWorkflowTester:
         print(f"\nWorkflow Request:")
         print(json.dumps(workflow_request, indent=2))
         
-        # This would call the actual workflow endpoint
-        print("\n[SIMULATED] Calling POST /workflow...")
-        print("Expected flow:")
-        print("  1. LLM receives tool context about get_riftbound_cards")
-        print("  2. LLM generates HTTPRequestSpec:")
-        print(f"     - method: GET")
-        print(f"     - url: {RIFTBOUND_API_BASE}/api/cards")
-        print("  3. System executes API call")
-        print("  4. Returns raw JSON response with all cards")
-        
-        # Simulate what the response would look like
-        print("\n✓ Expected Response Structure:")
-        print("""{
-  "status": "success",
-  "selected_tool": "get_riftbound_cards",
-  "http_spec": {
-    "method": "GET",
-    "url": "https://riftbound-top-decks-api.../api/cards"
-  },
-  "raw_response": {
-    "status_code": 200,
-    "body": [
-      {"name": "Card 1", "domain": "Fury", ...},
-      {"name": "Card 2", "domain": "Mind", ...},
-      ...
-    ]
-  },
-  "formatted_response": null
-}""")
+        try:
+            print("\n[REAL CALL] Calling POST /workflow...")
+            response = await self.client.post(
+                f"{self.base_url}/workflow",
+                json=workflow_request,
+                timeout=60.0
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print("\n✓ SUCCESS!")
+                print(f"Status: {result.get('status')}")
+                print(f"Selected Tool: {result.get('selected_tool')}")
+                
+                if result.get('http_spec'):
+                    print(f"\nHTTP Spec Generated:")
+                    print(f"  Method: {result['http_spec'].get('method')}")
+                    print(f"  URL: {result['http_spec'].get('url')}")
+                
+                if result.get('raw_response'):
+                    raw = result['raw_response']
+                    print(f"\nAPI Response:")
+                    print(f"  Status Code: {raw.get('status_code')}")
+                    if isinstance(raw.get('body'), list):
+                        print(f"  Cards Retrieved: {len(raw['body'])}")
+                        print(f"  First Card: {raw['body'][0].get('name') if raw['body'] else 'N/A'}")
+                    else:
+                        print(f"  Body: {str(raw.get('body'))[:200]}...")
+                
+                return result
+            else:
+                print(f"\n✗ ERROR: Status {response.status_code}")
+                print(response.text)
+                
+        except Exception as e:
+            print(f"\n✗ ERROR: {e}")
+            print("Make sure:")
+            print("  1. Backend is running (docker-compose up)")
+            print("  2. Tools are registered in the system")
+            print("  3. OPENAI_API_KEY is set")
     
     async def test_workflow_cards_with_formatting(self):
         """Test workflow: Get cards with LLM formatting to find Fury cards."""
@@ -196,37 +205,41 @@ class RiftboundWorkflowTester:
         print(f"\nWorkflow Request:")
         print(json.dumps(workflow_request, indent=2))
         
-        print("\n[SIMULATED] Calling POST /workflow...")
-        print("Expected flow:")
-        print("  1. LLM generates HTTPRequestSpec to get all cards")
-        print("  2. System executes API call and gets all cards")
-        print("  3. LLM formats the response, filtering for 5 random Fury cards")
-        print("  4. Returns both raw data and formatted response")
-        
-        print("\n✓ Expected Formatted Response:")
-        print("""
-Here are 5 random Fury domain cards from Riftbound:
-
-1. **Raging Firebrand**
-   - Energy: 6 | Power: 1 | Might: 4
-   - Description: When you play me, the next spell you play this turn costs 5 less.
-
-2. **Pouty Poro**
-   - Energy: 2 | Power: 0 | Might: 2
-   - Description: [Deflect] (Opponents must pay to choose me with a spell or ability.)
-
-3. **Scrapyard Champion**
-   - Energy: 5 | Power: 1 | Might: 5
-   - Description: [Legion] — When you play me, discard 2, then draw 2.
-
-4. **Ravenborn Tome** (Gear)
-   - Energy: 3 | Power: 0 | Might: 0
-   - Description: Exhaust: The next spell you play deals 1 Bonus Damage.
-
-5. **Tryndamere, Barbarian** (Champion)
-   - Energy: 7 | Power: 2 | Might: 8
-   - Description: When I conquer after an attack, if you assigned 5 or more excess damage, you score 1 point.
-""")
+        try:
+            print("\n[REAL CALL] Calling POST /workflow...")
+            response = await self.client.post(
+                f"{self.base_url}/workflow",
+                json=workflow_request,
+                timeout=60.0
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print("\n✓ SUCCESS!")
+                print(f"Status: {result.get('status')}")
+                print(f"Selected Tool: {result.get('selected_tool')}")
+                
+                if result.get('formatted_response'):
+                    print(f"\n📝 LLM Formatted Response:")
+                    print("="*80)
+                    print(result['formatted_response'])
+                    print("="*80)
+                
+                if result.get('raw_response'):
+                    raw = result['raw_response']
+                    print(f"\n📊 Raw Data:")
+                    print(f"  Status Code: {raw.get('status_code')}")
+                    if isinstance(raw.get('body'), list):
+                        print(f"  Total Cards: {len(raw['body'])}")
+                
+                return result
+            else:
+                print(f"\n✗ ERROR: Status {response.status_code}")
+                print(response.text)
+                
+        except Exception as e:
+            print(f"\n✗ ERROR: {e}")
+            print("This test requires OpenAI API key and tools to be registered.")
     
     async def test_workflow_decks(self):
         """Test workflow: Get deck information."""
@@ -244,47 +257,33 @@ Here are 5 random Fury domain cards from Riftbound:
         print(f"\nWorkflow Request:")
         print(json.dumps(workflow_request, indent=2))
         
-        print("\n[SIMULATED] Calling POST /workflow...")
-        print("Expected flow:")
-        print("  1. LLM generates HTTPRequestSpec to get all decks")
-        print("  2. System executes API call")
-        print("  3. LLM formats the response with top 5 recent decks")
-        print("  4. Returns formatted summary")
-        
-        print("\n✓ Expected Formatted Response:")
-        print("""
-Top 5 Most Recent Riftbound Decks:
-
-1. **Kaisa new**
-   - Legend: Daughter Of The Void
-   - Owner: GeorgeG
-   - Size: 64 cards
-   - Created: Nov 8, 2025
-
-2. **提莫**
-   - Legend: Swift Scout
-   - Owner: ssl-布莱克
-   - Size: 64 cards
-   - Created: Nov 8, 2025
-
-3. **广州站**
-   - Legend: Herald Of The Arcane
-   - Owner: 乐在麒宗-阿保
-   - Size: 64 cards
-   - Created: Nov 8, 2025
-
-4. **广州**
-   - Legend: Wuju Bladesman - Starter
-   - Owner: 東莞天貓
-   - Size: 64 cards
-   - Created: Nov 7, 2025
-
-5. **karsa**
-   - Legend: Daughter Of The Void
-   - Owner: Acc.Ai.昕奕
-   - Size: 64 cards
-   - Created: Nov 7, 2025
-""")
+        try:
+            print("\n[REAL CALL] Calling POST /workflow...")
+            response = await self.client.post(
+                f"{self.base_url}/workflow",
+                json=workflow_request,
+                timeout=60.0
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print("\n✓ SUCCESS!")
+                print(f"Status: {result.get('status')}")
+                print(f"Selected Tool: {result.get('selected_tool')}")
+                
+                if result.get('formatted_response'):
+                    print(f"\n📝 LLM Formatted Response:")
+                    print("="*80)
+                    print(result['formatted_response'])
+                    print("="*80)
+                
+                return result
+            else:
+                print(f"\n✗ ERROR: Status {response.status_code}")
+                print(response.text)
+                
+        except Exception as e:
+            print(f"\n✗ ERROR: {e}")
     
     async def test_workflow_multi_tool(self):
         """Test workflow: LLM chooses between cards and decks."""
@@ -302,25 +301,36 @@ Top 5 Most Recent Riftbound Decks:
         print(f"\nWorkflow Request:")
         print(json.dumps(workflow_request, indent=2))
         
-        print("\n[SIMULATED] Calling POST /workflow...")
-        print("Expected flow:")
-        print("  1. LLM receives context for BOTH tools")
-        print("  2. LLM analyzes user intent: 'deck lists' → chooses get_riftbound_decks")
-        print("  3. LLM generates HTTPRequestSpec for decks endpoint")
-        print("  4. System executes API call")
-        print("  5. LLM formats the response")
-        
-        print("\n✓ Expected Response:")
-        print("""{
-  "status": "success",
-  "selected_tool": "get_riftbound_decks",  ← LLM chose this!
-  "http_spec": {
-    "method": "GET",
-    "url": "https://riftbound-top-decks-api.../api/decks"
-  },
-  "raw_response": { ... },
-  "formatted_response": "I found 46 deck lists in the Riftbound database..."
-}""")
+        try:
+            print("\n[REAL CALL] Calling POST /workflow...")
+            print("LLM will choose between 2 tools based on user intent...")
+            
+            response = await self.client.post(
+                f"{self.base_url}/workflow",
+                json=workflow_request,
+                timeout=60.0
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                print("\n✓ SUCCESS!")
+                print(f"Status: {result.get('status')}")
+                print(f"\n🤖 LLM Selected Tool: {result.get('selected_tool')}")
+                print("   (Expected: get_riftbound_decks based on 'deck lists' in instruction)")
+                
+                if result.get('formatted_response'):
+                    print(f"\n📝 LLM Formatted Response:")
+                    print("="*80)
+                    print(result['formatted_response'])
+                    print("="*80)
+                
+                return result
+            else:
+                print(f"\n✗ ERROR: Status {response.status_code}")
+                print(response.text)
+                
+        except Exception as e:
+            print(f"\n✗ ERROR: {e}")
     
     async def test_direct_api_call(self):
         """Make a direct API call to verify the API works."""
@@ -357,15 +367,18 @@ Top 5 Most Recent Riftbound Decks:
     async def run_all_tests(self):
         """Run all test scenarios."""
         print("\n" + "#"*80)
-        print("# RIFTBOUND MCP WORKFLOW MANUAL TEST SUITE")
+        print("# RIFTBOUND MCP WORKFLOW MANUAL TEST SUITE (REAL CALLS)")
         print("#"*80)
-        print("\nThis script demonstrates how the MCP workflow would work with")
-        print("the Riftbound Top Decks API.")
-        print("\nNOTE: This is a simulation showing expected behavior.")
-        print("To run for real, you need:")
-        print("  1. Backend server running (python -m uvicorn app:app)")
-        print("  2. OPENAI_API_KEY environment variable set")
-        print("  3. Tools registered in the system")
+        print("\n⚠️  WARNING: This test makes REAL API calls!")
+        print("   - Calls OpenAI API (costs ~$0.01-0.05 total)")
+        print("   - Calls Riftbound API (free)")
+        print("   - Requires backend server running on localhost:8000")
+        print("   - Requires OPENAI_API_KEY set in backend/.env")
+        print("   - Requires tools to be registered in the system")
+        print("\nPress Ctrl+C to cancel...")
+        print("\nStarting tests in 3 seconds...")
+        import asyncio
+        await asyncio.sleep(3)
         
         # Register tools
         await self.register_riftbound_cards_tool()
