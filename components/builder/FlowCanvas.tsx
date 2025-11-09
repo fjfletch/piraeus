@@ -110,7 +110,7 @@ export default function FlowCanvas() {
 
     setNodes(newNodes);
     setEdges(newEdges);
-  }, [currentMCP, setNodes, setEdges]);
+  }, [currentMCP, llmNodes, setNodes, setEdges]);
 
   const handleNodeClick = (event: React.MouseEvent, node: Node) => {
     selectNode({
