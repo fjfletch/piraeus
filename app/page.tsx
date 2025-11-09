@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Zap, Code, TestTube, Share2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
