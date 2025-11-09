@@ -248,7 +248,7 @@ export default function Home() {
                   Create Free Account
                 </Button>
               </Link>
-              <Link href="/docs">
+              <Link href="/about">
                 <Button 
                   size="lg" 
                   variant="outline" 
