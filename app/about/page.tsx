@@ -237,47 +237,6 @@ export default function About() {
           </div>
         </motion.div>
       </section>
-
-      {/* CTA Section */}
-      <section className="min-h-[60vh] flex items-center justify-center px-4 pb-20">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="container mx-auto max-w-4xl text-center"
-        >
-          <div className="backdrop-blur-xl bg-white/15 border-2 border-white/30 rounded-3xl p-12 shadow-2xl">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6" style={{ color: '#033F63' }}>
-              Join Us on This Journey
-            </h2>
-            <p className="text-xl mb-10" style={{ color: '#28666E' }}>
-              Whether you're building, contributing, or just exploring, we'd love to have you be part of the Piraeus community.
-            </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Link href="/auth/signup">
-                <Button size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#033F63' }}>
-                  Get Started Free
-                </Button>
-              </Link>
-              <Link href="/marketplace">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow border-2 backdrop-blur-sm"
-                  style={{ 
-                    borderColor: '#28666E',
-                    color: '#033F63',
-                    backgroundColor: 'rgba(255, 255, 255, 0.6)'
-                  }}
-                >
-                  Explore Marketplace
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-      </section>
     </div>
   );
 }
