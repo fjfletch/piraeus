@@ -180,7 +180,8 @@ export function MCPDetailModal({ open, onOpenChange, mcpId, onUseMCP }: MCPDetai
             )}
           </DialogTitle>
           {mcpDetails && (
-            <DialogDescription>
+            <DialogDescription asChild>
+              <div>
                 <div className="flex items-center gap-4 mt-2 flex-wrap">
                   <span>by @{mcpDetails.author}</span>
                   {mcpDetails.stars && (
@@ -197,7 +198,8 @@ export function MCPDetailModal({ open, onOpenChange, mcpId, onUseMCP }: MCPDetai
                     </div>
                   )}
                 </div>
-              </DialogDescription>
+              </div>
+            </DialogDescription>
             )}
         </DialogHeader>
 
