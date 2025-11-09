@@ -408,6 +408,7 @@ ${mockResponse.tool_calls
                     temperature,
                     maxTokens,
                     systemPrompt,
+                    availableToolIds,
                   });
                 }}
               >
