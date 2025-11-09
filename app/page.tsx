@@ -48,22 +48,35 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative py-24 px-4 overflow-hidden" style={{ backgroundColor: '#28666E' }}>
+      <section className="relative py-24 px-4 overflow-hidden" style={{ backgroundColor: '#529BC9' }}>
         {/* Ocean waves animation */}
-        <div className="absolute inset-0 opacity-30">
-          <svg className="absolute bottom-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#1a4d52" fillOpacity="0.5" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,128C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+        <div className="absolute inset-0">
+          <svg className="absolute bottom-0 w-full h-64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="#28666E" fillOpacity="0.7" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,128C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
               <animate attributeName="d" dur="10s" repeatCount="indefinite"
                 values="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,128C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
                         M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,181.3C672,181,768,139,864,133.3C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
                         M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,181.3C960,181,1056,139,1152,128C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
             </path>
           </svg>
+          
+          {/* Second wave layer */}
+          <svg className="absolute bottom-0 w-full h-64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="#28666E" fillOpacity="0.5" d="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,128C672,128,768,160,864,165.3C960,171,1056,149,1152,133.3C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+              <animate attributeName="d" dur="8s" repeatCount="indefinite"
+                values="M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,128C672,128,768,160,864,165.3C960,171,1056,149,1152,133.3C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                        M0,192L48,181.3C96,171,192,149,288,154.7C384,160,480,192,576,192C672,192,768,160,864,154.7C960,149,1056,171,1152,186.7C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                        M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,128C672,128,768,160,864,165.3C960,171,1056,149,1152,133.3C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
+            </path>
+          </svg>
         </div>
 
-        {/* Boat animation */}
-        <div className="absolute bottom-8 right-8 md:right-16" style={{ animation: 'float 6s ease-in-out infinite' }}>
-          <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        {/* Boat animation - moves with waves */}
+        <div className="absolute right-[5%] md:right-[8%]" style={{ 
+          bottom: 'calc(8% + 0px)',
+          animation: 'waveMotion 10s ease-in-out infinite'
+        }}>
+          <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="md:w-20 md:h-20">
             {/* Boat hull */}
             <path d="M20,70 L80,70 L75,85 L25,85 Z" fill="#8B4513" stroke="#654321" strokeWidth="2"/>
             {/* Boat deck */}
@@ -100,12 +113,43 @@ export default function Home() {
         </div>
 
         <style jsx>{`
-          @keyframes float {
+          @keyframes waveMotion {
             0%, 100% {
-              transform: translateY(0px) rotate(-2deg);
+              transform: translateY(0px) rotate(-3deg);
+              bottom: calc(8% + 0px);
+            }
+            25% {
+              transform: translateY(-20px) rotate(2deg);
+              bottom: calc(8% + 20px);
             }
             50% {
-              transform: translateY(-15px) rotate(2deg);
+              transform: translateY(-35px) rotate(-1deg);
+              bottom: calc(8% + 35px);
+            }
+            75% {
+              transform: translateY(-20px) rotate(2deg);
+              bottom: calc(8% + 20px);
+            }
+          }
+          
+          @media (max-width: 768px) {
+            @keyframes waveMotion {
+              0%, 100% {
+                transform: translateY(0px) rotate(-3deg);
+                bottom: calc(5% + 0px);
+              }
+              25% {
+                transform: translateY(-15px) rotate(2deg);
+                bottom: calc(5% + 15px);
+              }
+              50% {
+                transform: translateY(-25px) rotate(-1deg);
+                bottom: calc(5% + 25px);
+              }
+              75% {
+                transform: translateY(-15px) rotate(2deg);
+                bottom: calc(5% + 15px);
+              }
             }
           }
         `}</style>
