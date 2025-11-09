@@ -62,21 +62,27 @@ export default function BuilderV6Page() {
       <div className="flex-1 flex overflow-hidden">
         {/* Left Sidebar - 280px */}
         <div className="w-[280px] border-r bg-background overflow-y-auto">
-          <div className="p-4">
-            <div className="text-sm text-muted-foreground">
-              Sidebar for {currentTab}
+          {currentTab === 'tools' && <ToolsTab.Sidebar />}
+          {currentTab !== 'tools' && (
+            <div className="p-4">
+              <div className="text-sm text-muted-foreground">
+                Sidebar for {currentTab}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Center Canvas - Flexible */}
         <div className="flex-1 bg-background overflow-y-auto">
-          <div className="p-6">
-            <div className="text-2xl font-bold mb-2 capitalize">{currentTab}</div>
-            <div className="text-muted-foreground">
-              Canvas area for {currentTab} tab (content coming in next phases)
+          {currentTab === 'tools' && <ToolsTab.Canvas />}
+          {currentTab !== 'tools' && (
+            <div className="p-6">
+              <div className="text-2xl font-bold mb-2 capitalize">{currentTab}</div>
+              <div className="text-muted-foreground">
+                Canvas area for {currentTab} tab (content coming in next phases)
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Right Inspector - 400px (only for workflow tab) */}
