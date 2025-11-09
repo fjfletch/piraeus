@@ -35,7 +35,7 @@ export function APIConfigModal({ open, onOpenChange, onSave, existingAPI }: APIC
     if (existingAPI) {
       setName(existingAPI.name);
       setBaseUrl(existingAPI.baseUrl);
-      setTimeout(existingAPI.timeout || 30);
+      setTimeoutValue(existingAPI.timeout || 30);
       setAuthType(existingAPI.authentication.type);
       setAuthConfig(existingAPI.authentication.config || {});
       setRoutes(existingAPI.routes);
@@ -48,7 +48,7 @@ export function APIConfigModal({ open, onOpenChange, onSave, existingAPI }: APIC
   const resetForm = () => {
     setName("");
     setBaseUrl("");
-    setTimeout(30);
+    setTimeoutValue(30);
     setAuthType("none");
     setAuthConfig({});
     setRoutes([]);
