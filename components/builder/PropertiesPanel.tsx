@@ -214,9 +214,19 @@ ${mockResponse.tool_calls
 
     // API node
     if (selectedNode.id.startsWith('api-')) {
-      const apiId = selectedNode.id.replace('api-', '');
+      // Get API ID from node data instead of parsing node ID
+      const apiId = selectedNode.data?.apiId || selectedNode.id.replace('api-', '');
       const api = currentMCP?.apis.find((a) => a.id === apiId);
-      if (!api) return <p>API not found</p>;
+      if (!api) {
+        return (
+          <Card>
+            <CardContent className="p-6 text-center text-muted-foreground">
+              <p className="text-sm">API not found in configuration</p>
+              <p className="text-xs mt-2">The API may have been deleted or the data is corrupted.</p>
+            </CardContent>
+          </Card>
+        );
+      }
 
       const handleDeleteAPI = () => {
         if (confirm('Are you sure you want to delete this API?')) {
