@@ -104,19 +104,6 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          >
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm uppercase tracking-wider" style={{ color: '#28666E' }}>Scroll</span>
-              <ArrowDown className="w-6 h-6 animate-bounce" style={{ color: '#28666E' }} />
-            </div>
-          </motion.div>
         </motion.div>
       </section>
 
