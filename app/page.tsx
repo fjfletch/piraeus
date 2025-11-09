@@ -131,11 +131,11 @@ export default function Home() {
           <Card className="backdrop-blur-xl bg-white/20 border-2 border-white/30 shadow-2xl" style={{ borderColor: 'rgba(124, 152, 133, 0.2)' }}>
             <CardHeader className="text-center pb-8">
               <CardTitle className="text-5xl mb-4">
-                <span style={{ color: '#033F63' }}>Built With </span>
-                <span style={{ color: '#7C9885' }}>Modern Tech</span>
+                <span style={{ color: '#033F63' }}>Build with </span>
+                <span style={{ color: '#7C9885' }}>Featured Integrations</span>
               </CardTitle>
               <CardDescription className="text-lg" style={{ color: '#28666E' }}>
-                Leveraging the latest web technologies for exceptional performance
+                Connect your agents to powerful services and APIs
               </CardDescription>
             </CardHeader>
             <CardContent>
