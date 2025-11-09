@@ -97,10 +97,10 @@ export default function Home() {
             <div className="flex gap-4 justify-center flex-wrap">
               <Link href="/builder/new">
                 <Button size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-shadow" style={{ backgroundColor: '#033F63' }}>
-                  Explore Now
+                  Create Now
                 </Button>
               </Link>
-              <Link href="/docs">
+              <Link href="/marketplace">
                 <Button 
                   size="lg" 
                   variant="outline" 
@@ -111,7 +111,7 @@ export default function Home() {
                     backgroundColor: 'rgba(255, 255, 255, 0.6)'
                   }}
                 >
-                  Learn More
+                  Browse Marketplace
                 </Button>
               </Link>
             </div>
