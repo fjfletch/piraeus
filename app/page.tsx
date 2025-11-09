@@ -54,7 +54,7 @@ export default function Home() {
             Connect Any API to Any LLM
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Build powerful AI integrations visually. No code required. The Model Context Protocol Platform 
+            Build powerful AI integrations visually. No code required. Piraeus 
             makes it easy to expose APIs as tools that LLMs can use.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
