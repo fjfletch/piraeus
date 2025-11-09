@@ -47,10 +47,10 @@ class Settings(BaseSettings):
     )
     
     # API Keys
-    openai_api_key: str = Field(
-        ...,
+    openai_api_key: Optional[str] = Field(
+        default=None,
         alias="OPENAI-SECRET",
-        description="OpenAI API key (required)"
+        description="OpenAI API key (optional)"
     )
     claude_api_key: Optional[str] = Field(
         default=None,
