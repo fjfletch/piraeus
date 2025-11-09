@@ -148,3 +148,9 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 2025-11-09 01:16:51.017 | ERROR    | dynamic_tools.services.prompt_service:_call_llm_with_retry:84 - LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
 2025-11-09 01:16:51.018 | ERROR    | dynamic_tools.services.prompt_service:prompt_mcp:179 - MCP prompt failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: test-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
 2025-11-09 01:18:40.997 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 02:17:38.859 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 02:18:08.940 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 02:18:39.093 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 02:19:09.162 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 02:19:39.230 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
+2025-11-09 02:20:09.292 | INFO     | dynamic_tools.api.app:health_check:32 - Health check requested
