@@ -138,35 +138,6 @@ export default function BlocksPalette() {
               </p>
             </div>
 
-            {/* Existing APIs */}
-            {currentMCP && currentMCP.apis.length > 0 && (
-              <div>
-                <h4 className="text-xs font-semibold mb-2 text-muted-foreground uppercase">
-                  APIs ({currentMCP.apis.length})
-                </h4>
-                <div className="space-y-2">
-                  {currentMCP.apis.map((api) => (
-                    <Card
-                      key={api.id}
-                      className="p-3 cursor-move hover:bg-muted/50 transition-colors border-2"
-                      draggable
-                      onDragStart={(e) => handleDragStart(e, 'api', api)}
-                    >
-                      <div className="flex items-start gap-2">
-                        <Wifi className="h-4 w-4 text-yellow-600 mt-0.5" />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium truncate">{api.name}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {api.routes.length} routes
-                          </p>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Existing Tools */}
             {currentMCP && currentMCP.tools.length > 0 && (
               <div>
