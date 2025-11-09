@@ -25,8 +25,10 @@ export const CONNECTION_RULES = {
  * Check if a connection between two node types is allowed
  */
 export function canConnect(sourceType: string, targetType: string): boolean {
-  const allowedTargets = CONNECTION_RULES.allowed[sourceType as keyof typeof CONNECTION_RULES.allowed];
-  return allowedTargets ? allowedTargets.includes(targetType) : false;
+  const allowedKey = sourceType as keyof typeof CONNECTION_RULES.allowed;
+  const allowedTargets = CONNECTION_RULES.allowed[allowedKey];
+  if (!allowedTargets) return false;
+  return allowedTargets.includes(targetType as any);
 }
 
 /**
