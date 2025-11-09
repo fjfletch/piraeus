@@ -39,17 +39,6 @@ export function Navigation() {
         <div className="flex-1" />
 
         <div className="flex items-center gap-4">
-          <div className="max-w-md w-64">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search..."
-                className="pl-10"
-              />
-            </div>
-          </div>
-
           <div className="flex items-center gap-1">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
