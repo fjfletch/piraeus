@@ -21,23 +21,29 @@ export default function BuilderV6Page() {
   const [isSaving, setIsSaving] = useState(false);
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 
-  // Load data from backend on mount
+  // Load data from backend on mount (with graceful fallback)
   useEffect(() => {
     const loadData = async () => {
       try {
         await loadAllFromBackend();
+        console.log('✅ Successfully loaded data from backend');
+        toast({
+          title: 'Connected',
+          description: 'Data loaded from backend',
+        });
+      } catch (error) {
+        console.warn('⚠️ Backend unavailable, using local data:', error);
+        // Gracefully fall back to local/mock data
+        toast({
+          title: 'Offline Mode',
+          description: 'Using local data (backend unavailable)',
+          variant: 'default'
+        });
+      } finally {
         // Show loading screen for minimum duration
         setTimeout(() => {
           setIsLoading(false);
         }, 1500);
-      } catch (error) {
-        console.error('Failed to load data:', error);
-        toast({
-          title: 'Error',
-          description: 'Failed to load data from backend',
-          variant: 'destructive'
-        });
-        setIsLoading(false);
       }
     };
     
