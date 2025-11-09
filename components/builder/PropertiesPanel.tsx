@@ -331,15 +331,16 @@ ${mockResponse.tool_calls
   };
 
   return (
-    <Tabs defaultValue="properties" className="p-4">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="properties">Properties</TabsTrigger>
-        <TabsTrigger value="test">Test</TabsTrigger>
-      </TabsList>
+    <>
+      <Tabs defaultValue="properties" className="p-4">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="properties">Properties</TabsTrigger>
+          <TabsTrigger value="test">Test</TabsTrigger>
+        </TabsList>
 
-      <TabsContent value="properties" className="mt-4">
-        {renderNodeProperties()}
-      </TabsContent>
+        <TabsContent value="properties" className="mt-4">
+          {renderNodeProperties()}
+        </TabsContent>
 
       <TabsContent value="test" className="mt-4 space-y-4">
         {(!currentMCP || currentMCP.id === 'new') && (
