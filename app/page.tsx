@@ -205,7 +205,7 @@ export default function Home() {
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="h-full backdrop-blur-xl bg-white/40 border-2 border-white/50 hover:shadow-2xl hover:bg-white/50 transition-all duration-300" style={{ borderColor: 'rgba(181, 182, 130, 0.4)' }}>
+                  <Card className="h-full backdrop-blur-xl bg-white/20 border-2 border-white/30 hover:shadow-2xl hover:bg-white/30 transition-all duration-300" style={{ borderColor: 'rgba(181, 182, 130, 0.3)' }}>
                     <CardHeader>
                       <div 
                         className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto backdrop-blur-sm"
