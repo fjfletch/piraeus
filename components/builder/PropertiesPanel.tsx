@@ -282,7 +282,21 @@ ${mockResponse.tool_calls
     }
 
     // LLM node
-    if (selectedNode.id === 'llm' || selectedNode.id.startsWith('llm-')) {
+    if (selectedNode.id === 'llm' || selectedNode.id.startsWith('llm-decision')) {
+      const handleUpdateLLMNode = () => {
+        updateLLMNode(selectedNode.id, {
+          mode: llmMode,
+          model,
+          temperature,
+          maxTokens,
+          systemPrompt,
+        });
+        toast({
+          title: 'LLM Updated',
+          description: 'Configuration saved',
+        });
+      };
+
       return (
         <Card>
           <CardHeader>
@@ -290,17 +304,61 @@ ${mockResponse.tool_calls
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label className="text-xs">Model</Label>
+              <Label className="text-xs font-semibold">Mode</Label>
               <Select
-                value={model}
-                onValueChange={(value) => {
-                  setModel(value);
-                  updateMCP({
-                    configuration: { ...currentMCP!.configuration, model: value },
+                value={llmMode}
+                onValueChange={(value: 'normal' | 'mcp') => {
+                  setLlmMode(value);
+                  updateLLMNode(selectedNode.id, {
+                    mode: value,
+                    model,
+                    temperature,
+                    maxTokens,
+                    systemPrompt,
                   });
                 }}
               >
                 <SelectTrigger className="text-sm">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="normal">
+                    <div className="flex items-center gap-2">
+                      <span>💬</span>
+                      <div>
+                        <p className="font-medium">Normal Prompt</p>
+                        <p className="text-xs text-muted-foreground">Standard chat/completion</p>
+                      </div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="mcp">
+                    <div className="flex items-center gap-2">
+                      <span>🔧</span>
+                      <div>
+                        <p className="font-medium">MCP Tool Calling</p>
+                        <p className="text-xs text-muted-foreground">LLM can use tools</p>
+                      </div>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+              {llmMode === 'mcp' && (
+                <p className="text-xs text-muted-foreground mt-2">
+                  💡 Connect tools to this LLM node to enable tool calling
+                </p>
+              )}
+            </div>
+
+            <div className="border-t pt-4">
+              <Label className="text-xs font-semibold">Model</Label>
+              <Select
+                value={model}
+                onValueChange={(value) => {
+                  setModel(value);
+                  handleUpdateLLMNode();
+                }}
+              >
+                <SelectTrigger className="text-sm mt-1">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -312,6 +370,7 @@ ${mockResponse.tool_calls
                 </SelectContent>
               </Select>
             </div>
+
             <div>
               <Label className="text-xs">Temperature: {temperature}</Label>
               <input
@@ -323,13 +382,12 @@ ${mockResponse.tool_calls
                 onChange={(e) => {
                   const val = parseFloat(e.target.value);
                   setTemperature(val);
-                  updateMCP({
-                    configuration: { ...currentMCP!.configuration, temperature: val },
-                  });
                 }}
+                onMouseUp={handleUpdateLLMNode}
                 className="w-full"
               />
             </div>
+
             <div>
               <Label className="text-xs">Max Tokens</Label>
               <Input
@@ -338,12 +396,29 @@ ${mockResponse.tool_calls
                 onChange={(e) => {
                   const val = parseInt(e.target.value);
                   setMaxTokens(val);
-                  updateMCP({
-                    configuration: { ...currentMCP!.configuration, maxTokens: val },
-                  });
                 }}
+                onBlur={handleUpdateLLMNode}
                 className="text-sm"
               />
+            </div>
+
+            <div>
+              <Label className="text-xs">System Prompt (Optional)</Label>
+              <Textarea
+                value={systemPrompt}
+                onChange={(e) => setSystemPrompt(e.target.value)}
+                onBlur={handleUpdateLLMNode}
+                rows={3}
+                className="text-xs"
+                placeholder="You are a helpful assistant..."
+              />
+            </div>
+
+            <div className="bg-muted p-3 rounded-lg text-xs">
+              <p className="font-semibold mb-1">Current Setup:</p>
+              <p>• Mode: <strong>{llmMode === 'mcp' ? 'MCP Tool Calling' : 'Normal Prompt'}</strong></p>
+              <p>• Model: <strong>{model}</strong></p>
+              <p>• Temperature: <strong>{temperature}</strong></p>
             </div>
           </CardContent>
         </Card>
