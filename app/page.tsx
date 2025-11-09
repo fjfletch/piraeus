@@ -74,18 +74,18 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Everything You Need to Build AI Integrations
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <Card key={index}>
+              <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <feature.icon className="h-10 w-10 mb-2 text-primary" />
+                  <feature.icon className="h-10 w-10 mb-4 text-primary" />
                   <CardTitle>{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
                   <CardDescription>{feature.description}</CardDescription>
-                </CardContent>
+                </CardHeader>
               </Card>
             ))}
           </div>
