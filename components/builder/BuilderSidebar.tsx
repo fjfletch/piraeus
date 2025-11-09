@@ -106,7 +106,7 @@ export default function BuilderSidebar() {
             <Wifi className="h-4 w-4" />
           </TabsTrigger>
           <TabsTrigger value="tools">
-            <Tool className="h-4 w-4" />
+            <Wrench className="h-4 w-4" />
           </TabsTrigger>
           <TabsTrigger value="prompts">
             <MessageSquare className="h-4 w-4" />
