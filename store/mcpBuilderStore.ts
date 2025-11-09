@@ -191,6 +191,17 @@ export const useMCPBuilderStore = create<MCPBuilderStore>((set, get) => ({
   workflowSteps: [],
   currentTab: 'tools',
   selectedItem: null,
+  
+  // Backend integration state
+  projectId: process.env.NEXT_PUBLIC_DEFAULT_PROJECT_ID || '00000000-0000-0000-0000-000000000001',
+  isLoading: false,
+  isSyncing: false,
+  lastError: null,
+  currentFlowId: null,
+  toolIdMap: new Map(),
+  promptIdMap: new Map(),
+  mcpConfigIdMap: new Map(),
+  responseConfigIdMap: new Map(),
 
   // ═══ TAB ACTIONS ═══
   setCurrentTab: (tab: TabType) => set({ currentTab: tab }),
