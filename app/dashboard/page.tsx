@@ -83,7 +83,7 @@ export default function Dashboard() {
 
         {/* Recent MCPs */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Recent MCPs</h2>
+          <h2 className="text-2xl font-bold mb-4 text-white">Recent MCPs</h2>
           <div className="space-y-4">
             {recentMCPs.map((mcp) => (
               <Card key={mcp.id} className="hover:shadow-md transition-shadow">
