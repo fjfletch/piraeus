@@ -68,7 +68,7 @@ export default function Dashboard() {
         {/* Stats Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => (
-            <Card key={index} className="bg-white/90 backdrop-blur-sm border-white/30">
+            <Card key={index} className="bg-white/90 backdrop-blur-sm border-white/30 shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardDescription>{stat.label}</CardDescription>
                 <stat.icon className="h-4 w-4 text-muted-foreground" />
