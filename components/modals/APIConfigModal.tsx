@@ -23,7 +23,7 @@ export function APIConfigModal({ open, onOpenChange, onSave, existingAPI }: APIC
   const { toast } = useToast();
   const [name, setName] = useState("");
   const [baseUrl, setBaseUrl] = useState("");
-  const [timeout, setTimeout] = useState(30);
+  const [timeout, setTimeoutValue] = useState(30);
   const [authType, setAuthType] = useState<string>("none");
   const [authConfig, setAuthConfig] = useState<any>({});
   const [routes, setRoutes] = useState<APIRoute[]>([]);
