@@ -15,18 +15,33 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function BuilderV6Page() {
   const { toast } = useToast();
-  const { currentTab } = useMCPBuilderStore();
+  const { currentTab, loadAllFromBackend, isLoading: storeLoading } = useMCPBuilderStore();
   
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 
-  // Initial loading screen
+  // Load data from backend on mount
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-    return () => clearTimeout(timer);
+    const loadData = async () => {
+      try {
+        await loadAllFromBackend();
+        // Show loading screen for minimum duration
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+      } catch (error) {
+        console.error('Failed to load data:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load data from backend',
+          variant: 'destructive'
+        });
+        setIsLoading(false);
+      }
+    };
+    
+    loadData();
   }, []);
 
   // Save handler
