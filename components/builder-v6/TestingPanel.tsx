@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { AlertCircle, CheckCircle2, Loader2, PlayCircle, XCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import backendAPI from '@/lib/api/backend';
 
 interface TestResult {
   stepId: string;
@@ -24,7 +25,7 @@ interface TestResult {
 
 export function TestingPanel() {
   const { toast } = useToast();
-  const { workflowSteps, getMCPConfigById, getResponseConfigById } = useMCPBuilderStore();
+  const { workflowSteps, getMCPConfigById, getResponseConfigById, getToolById, tools } = useMCPBuilderStore();
   
   const [testInput, setTestInput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
@@ -130,7 +131,7 @@ export function TestingPanel() {
     });
   };
 
-  // Run workflow test
+  // Run workflow test - REAL BACKEND EXECUTION
   const handleRunTest = async () => {
     // Validate workflow
     const validation = validateWorkflow();
@@ -153,47 +154,131 @@ export function TestingPanel() {
       return;
     }
 
+    // Get first MCP step (required by validation)
+    const firstMCPStep = workflowSteps.find(step => step.type === 'mcp');
+    if (!firstMCPStep) {
+      toast({
+        title: 'Configuration Error',
+        description: 'No MCP step found in workflow',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Get MCP config and tools
+    const mcpConfig = firstMCPStep.mcpConfigId ? getMCPConfigById(firstMCPStep.mcpConfigId) : null;
+    const selectedToolIds = firstMCPStep.selectedTools || [];
+    
+    if (selectedToolIds.length === 0) {
+      toast({
+        title: 'Configuration Error',
+        description: 'No tools selected in MCP configuration',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Convert tool IDs to tool names
+    const toolNames = selectedToolIds
+      .map(id => getToolById(id)?.name)
+      .filter(name => name !== undefined) as string[];
+
+    if (toolNames.length === 0) {
+      toast({
+        title: 'Configuration Error',
+        description: 'Selected tools not found',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     // Start test
     setIsRunning(true);
     setTestResults([]);
     setCurrentStepIndex(0);
 
-    let currentInput = testInput;
-
-    // Execute each step
-    for (let i = 0; i < workflowSteps.length; i++) {
-      setCurrentStepIndex(i);
-      const step = workflowSteps[i];
+    try {
+      // Step 1: Register tools in backend registry (if needed)
+      // Note: In production, tools should be pre-registered or fetched from database
+      console.log('📝 Preparing to execute workflow with tools:', toolNames);
       
-      try {
-        const result = await simulateStepExecution(step, i, currentInput);
-        setTestResults((prev) => [...prev, result]);
-        
-        // Use output as input for next step
-        if (result.output) {
-          currentInput = result.output;
-        }
-      } catch (error) {
-        const errorResult: TestResult = {
-          stepId: step.id,
-          stepType: step.type,
-          stepName: step.type === 'mcp' ? 'MCP Step' : 'Response Step',
-          status: 'error',
-          error: error instanceof Error ? error.message : 'Unknown error',
+      // Step 2: Call the REAL backend workflow orchestrator
+      console.log('🚀 Calling backend workflow with:', {
+        user_instructions: testInput,
+        tool_ids: toolNames,
+        format_response: true,
+      });
+
+      const response = await backendAPI.workflow.execute({
+        user_instructions: testInput,
+        tool_ids: toolNames,
+        format_response: true,
+        response_format_instructions: mcpConfig?.instruction || 'Format the response clearly for the user',
+      });
+
+      console.log('✅ Backend response:', response);
+
+      if (response.status === 'success') {
+        // Add success result showing both HTTP response and formatted output
+        const result: TestResult = {
+          stepId: firstMCPStep.id,
+          stepType: 'mcp',
+          stepName: mcpConfig?.name || 'MCP Workflow',
+          status: 'success',
+          output: JSON.stringify({
+            selected_tool: response.selected_tool,
+            http_request: response.http_spec,
+            api_response: response.raw_response,
+            formatted_response: response.formatted_response,
+          }, null, 2),
           timestamp: Date.now(),
         };
-        setTestResults((prev) => [...prev, errorResult]);
-        break;
+        setTestResults([result]);
+
+        toast({
+          title: 'Workflow Executed Successfully! 🎉',
+          description: `Used tool: ${response.selected_tool}`,
+        });
+      } else {
+        // Handle error from backend
+        const errorResult: TestResult = {
+          stepId: firstMCPStep.id,
+          stepType: 'mcp',
+          stepName: mcpConfig?.name || 'MCP Workflow',
+          status: 'error',
+          error: `${response.error_stage}: ${response.error}`,
+          timestamp: Date.now(),
+        };
+        setTestResults([errorResult]);
+
+        toast({
+          title: 'Workflow Failed',
+          description: response.error || 'Unknown error occurred',
+          variant: 'destructive',
+        });
       }
+    } catch (error: any) {
+      console.error('❌ Workflow execution error:', error);
+      
+      const errorResult: TestResult = {
+        stepId: firstMCPStep.id,
+        stepType: 'mcp',
+        stepName: mcpConfig?.name || 'MCP Workflow',
+        status: 'error',
+        error: error.message || 'Failed to execute workflow',
+        timestamp: Date.now(),
+      };
+      setTestResults([errorResult]);
+
+      toast({
+        title: 'Execution Error',
+        description: 'Failed to connect to backend or execute workflow',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsRunning(false);
+      setCurrentStepIndex(-1);
     }
-
-    setIsRunning(false);
-    setCurrentStepIndex(-1);
-
-    toast({
-      title: 'Test Complete',
-      description: `Executed ${workflowSteps.length} step(s) successfully`,
-    });
   };
 
   // Clear test results

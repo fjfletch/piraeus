@@ -38,10 +38,11 @@ export function ResponseConfigModal({
 }: ResponseConfigModalProps) {
   const { toast } = useToast();
   const {
-    addResponseConfig,
-    updateResponseConfig,
-    deleteResponseConfig,
+    syncAddResponseConfig,
+    syncUpdateResponseConfig,
+    syncDeleteResponseConfig,
     getResponseConfigById,
+    isSyncing,
   } = useMCPBuilderStore();
 
   const [localConfig, setLocalConfig] = useState<Omit<SavedResponseConfig, 'id'> | null>(null);
@@ -72,7 +73,7 @@ export function ResponseConfigModal({
     }
   }, [open, configId, getResponseConfigById]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!localConfig) return;
 
     if (!localConfig.name.trim()) {
@@ -86,29 +87,38 @@ export function ResponseConfigModal({
 
     if (configId === null) {
       // Add new config
-      addResponseConfig(localConfig);
-      toast({
-        title: 'Response Config Created',
-        description: `${localConfig.name} has been created successfully`,
-      });
+      const newId = await syncAddResponseConfig(localConfig);
+      if (newId) {
+        toast({
+          title: 'Response Config Created',
+          description: `${localConfig.name} has been saved to backend`,
+        });
+        onOpenChange(false);
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to save response config to backend',
+          variant: 'destructive',
+        });
+      }
     } else {
       // Update existing config
-      updateResponseConfig(configId, localConfig);
+      await syncUpdateResponseConfig(configId, localConfig);
       toast({
         title: 'Response Config Updated',
-        description: `${localConfig.name} has been updated successfully`,
+        description: `${localConfig.name} has been synced to backend`,
       });
+      onOpenChange(false);
     }
-    onOpenChange(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (configId !== null) {
       const config = getResponseConfigById(configId);
-      deleteResponseConfig(configId);
+      await syncDeleteResponseConfig(configId);
       toast({
         title: 'Response Config Deleted',
-        description: `${config?.name} has been deleted`,
+        description: `${config?.name} has been deleted from backend`,
         variant: 'destructive',
       });
       onOpenChange(false);
@@ -227,8 +237,8 @@ export function ResponseConfigModal({
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancel
             </Button>
-            <Button type="button" onClick={handleSave}>
-              Save Config
+            <Button type="button" onClick={handleSave} disabled={isSyncing}>
+              {isSyncing ? 'Saving...' : 'Save Config'}
             </Button>
           </div>
         </DialogFooter>

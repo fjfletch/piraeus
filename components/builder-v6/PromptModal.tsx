@@ -26,7 +26,7 @@ interface PromptModalProps {
 
 export function PromptModal({ open, onOpenChange, promptId }: PromptModalProps) {
   const { toast } = useToast();
-  const { addPrompt, updatePrompt, deletePrompt, getPromptById } = useMCPBuilderStore();
+  const { syncAddPrompt, syncUpdatePrompt, syncDeletePrompt, getPromptById, isSyncing } = useMCPBuilderStore();
   
   const [localPrompt, setLocalPrompt] = useState<Omit<SavedPrompt, 'id'> | null>(null);
 
@@ -52,7 +52,7 @@ export function PromptModal({ open, onOpenChange, promptId }: PromptModalProps) 
     }
   }, [open, promptId, getPromptById]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!localPrompt) return;
 
     if (!localPrompt.name.trim()) {
@@ -75,29 +75,38 @@ export function PromptModal({ open, onOpenChange, promptId }: PromptModalProps) 
 
     if (promptId === null) {
       // Add new prompt
-      addPrompt(localPrompt);
-      toast({
-        title: 'Prompt Created',
-        description: `${localPrompt.name} has been created successfully`,
-      });
+      const newId = await syncAddPrompt(localPrompt);
+      if (newId) {
+        toast({
+          title: 'Prompt Created',
+          description: `${localPrompt.name} has been saved to backend`,
+        });
+        onOpenChange(false);
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to save prompt to backend',
+          variant: 'destructive',
+        });
+      }
     } else {
       // Update existing prompt
-      updatePrompt(promptId, localPrompt);
+      await syncUpdatePrompt(promptId, localPrompt);
       toast({
         title: 'Prompt Updated',
-        description: `${localPrompt.name} has been updated successfully`,
+        description: `${localPrompt.name} has been synced to backend`,
       });
+      onOpenChange(false);
     }
-    onOpenChange(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (promptId !== null) {
       const prompt = getPromptById(promptId);
-      deletePrompt(promptId);
+      await syncDeletePrompt(promptId);
       toast({
         title: 'Prompt Deleted',
-        description: `${prompt?.name} has been deleted`,
+        description: `${prompt?.name} has been deleted from backend`,
         variant: 'destructive',
       });
       onOpenChange(false);
@@ -165,8 +174,8 @@ export function PromptModal({ open, onOpenChange, promptId }: PromptModalProps) 
             >
               Cancel
             </Button>
-            <Button type="button" onClick={handleSave}>
-              Save Prompt
+            <Button type="button" onClick={handleSave} disabled={isSyncing}>
+              {isSyncing ? 'Saving...' : 'Save Prompt'}
             </Button>
           </div>
         </DialogFooter>

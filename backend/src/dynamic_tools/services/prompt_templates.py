@@ -180,4 +180,77 @@ Always respond with a valid HTTPRequestSpec that can be executed immediately."""
 Based on the user's request and the available tools above, generate a complete HTTP request specification that will accomplish the user's goal. Select the most appropriate tool and extract all necessary parameters from the user's request."""
 
         return system_prompt, user_prompt
+    
+    @staticmethod
+    def strict_workflow_tool_selection_prompt(
+        instructions: str,
+        tools_context: str
+    ) -> tuple[str, str]:
+        """Ultra-strict prompt for tool selection with comprehensive validation.
+        
+        This prompt enforces:
+        - Exact JSON output format
+        - Anti-hallucination rules for URLs
+        - Three status types: success, insufficient_info, no_suitable_tool
+        - Parameter extraction with validation
+        - Missing information detection
+        - Multi-tool scenario handling
+        
+        Args:
+            instructions: User's natural language instructions
+            tools_context: Formatted string describing available tools
+            
+        Returns:
+            Tuple of (system_prompt, user_prompt)
+        """
+        system_prompt = """You are a precision API orchestration assistant. Your ONLY job is to generate EXACT, VALID HTTP request specifications.
+
+You MUST respond with ONLY valid JSON in this EXACT structure:
+
+{
+  "status": "success" | "insufficient_info" | "no_suitable_tool",
+  "selected_tool": "exact tool name from documentation",
+  "reasoning": "brief explanation of tool selection",
+  "http_request": {
+    "method": "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
+    "url": "EXACT url from documentation - DO NOT MODIFY",
+    "headers": {"Header-Name": "header-value"},
+    "query_params": {"param_name": "param_value"},
+    "body": null | "string" | {}
+  },
+  "extracted_parameters": {"param_name": "value from user request"},
+  "missing_information": ["list of missing required parameters"]
+}
+
+🚨 CRITICAL ANTI-HALLUCINATION RULES:
+✅ USE EXACT URLs FROM DOCUMENTATION - Look for "FULL URL TO USE:" and copy CHARACTER-FOR-CHARACTER
+✅ DO NOT modify, shorten, clean up, or "improve" URLs
+✅ DO NOT substitute domains or remove subdomains
+❌ FORBIDDEN: Creating URLs based on "what seems right"
+
+🎯 TOOL SELECTION RULES:
+1. READ ALL TOOLS: Analyze EVERY available tool carefully
+2. PICK BEST MATCH: Choose tool most aligned to user request
+3. MULTIPLE TOOLS NEEDED: Set status "no_suitable_tool" and explain
+4. NO TOOL MATCHES: Set status "no_suitable_tool" and list capabilities
+5. MISSING INFO: Set status "insufficient_info" and populate missing_information array
+
+📝 PARAMETER EXTRACTION:
+✅ Extract parameter values exactly as user provided
+✅ Required + Missing → status "insufficient_info"
+✅ Optional + Missing → Omit or use documented default
+❌ DO NOT invent parameter values
+❌ DO NOT use placeholders for required user parameters
+
+✅ VALIDATION: Response must be valid JSON with exact status values. URL must be unmodified from documentation."""
+
+        user_prompt = f"""USER REQUEST:
+{instructions}
+
+AVAILABLE TOOLS:
+{tools_context}
+
+TASK: Analyze the user request and available tools, then respond with ONLY valid JSON according to the format specified above."""
+
+        return system_prompt, user_prompt
 

@@ -11,6 +11,20 @@ import {
   SelectedItem,
   DeploymentStatus
 } from '@/types/builder';
+import backendAPI from '@/lib/api/backend';
+import {
+  transformToolsFromBackend,
+  transformToolToBackend,
+  transformPromptsFromBackend,
+  transformPromptToBackend,
+  transformMCPConfigsFromBackend,
+  transformMCPConfigToBackend,
+  transformResponseConfigsFromBackend,
+  transformResponseConfigToBackend,
+  transformFlowFromBackend,
+  transformFlowToBackend,
+} from '@/lib/api/transformers';
+import { BackendTool, BackendPrompt, BackendMCPConfig, BackendResponseConfig, BackendFlow } from '@/lib/api/types';
 
 // ID Counters (outside store to persist across renders)
 let toolIdCounter = 4; // Starts after default tools
@@ -27,6 +41,19 @@ interface MCPBuilderStore {
   workflowSteps: WorkflowStep[];
   currentTab: TabType;
   selectedItem: SelectedItem | null;
+  
+  // Backend integration state
+  projectId: string;
+  isLoading: boolean;
+  isSyncing: boolean;
+  lastError: string | null;
+  currentFlowId: string | null; // UUID of current workflow in backend
+  
+  // Backend ID mappings (numeric_id -> UUID)
+  toolIdMap: Map<number, string>;
+  promptIdMap: Map<number, string>;
+  mcpConfigIdMap: Map<number, string>;
+  responseConfigIdMap: Map<number, string>;
 
   // ═══ TAB ACTIONS ═══
   setCurrentTab: (tab: TabType) => void;
@@ -74,6 +101,41 @@ interface MCPBuilderStore {
   getMCPConfigById: (id: number) => SavedMCPConfig | undefined;
   getResponseConfigById: (id: number) => SavedResponseConfig | undefined;
   getWorkflowStepById: (stepId: string) => WorkflowStep | undefined;
+  
+  // ═══ BACKEND INTEGRATION ═══
+  setProjectId: (projectId: string) => void;
+  setLoading: (loading: boolean) => void;
+  setSyncing: (syncing: boolean) => void;
+  setError: (error: string | null) => void;
+  
+  // Load all data from backend
+  loadAllFromBackend: () => Promise<void>;
+  
+  // Batch setters (for loading from backend)
+  setTools: (tools: Tool[], idMap: Map<number, string>) => void;
+  setPrompts: (prompts: SavedPrompt[], idMap: Map<number, string>) => void;
+  setMCPConfigs: (configs: SavedMCPConfig[], idMap: Map<number, string>) => void;
+  setResponseConfigs: (configs: SavedResponseConfig[], idMap: Map<number, string>) => void;
+  setWorkflowSteps: (steps: WorkflowStep[], flowId: string | null) => void;
+  
+  // Backend sync methods (async versions)
+  syncAddTool: (tool: Omit<Tool, 'id'>) => Promise<number | null>;
+  syncUpdateTool: (id: number, updates: Partial<Tool>) => Promise<void>;
+  syncDeleteTool: (id: number) => Promise<void>;
+  
+  syncAddPrompt: (prompt: Omit<SavedPrompt, 'id'>) => Promise<number | null>;
+  syncUpdatePrompt: (id: number, updates: Partial<SavedPrompt>) => Promise<void>;
+  syncDeletePrompt: (id: number) => Promise<void>;
+  
+  syncAddMCPConfig: (config: Omit<SavedMCPConfig, 'id'>) => Promise<number | null>;
+  syncUpdateMCPConfig: (id: number, updates: Partial<SavedMCPConfig>) => Promise<void>;
+  syncDeleteMCPConfig: (id: number) => Promise<void>;
+  
+  syncAddResponseConfig: (config: Omit<SavedResponseConfig, 'id'>) => Promise<number | null>;
+  syncUpdateResponseConfig: (id: number, updates: Partial<SavedResponseConfig>) => Promise<void>;
+  syncDeleteResponseConfig: (id: number) => Promise<void>;
+  
+  syncSaveWorkflow: (name: string) => Promise<void>;
 }
 
 // Default tools
@@ -129,6 +191,17 @@ export const useMCPBuilderStore = create<MCPBuilderStore>((set, get) => ({
   workflowSteps: [],
   currentTab: 'tools',
   selectedItem: null,
+  
+  // Backend integration state
+  projectId: process.env.NEXT_PUBLIC_DEFAULT_PROJECT_ID || '00000000-0000-0000-0000-000000000001',
+  isLoading: false,
+  isSyncing: false,
+  lastError: null,
+  currentFlowId: null,
+  toolIdMap: new Map(),
+  promptIdMap: new Map(),
+  mcpConfigIdMap: new Map(),
+  responseConfigIdMap: new Map(),
 
   // ═══ TAB ACTIONS ═══
   setCurrentTab: (tab: TabType) => set({ currentTab: tab }),
@@ -495,5 +568,438 @@ export const useMCPBuilderStore = create<MCPBuilderStore>((set, get) => ({
 
   getWorkflowStepById: (stepId: string) => {
     return get().workflowSteps.find((step) => step.id === stepId);
+  },
+  
+  // ═══ BACKEND INTEGRATION METHODS ═══
+  
+  setProjectId: (projectId: string) => set({ projectId }),
+  setLoading: (loading: boolean) => set({ isLoading: loading }),
+  setSyncing: (syncing: boolean) => set({ isSyncing: syncing }),
+  setError: (error: string | null) => set({ lastError: error }),
+  
+  setTools: (tools: Tool[], idMap: Map<number, string>) => {
+    set({ tools, toolIdMap: idMap });
+    // Update ID counter
+    const maxId = Math.max(0, ...tools.map(t => t.id));
+    toolIdCounter = maxId + 1;
+  },
+  
+  setPrompts: (prompts: SavedPrompt[], idMap: Map<number, string>) => {
+    set({ savedPrompts: prompts, promptIdMap: idMap });
+    const maxId = Math.max(0, ...prompts.map(p => p.id));
+    promptIdCounter = maxId + 1;
+  },
+  
+  setMCPConfigs: (configs: SavedMCPConfig[], idMap: Map<number, string>) => {
+    set({ savedMCPConfigs: configs, mcpConfigIdMap: idMap });
+    const maxId = Math.max(0, ...configs.map(c => c.id));
+    mcpConfigIdCounter = maxId + 1;
+  },
+  
+  setResponseConfigs: (configs: SavedResponseConfig[], idMap: Map<number, string>) => {
+    set({ savedResponseConfigs: configs, responseConfigIdMap: idMap });
+    const maxId = Math.max(0, ...configs.map(c => c.id));
+    responseConfigIdCounter = maxId + 1;
+  },
+  
+  setWorkflowSteps: (steps: WorkflowStep[], flowId: string | null) => {
+    set({ workflowSteps: steps, currentFlowId: flowId });
+  },
+  
+  // Load all data from backend
+  loadAllFromBackend: async () => {
+    const { projectId, setLoading, setError, setTools, setPrompts, setMCPConfigs, setResponseConfigs, setWorkflowSteps } = get();
+    
+    setLoading(true);
+    setError(null);
+    
+    try {
+      // Load all entities in parallel
+      const [toolsData, promptsData, mcpConfigsData, responseConfigsData, flowsData] = await Promise.all([
+        backendAPI.tools.getAll(projectId),
+        backendAPI.prompts.getAll(projectId),
+        backendAPI.mcpConfigs.getAll(projectId),
+        backendAPI.responseConfigs.getAll(projectId),
+        backendAPI.flows.getAll(projectId)
+      ]);
+      
+      // Transform and set tools
+      const toolIdMap = new Map<number, string>();
+      const tools = transformToolsFromBackend(toolsData);
+      toolsData.forEach(t => toolIdMap.set(t.numeric_id, t.id));
+      setTools(tools, toolIdMap);
+      
+      // Transform and set prompts
+      const promptIdMap = new Map<number, string>();
+      const prompts = transformPromptsFromBackend(promptsData);
+      promptsData.forEach(p => promptIdMap.set(p.numeric_id, p.id));
+      setPrompts(prompts, promptIdMap);
+      
+      // Transform and set MCP configs
+      const mcpConfigIdMap = new Map<number, string>();
+      const mcpConfigs = transformMCPConfigsFromBackend(mcpConfigsData);
+      mcpConfigsData.forEach(c => mcpConfigIdMap.set(c.numeric_id, c.id));
+      setMCPConfigs(mcpConfigs, mcpConfigIdMap);
+      
+      // Transform and set response configs
+      const responseConfigIdMap = new Map<number, string>();
+      const responseConfigs = transformResponseConfigsFromBackend(responseConfigsData);
+      responseConfigsData.forEach(c => responseConfigIdMap.set(c.numeric_id, c.id));
+      setResponseConfigs(responseConfigs, responseConfigIdMap);
+      
+      // Load workflow (get first flow if exists)
+      if (flowsData.length > 0) {
+        const firstFlow = flowsData[0];
+        const workflowSteps = transformFlowFromBackend(firstFlow);
+        setWorkflowSteps(workflowSteps, firstFlow.id);
+      } else {
+        setWorkflowSteps([], null);
+      }
+      
+      console.log('✅ Loaded all data from backend');
+    } catch (error: any) {
+      console.warn('⚠️ Backend unavailable:', error);
+      setError(error.message || 'Backend unavailable');
+      // Don't throw - let the app continue with local/default data
+    } finally {
+      setLoading(false);
+    }
+  },
+  
+  // ═══ SYNC TOOLS ═══
+  
+  syncAddTool: async (tool: Omit<Tool, 'id'>) => {
+    const { projectId, setSyncing, setError, toolIdMap, addTool } = get();
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformToolToBackend(tool);
+      const created = await backendAPI.tools.create(projectId, backendData);
+      
+      // Update local state
+      toolIdMap.set(created.numeric_id, created.id);
+      const localId = addTool(tool);
+      
+      console.log(`✅ Tool synced to backend: ${created.name} (ID: ${created.numeric_id})`);
+      return created.numeric_id;
+    } catch (error: any) {
+      console.error('❌ Error syncing tool:', error);
+      setError(error.message || 'Failed to create tool');
+      return null;
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncUpdateTool: async (id: number, updates: Partial<Tool>) => {
+    const { toolIdMap, setSyncing, setError, updateTool } = get();
+    const uuid = toolIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for tool ID ${id}, updating locally only`);
+      updateTool(id, updates);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformToolToBackend({ ...get().getToolById(id)!, ...updates });
+      await backendAPI.tools.update(uuid, backendData);
+      updateTool(id, updates);
+      console.log(`✅ Tool updated in backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error updating tool:', error);
+      setError(error.message || 'Failed to update tool');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncDeleteTool: async (id: number) => {
+    const { toolIdMap, setSyncing, setError, deleteTool } = get();
+    const uuid = toolIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for tool ID ${id}, deleting locally only`);
+      deleteTool(id);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      await backendAPI.tools.delete(uuid);
+      toolIdMap.delete(id);
+      deleteTool(id);
+      console.log(`✅ Tool deleted from backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error deleting tool:', error);
+      setError(error.message || 'Failed to delete tool');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  // ═══ SYNC PROMPTS ═══
+  
+  syncAddPrompt: async (prompt: Omit<SavedPrompt, 'id'>) => {
+    const { projectId, setSyncing, setError, promptIdMap, addPrompt } = get();
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformPromptToBackend(prompt);
+      const created = await backendAPI.prompts.create(projectId, backendData);
+      
+      promptIdMap.set(created.numeric_id, created.id);
+      const localId = addPrompt(prompt);
+      
+      console.log(`✅ Prompt synced to backend: ${created.name} (ID: ${created.numeric_id})`);
+      return created.numeric_id;
+    } catch (error: any) {
+      console.error('❌ Error syncing prompt:', error);
+      setError(error.message || 'Failed to create prompt');
+      return null;
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncUpdatePrompt: async (id: number, updates: Partial<SavedPrompt>) => {
+    const { promptIdMap, setSyncing, setError, updatePrompt } = get();
+    const uuid = promptIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for prompt ID ${id}, updating locally only`);
+      updatePrompt(id, updates);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformPromptToBackend({ ...get().getPromptById(id)!, ...updates });
+      await backendAPI.prompts.update(uuid, backendData);
+      updatePrompt(id, updates);
+      console.log(`✅ Prompt updated in backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error updating prompt:', error);
+      setError(error.message || 'Failed to update prompt');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncDeletePrompt: async (id: number) => {
+    const { promptIdMap, setSyncing, setError, deletePrompt } = get();
+    const uuid = promptIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for prompt ID ${id}, deleting locally only`);
+      deletePrompt(id);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      await backendAPI.prompts.delete(uuid);
+      promptIdMap.delete(id);
+      deletePrompt(id);
+      console.log(`✅ Prompt deleted from backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error deleting prompt:', error);
+      setError(error.message || 'Failed to delete prompt');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  // ═══ SYNC MCP CONFIGS ═══
+  
+  syncAddMCPConfig: async (config: Omit<SavedMCPConfig, 'id'>) => {
+    const { projectId, setSyncing, setError, mcpConfigIdMap, addMCPConfig } = get();
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformMCPConfigToBackend(config);
+      const created = await backendAPI.mcpConfigs.create(projectId, backendData);
+      
+      mcpConfigIdMap.set(created.numeric_id, created.id);
+      const localId = addMCPConfig(config);
+      
+      console.log(`✅ MCP Config synced to backend: ${created.name} (ID: ${created.numeric_id})`);
+      return created.numeric_id;
+    } catch (error: any) {
+      console.error('❌ Error syncing MCP config:', error);
+      setError(error.message || 'Failed to create MCP config');
+      return null;
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncUpdateMCPConfig: async (id: number, updates: Partial<SavedMCPConfig>) => {
+    const { mcpConfigIdMap, setSyncing, setError, updateMCPConfig } = get();
+    const uuid = mcpConfigIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for MCP config ID ${id}, updating locally only`);
+      updateMCPConfig(id, updates);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformMCPConfigToBackend({ ...get().getMCPConfigById(id)!, ...updates });
+      await backendAPI.mcpConfigs.update(uuid, backendData);
+      updateMCPConfig(id, updates);
+      console.log(`✅ MCP Config updated in backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error updating MCP config:', error);
+      setError(error.message || 'Failed to update MCP config');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncDeleteMCPConfig: async (id: number) => {
+    const { mcpConfigIdMap, setSyncing, setError, deleteMCPConfig } = get();
+    const uuid = mcpConfigIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for MCP config ID ${id}, deleting locally only`);
+      deleteMCPConfig(id);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      await backendAPI.mcpConfigs.delete(uuid);
+      mcpConfigIdMap.delete(id);
+      deleteMCPConfig(id);
+      console.log(`✅ MCP Config deleted from backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error deleting MCP config:', error);
+      setError(error.message || 'Failed to delete MCP config');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  // ═══ SYNC RESPONSE CONFIGS ═══
+  
+  syncAddResponseConfig: async (config: Omit<SavedResponseConfig, 'id'>) => {
+    const { projectId, setSyncing, setError, responseConfigIdMap, addResponseConfig } = get();
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformResponseConfigToBackend(config);
+      const created = await backendAPI.responseConfigs.create(projectId, backendData);
+      
+      responseConfigIdMap.set(created.numeric_id, created.id);
+      const localId = addResponseConfig(config);
+      
+      console.log(`✅ Response Config synced to backend: ${created.name} (ID: ${created.numeric_id})`);
+      return created.numeric_id;
+    } catch (error: any) {
+      console.error('❌ Error syncing response config:', error);
+      setError(error.message || 'Failed to create response config');
+      return null;
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncUpdateResponseConfig: async (id: number, updates: Partial<SavedResponseConfig>) => {
+    const { responseConfigIdMap, setSyncing, setError, updateResponseConfig } = get();
+    const uuid = responseConfigIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for response config ID ${id}, updating locally only`);
+      updateResponseConfig(id, updates);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformResponseConfigToBackend({ ...get().getResponseConfigById(id)!, ...updates });
+      await backendAPI.responseConfigs.update(uuid, backendData);
+      updateResponseConfig(id, updates);
+      console.log(`✅ Response Config updated in backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error updating response config:', error);
+      setError(error.message || 'Failed to update response config');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  syncDeleteResponseConfig: async (id: number) => {
+    const { responseConfigIdMap, setSyncing, setError, deleteResponseConfig } = get();
+    const uuid = responseConfigIdMap.get(id);
+    
+    if (!uuid) {
+      console.warn(`No UUID found for response config ID ${id}, deleting locally only`);
+      deleteResponseConfig(id);
+      return;
+    }
+    
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      await backendAPI.responseConfigs.delete(uuid);
+      responseConfigIdMap.delete(id);
+      deleteResponseConfig(id);
+      console.log(`✅ Response Config deleted from backend: ${id}`);
+    } catch (error: any) {
+      console.error('❌ Error deleting response config:', error);
+      setError(error.message || 'Failed to delete response config');
+    } finally {
+      setSyncing(false);
+    }
+  },
+  
+  // ═══ SYNC WORKFLOW ═══
+  
+  syncSaveWorkflow: async (name: string) => {
+    const { projectId, workflowSteps, currentFlowId, setSyncing, setError, setWorkflowSteps } = get();
+    setSyncing(true);
+    setError(null);
+    
+    try {
+      const backendData = transformFlowToBackend(name, workflowSteps);
+      
+      if (currentFlowId) {
+        // Update existing flow
+        await backendAPI.flows.update(currentFlowId, backendData);
+        console.log(`✅ Workflow updated in backend: ${name}`);
+      } else {
+        // Create new flow
+        const created = await backendAPI.flows.create(projectId, backendData);
+        setWorkflowSteps(workflowSteps, created.id);
+        console.log(`✅ Workflow created in backend: ${name} (ID: ${created.id})`);
+      }
+    } catch (error: any) {
+      console.error('❌ Error saving workflow:', error);
+      setError(error.message || 'Failed to save workflow');
+    } finally {
+      setSyncing(false);
+    }
   }
 }));

@@ -15,31 +15,71 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function BuilderV6Page() {
   const { toast } = useToast();
-  const { currentTab } = useMCPBuilderStore();
+  const { currentTab, loadAllFromBackend, syncSaveWorkflow, isLoading: storeLoading, isSyncing } = useMCPBuilderStore();
   
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 
-  // Initial loading screen
+  // Load data from backend on mount (with graceful fallback)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-    return () => clearTimeout(timer);
+    const loadData = async () => {
+      // Backend loading enabled - investigating route issues
+      
+      const ENABLE_BACKEND = true; // Enabled for debugging
+      
+      if (ENABLE_BACKEND) {
+        try {
+          await loadAllFromBackend();
+          console.log('✅ Successfully loaded data from backend');
+          toast({
+            title: 'Connected',
+            description: 'Data loaded from backend',
+          });
+        } catch (error) {
+          console.warn('⚠️ Backend unavailable, using local data:', error);
+          toast({
+            title: 'Offline Mode',
+            description: 'Using local data (backend unavailable)',
+            variant: 'default'
+          });
+        }
+      } else {
+        console.log('📦 Using local data (backend disabled - requires HTTPS)');
+        toast({
+          title: 'Local Mode',
+          description: 'Using mock data - backend requires HTTPS',
+          variant: 'default'
+        });
+      }
+      
+      // Show loading screen for minimum duration
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+    };
+    
+    loadData();
   }, []);
 
-  // Save handler
-  const handleSave = () => {
+  // Save handler - saves workflow to backend
+  const handleSave = async () => {
     setIsSaving(true);
-    // Simulate save operation
-    setTimeout(() => {
-      setIsSaving(false);
+    try {
+      await syncSaveWorkflow('My Workflow');
       toast({
         title: 'Saved',
-        description: 'Your project has been saved successfully'
+        description: 'Your workflow has been saved to backend'
       });
-    }, 1000);
+    } catch (error) {
+      toast({
+        title: 'Save Failed',
+        description: 'Failed to save workflow to backend',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   // Publish handler
@@ -57,7 +97,7 @@ export default function BuilderV6Page() {
       <Header
         onSave={handleSave}
         onDeploy={handlePublish}
-        isSaving={isSaving}
+        isSaving={isSaving || isSyncing}
       />
 
       {/* Tab Bar */}

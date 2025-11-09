@@ -47,10 +47,10 @@ class Settings(BaseSettings):
     )
     
     # API Keys
-    openai_api_key: str = Field(
-        ...,
+    openai_api_key: Optional[str] = Field(
+        default=None,
         alias="OPENAI-SECRET",
-        description="OpenAI API key (required)"
+        description="OpenAI API key (optional)"
     )
     claude_api_key: Optional[str] = Field(
         default=None,
@@ -125,9 +125,11 @@ class Settings(BaseSettings):
     
     @field_validator("openai_api_key")
     @classmethod
-    def validate_openai_key(cls, v: str) -> str:
+    def validate_openai_key(cls, v: Optional[str]) -> Optional[str]:
         """Validate OpenAI API key format."""
-        if not v or len(v) < 20:
+        if v is None:
+            return v
+        if len(v) < 20:
             raise ValueError("openai_api_key must be a valid API key (at least 20 characters)")
         if not v.startswith("sk-"):
             raise ValueError("openai_api_key must start with 'sk-'")

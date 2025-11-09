@@ -8,6 +8,7 @@ from loguru import logger
 
 from .endpoints import router
 from .database_endpoints import router as db_router
+from .proxy import router as proxy_router
 
 # Configure loguru
 logger.remove()  # Remove default handler
@@ -32,6 +33,7 @@ app.add_middleware(
 # Include API endpoints
 app.include_router(router)
 app.include_router(db_router)
+app.include_router(proxy_router)
 
 
 @app.get("/health")
