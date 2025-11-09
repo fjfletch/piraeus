@@ -14,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/Navigation";
 import { motion } from 'framer-motion';
-import ParticleSphereCanvas from '@/components/ParticleSphereCanvas';
+import ParticleSpiralCanvas from '@/components/ParticleSpiralCanvas';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
