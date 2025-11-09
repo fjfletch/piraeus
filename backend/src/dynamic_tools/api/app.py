@@ -1,6 +1,7 @@
 """FastAPI application entry point."""
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import sys
 from loguru import logger
@@ -16,6 +17,19 @@ app = FastAPI(
     title="LLM HTTP Service",
     description="LLM-powered HTTP service with MCP support and dynamic_tools integration",
     version="0.1.0"
+)
+
+# Configure CORS for frontend communication
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        "https://*.vercel.app",   # Vercel deployments
+        "https://mcp-factor.vercel.app",  # Production (update with your actual domain)
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Include API endpoints
