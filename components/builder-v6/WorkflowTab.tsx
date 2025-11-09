@@ -464,3 +464,65 @@ function ResponseStepCard({
     </Card>
   );
 }
+
+// Draggable MCP Item Component
+function DraggableMCPItem({ config }: { config: any }) {
+  const [isDragging, setIsDragging] = useState(false);
+
+  return (
+    <div
+      draggable
+      onDragStart={(e) => {
+        e.dataTransfer.setData('type', 'saved-mcp');
+        e.dataTransfer.setData('mcpConfigId', config.id.toString());
+        e.dataTransfer.effectAllowed = 'copy';
+        setIsDragging(true);
+      }}
+      onDragEnd={() => {
+        setIsDragging(false);
+      }}
+      className={`
+        p-2 rounded-md border cursor-move 
+        transition-all duration-200
+        flex items-center gap-2 text-xs
+        ${isDragging ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}
+        bg-card border-border
+        hover:bg-accent hover:border-primary/50
+      `}
+    >
+      <Bot className="h-3 w-3 flex-shrink-0 text-muted-foreground" />
+      <span className="truncate">{config.name}</span>
+    </div>
+  );
+}
+
+// Draggable Response Item Component
+function DraggableResponseItem({ config }: { config: any }) {
+  const [isDragging, setIsDragging] = useState(false);
+
+  return (
+    <div
+      draggable
+      onDragStart={(e) => {
+        e.dataTransfer.setData('type', 'saved-response');
+        e.dataTransfer.setData('responseConfigId', config.id.toString());
+        e.dataTransfer.effectAllowed = 'copy';
+        setIsDragging(true);
+      }}
+      onDragEnd={() => {
+        setIsDragging(false);
+      }}
+      className={`
+        p-2 rounded-md border cursor-move 
+        transition-all duration-200
+        flex items-center gap-2 text-xs
+        ${isDragging ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}
+        bg-card border-border
+        hover:bg-accent hover:border-primary/50
+      `}
+    >
+      <Send className="h-3 w-3 flex-shrink-0 text-muted-foreground" />
+      <span className="truncate">{config.name}</span>
+    </div>
+  );
+}
