@@ -177,6 +177,7 @@ export default function APIConfigModal({
         method: r.method,
         path: r.path,
         description: r.description,
+        body: r.body || undefined,
       })),
       status: 'disconnected',
     };
