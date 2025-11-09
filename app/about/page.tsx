@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Users, Target, Zap, Heart, Code, Rocket } from "lucide-react";
+import { Target, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,6 +11,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { Navigation } from "@/components/Navigation";
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -37,49 +43,27 @@ export default function About() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const values = [
+  const faqs = [
     {
-      icon: Zap,
-      title: "Innovation First",
-      description:
-        "We're constantly pushing the boundaries of what's possible with AI integrations, making complex technologies accessible to everyone.",
+      question: "What is Piraeus?",
+      answer: "Piraeus is a visual, no-code platform for building AI integrations. It allows developers and businesses to connect APIs to LLMs without writing complex integration code, making AI implementation faster and more accessible."
     },
     {
-      icon: Code,
-      title: "Developer Focused",
-      description:
-        "Built by developers, for developers. We understand your workflow and design tools that fit seamlessly into your process.",
+      question: "Who should use Piraeus?",
+      answer: "Anyone who wants to create and utilize their agents in a easier and better way. Builders, consumers, and non-technical users alike would be able to use our platform."
     },
     {
-      icon: Heart,
-      title: "Open & Transparent",
-      description:
-        "We believe in open standards, community-driven development, and transparent communication with our users.",
+      question: "Why does this matter?",
+      answer: "We believe that most current MCP creation tools are inconsistent and overly complicated. Piraeus aims to change that by making MCPs accessible to a broader community of developers and users. During our research, we also found no dedicated marketplace for MCPs — a gap we're determined to fill by building a platform that benefits everyone in the ecosystem."
     },
     {
-      icon: Rocket,
-      title: "Ship Fast",
-      description:
-        "Move quickly, iterate often, and deliver value. We're committed to shipping features that matter, when they matter.",
-    },
-  ];
-
-  const team = [
-    {
-      name: "Engineering Team",
-      role: "Building the Future",
-      description: "Our team of engineers is dedicated to creating robust, scalable solutions that power the next generation of AI applications.",
+      question: "What does the technical stack look like?",
+      answer: "Our tech stack includes a PostgreSQL database and a Python FastAPI backend hosted on AWS. The frontend is built with Vite and React, hosted on Emergent. We also integrate multiple APIs — including OpenAI and Anthropic endpoints — to enable seamless interaction with LLMs."
     },
     {
-      name: "Product Team",
-      role: "User Experience",
-      description: "Focused on making complex integrations simple and intuitive, ensuring every user can build powerful AI tools.",
-    },
-    {
-      name: "Community",
-      role: "Open Source",
-      description: "A vibrant community of developers, contributors, and users who shape the direction of Piraeus through feedback and collaboration.",
-    },
+      question: "What's planned for the future?",
+      answer: "We eventually want to have users able to upload their own MCPs they create in order to facilitate the marketplace emphasis of our idea, which unfortunately we could not complete within the time frame. We also have ideas of how we could scale up for both large community and enterprise capabilities."
+    }
   ];
 
   return (
@@ -136,113 +120,53 @@ export default function About() {
               Empowering developers and businesses to build the future of AI
             </p>
             <p className="text-lg leading-relaxed text-center max-w-3xl mx-auto" style={{ color: '#033F63' }}>
-              At Piraeus, we believe that AI integration shouldn't be a barrier. Whether you're a startup building your first AI feature or an enterprise scaling AI across your organization, we provide the tools and platform to make it happen. Our visual builder removes the complexity, while our robust API and marketplace ecosystem ensures you have everything you need to succeed.
+              At Piraeus, we believe building MCPs shouldn't be hard. Our mission is to make it effortless for you and your agents to discover, connect, and deploy the tools you need. We're creating a digital bazaar — a vibrant hub where developers and agents in a post-agent world can easily trade, share, and build the capabilities that power the next generation of intelligent systems.
             </p>
           </div>
         </motion.div>
       </section>
 
-      {/* Values Section */}
+      {/* FAQ Section */}
       <section className="min-h-screen flex items-center justify-center px-4 py-20">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="container mx-auto max-w-6xl"
+          className="container mx-auto max-w-4xl"
         >
-          <div className="text-center mb-16 backdrop-blur-lg bg-white/15 border border-white/25 rounded-3xl p-8 shadow-xl">
-            <h2 className="text-5xl font-bold mb-4" style={{ color: '#033F63' }}>
-              Our Values
-            </h2>
-            <p className="text-xl" style={{ color: '#28666E' }}>
-              The principles that guide everything we do
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="h-full backdrop-blur-xl bg-white/20 border-2 border-white/30 hover:shadow-2xl hover:bg-white/30 transition-all duration-300" style={{ borderColor: 'rgba(181, 182, 130, 0.3)' }}>
-                    <CardHeader>
-                      <div 
-                        className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto backdrop-blur-sm"
-                        style={{ backgroundColor: 'rgba(254, 220, 151, 0.5)', border: '2px solid rgba(254, 220, 151, 0.3)' }}
-                      >
-                        <Icon className="w-8 h-8" style={{ color: '#033F63' }} />
-                      </div>
-                      <CardTitle className="text-center text-xl" style={{ color: '#033F63' }}>
-                        {value.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-center" style={{ color: '#28666E' }}>
-                        {value.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Team Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 py-20">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="container mx-auto max-w-6xl"
-        >
-          <div className="text-center mb-16 backdrop-blur-lg bg-white/15 border border-white/25 rounded-3xl p-8 shadow-xl">
+          <div className="backdrop-blur-lg bg-white/15 border border-white/25 rounded-3xl p-12 shadow-2xl">
             <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 mx-auto backdrop-blur-sm" style={{ backgroundColor: 'rgba(254, 220, 151, 0.5)', border: '2px solid rgba(254, 220, 151, 0.3)' }}>
-              <Users className="w-10 h-10" style={{ color: '#033F63' }} />
+              <HelpCircle className="w-10 h-10" style={{ color: '#033F63' }} />
             </div>
-            <h2 className="text-5xl font-bold mb-4" style={{ color: '#033F63' }}>
-              Built by a Global Team
+            <h2 className="text-5xl font-bold mb-8 text-center" style={{ color: '#033F63' }}>
+              FAQ
             </h2>
-            <p className="text-xl" style={{ color: '#28666E' }}>
-              Passionate people working together to build the future
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full backdrop-blur-xl bg-white/20 border-2 border-white/30 hover:shadow-2xl hover:bg-white/30 transition-all duration-300" style={{ borderColor: 'rgba(181, 182, 130, 0.3)' }}>
-                  <CardHeader>
-                    <CardTitle className="text-xl" style={{ color: '#033F63' }}>
-                      {member.name}
-                    </CardTitle>
-                    <CardDescription className="text-base" style={{ color: '#7C9885' }}>
-                      {member.role}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm leading-relaxed" style={{ color: '#28666E' }}>
-                      {member.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            <Accordion type="multiple" className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="backdrop-blur-xl bg-white/20 border-2 border-white/30 mb-3"
+                  style={{ borderColor: 'rgba(181, 182, 130, 0.3)' }}
+                >
+                  <AccordionTrigger
+                    value={`item-${index}`}
+                    className="text-lg font-semibold"
+                    style={{ color: '#033F63' }}
+                  >
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent
+                    value={`item-${index}`}
+                    className="text-base leading-relaxed"
+                    style={{ color: '#28666E' }}
+                  >
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </motion.div>
       </section>
