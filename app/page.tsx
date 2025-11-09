@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Zap, Code, TestTube, Share2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,8 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Navigation from "@/components/Navigation";
-import { formatNumber } from "@/lib/utils";
+import { Navigation } from "@/components/Navigation";
+import { mockMCPs } from "@/lib/mock-data";
 
 export default function Home() {
   const features = [
