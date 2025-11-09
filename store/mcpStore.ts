@@ -6,6 +6,7 @@ interface MCPStoreState {
   nodes: FlowNode[];
   edges: FlowEdge[];
   selectedNode: FlowNode | null;
+  llmNodes: Record<string, any>; // Store individual LLM node configs
   setCurrentMCP: (mcp: MCPIntegration | null) => void;
   updateMCP: (updates: Partial<MCPIntegration>) => void;
   setNodes: (nodes: FlowNode[]) => void;
@@ -17,6 +18,8 @@ interface MCPStoreState {
   updateTool: (toolId: string, updates: Partial<MCPTool>) => void;
   removeTool: (toolId: string) => void;
   selectNode: (node: FlowNode | null) => void;
+  updateLLMNode: (nodeId: string, config: any) => void;
+  getLLMNode: (nodeId: string) => any;
 }
 
 export const useMCPStore = create<MCPStoreState>((set) => ({
