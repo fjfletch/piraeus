@@ -57,35 +57,15 @@ export default function Marketplace() {
     <div className="min-h-screen relative overflow-hidden">
       {/* Airbrush gradient background */}
       <div className="fixed inset-0 -z-10">
-        <style jsx>{`
-          @keyframes float1 {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(30px, -20px); }
-            50% { transform: translate(-20px, 30px); }
-            75% { transform: translate(20px, 20px); }
-          }
-          @keyframes float2 {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(-25px, 25px); }
-            50% { transform: translate(30px, -15px); }
-            75% { transform: translate(-15px, -25px); }
-          }
-          @keyframes float3 {
-            0%, 100% { transform: translate(-50%, -50%); }
-            25% { transform: translate(calc(-50% + 25px), calc(-50% - 30px)); }
-            50% { transform: translate(calc(-50% - 30px), calc(-50% + 20px)); }
-            75% { transform: translate(calc(-50% + 15px), calc(-50% + 25px)); }
-          }
-        `}</style>
         <div className="absolute inset-0 bg-gradient-to-br from-[#033f63] via-[#28666e] to-[#7c9885]"></div>
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-[#b5b682] opacity-30 blur-[120px]" style={{ animation: 'float1 25s ease-in-out infinite' }}></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-[#fedc97] opacity-40 blur-[100px]" style={{ animation: 'float2 30s ease-in-out infinite' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] rounded-full bg-[#7c9885] opacity-20 blur-[150px]" style={{ animation: 'float3 35s ease-in-out infinite' }}></div>
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-[#b5b682] opacity-30 blur-[120px] animate-float1"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-[#fedc97] opacity-40 blur-[100px] animate-float2"></div>
+        <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] rounded-full bg-[#7c9885] opacity-20 blur-[150px] animate-float3"></div>
       </div>
       
       <Navigation />
       
-      <div className="container mx-auto px-4 py-8 max-w-7xl relative">
+      <div className="container mx-auto px-4 pt-24 pb-8 max-w-7xl relative">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-white">MCP Marketplace</h1>
           <p className="text-white/80 mt-1">Browse and download other user's MCPs</p>
