@@ -27,6 +27,8 @@ export default function FlowCanvas() {
   const { toast } = useToast();
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const reactFlowWrapper = useRef<HTMLDivElement>(null);
+  const [reactFlowInstance, setReactFlowInstance] = React.useState<any>(null);
 
   useEffect(() => {
     if (!currentMCP) {
