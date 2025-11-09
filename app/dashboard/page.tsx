@@ -86,7 +86,7 @@ export default function Dashboard() {
           <h2 className="text-2xl font-bold mb-4 text-white">Recent MCPs</h2>
           <div className="space-y-4">
             {recentMCPs.map((mcp) => (
-              <Card key={mcp.id} className="hover:shadow-md transition-shadow">
+              <Card key={mcp.id} className="hover:shadow-md transition-shadow bg-white/90 backdrop-blur-sm border-white/30">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
