@@ -46,14 +46,32 @@ export default function EdgeProperties({ edge }: EdgePropertiesProps) {
 
     // Update edge styling based on condition
     if (conditionType === 'on-success') {
-      updates.style = { ...edge.style, stroke: '#22c55e' };
+      updates.style = { 
+        stroke: '#22c55e', 
+        strokeWidth: 2,
+        // Solid green line for success
+      };
       updates.animated = true;
     } else if (conditionType === 'on-error') {
-      updates.style = { ...edge.style, stroke: '#ef4444' };
+      updates.style = { 
+        stroke: '#ef4444', 
+        strokeWidth: 2,
+        strokeDasharray: '5,5', // Dotted red line for error paths
+      };
+      updates.animated = false;
     } else if (conditionType === 'custom') {
-      updates.style = { ...edge.style, stroke: '#f59e0b' };
+      updates.style = { 
+        stroke: '#f59e0b', 
+        strokeWidth: 2,
+        // Solid orange line for custom conditions
+      };
+      updates.animated = false;
     } else {
-      updates.style = { ...edge.style, stroke: '#3b82f6' };
+      updates.style = { 
+        stroke: '#3b82f6', 
+        strokeWidth: 2,
+        // Solid blue line for always
+      };
       updates.animated = false;
     }
 
