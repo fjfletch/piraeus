@@ -185,7 +185,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="container mx-auto max-w-6xl"
         >
-          <div className="text-center mb-16 backdrop-blur-lg bg-white/30 border border-white/40 rounded-3xl p-8 shadow-xl">
+          <div className="text-center mb-16 backdrop-blur-lg bg-white/15 border border-white/25 rounded-3xl p-8 shadow-xl">
             <h2 className="text-5xl font-bold mb-4" style={{ color: '#033F63' }}>
               Powerful Features
             </h2>
