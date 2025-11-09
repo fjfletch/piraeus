@@ -42,7 +42,14 @@ export default function FlowCanvas() {
       type: 'input',
       position: { x: 250, y: 50 },
       data: { label: '🎤 User Query' },
-      style: { backgroundColor: '#f0f9ff', border: '2px solid #0ea5e9' },
+      style: { 
+        backgroundColor: '#f0f9ff', 
+        border: '2px solid #0ea5e9',
+        borderRadius: '8px',
+        padding: '12px',
+        fontWeight: 500,
+      },
+      draggable: true,
     });
 
     // LLM node
@@ -52,7 +59,14 @@ export default function FlowCanvas() {
       data: {
         label: `🤖 LLM Decision\n${currentMCP.configuration.model || 'GPT-4'}`,
       },
-      style: { backgroundColor: '#e0f2fe', border: '2px solid #0284c7' },
+      style: { 
+        backgroundColor: '#e0f2fe', 
+        border: '2px solid #0284c7',
+        borderRadius: '8px',
+        padding: '12px',
+        fontWeight: 500,
+      },
+      draggable: true,
     });
 
     // Edge from input to LLM
