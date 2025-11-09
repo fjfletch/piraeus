@@ -20,8 +20,8 @@ from ..services.workflow_orchestrator import WorkflowOrchestrator
 from ..core.registry import ToolRegistry
 from ..config.settings import Settings, get_settings
 
-# Create API router
-router = APIRouter()
+# Create API router with /api prefix to match database endpoints
+router = APIRouter(prefix="/api")
 
 # Global tool registry (shared across requests)
 _global_registry = ToolRegistry()
