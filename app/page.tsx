@@ -174,7 +174,7 @@ export default function Home() {
           viewport={{ once: true }}
           className="container mx-auto max-w-6xl"
         >
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 backdrop-blur-lg bg-white/30 border border-white/40 rounded-3xl p-8 shadow-xl">
             <h2 className="text-5xl font-bold mb-4" style={{ color: '#033F63' }}>
               Powerful Features
             </h2>
@@ -194,11 +194,11 @@ export default function Home() {
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="h-full backdrop-blur-md bg-white/80 border-2 hover:shadow-2xl transition-shadow duration-300" style={{ borderColor: '#B5B682' }}>
+                  <Card className="h-full backdrop-blur-xl bg-white/40 border-2 border-white/50 hover:shadow-2xl hover:bg-white/50 transition-all duration-300" style={{ borderColor: 'rgba(181, 182, 130, 0.4)' }}>
                     <CardHeader>
                       <div 
-                        className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto"
-                        style={{ backgroundColor: '#FEDC97' }}
+                        className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto backdrop-blur-sm"
+                        style={{ backgroundColor: 'rgba(254, 220, 151, 0.8)', border: '2px solid rgba(254, 220, 151, 0.4)' }}
                       >
                         <Icon className="w-8 h-8" style={{ color: '#033F63' }} />
                       </div>
