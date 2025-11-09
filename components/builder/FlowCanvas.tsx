@@ -134,7 +134,7 @@ export default function FlowCanvas() {
     }
   }, [currentMCP]);
 
-  // Separate effect to update LLM node label when mode changes (without resetting the flow)
+  // Separate effect to update LLM node label and config when mode or tools change (without resetting the flow)
   useEffect(() => {
     if (nodes.length > 0) {
       setNodes((nds) =>
@@ -148,6 +148,7 @@ export default function FlowCanvas() {
                 ...node.data,
                 label: `🤖 LLM Decision\n${llmModeLabel}`,
                 mode: llmConfig.mode,
+                availableToolIds: llmConfig.availableToolIds || [],
               },
             };
           }
