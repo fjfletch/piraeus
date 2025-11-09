@@ -209,7 +209,8 @@ class WorkflowOrchestrator:
         """Convert tool configs to structured API documentation string.
         
         This method formats tool information into a structured text format
-        that the LLM can understand and use for tool selection.
+        that the LLM can understand and use for tool selection. It includes
+        EXACT API endpoint information to prevent URL hallucination.
         
         Args:
             tools: List of tool objects (BaseTool or ToolConfig)
@@ -229,12 +230,36 @@ class WorkflowOrchestrator:
             try:
                 tool_def = self.tool_registry.get_definition(tool.name)
                 
-                context_parts.append(f"\nTool: {tool_def.name}")
+                context_parts.append(f"\n{'='*60}")
+                context_parts.append(f"Tool: {tool_def.name}")
                 context_parts.append(f"Description: {tool_def.description}")
+                
+                # **CRITICAL: Include EXACT API endpoint information**
+                # This prevents the LLM from hallucinating URLs
+                if hasattr(tool, 'config') and hasattr(tool.config, 'api'):
+                    api_config = tool.config.api
+                    context_parts.append(f"\n**EXACT API ENDPOINT (USE THIS EXACT URL):**")
+                    context_parts.append(f"  Base URL: {api_config.base_url}")
+                    context_parts.append(f"  Path: {api_config.path if api_config.path else '(no additional path)'}")
+                    full_url = f"{api_config.base_url}{api_config.path if api_config.path else ''}"
+                    context_parts.append(f"  **FULL URL TO USE: {full_url}**")
+                    context_parts.append(f"  HTTP Method: {api_config.method}")
+                    
+                    # Include auth requirements
+                    if api_config.auth and api_config.auth.method != "none":
+                        context_parts.append(f"  Authentication: {api_config.auth.method}")
+                    
+                    # Include any required headers
+                    if api_config.headers:
+                        context_parts.append(f"  Required Headers: {api_config.headers}")
+                    
+                    # Include any default params
+                    if api_config.params:
+                        context_parts.append(f"  Default Query Params: {api_config.params}")
                 
                 # Format input schema
                 if tool_def.input_schema and "properties" in tool_def.input_schema:
-                    context_parts.append("Required Parameters:")
+                    context_parts.append("\nRequired Parameters:")
                     for param_name, param_info in tool_def.input_schema.get("properties", {}).items():
                         param_type = param_info.get("type", "any")
                         param_desc = param_info.get("description", "No description")
@@ -244,10 +269,12 @@ class WorkflowOrchestrator:
                 
                 # Format output schema
                 if tool_def.output_schema and "properties" in tool_def.output_schema:
-                    context_parts.append("Expected Output:")
+                    context_parts.append("\nExpected Output:")
                     for output_name, output_info in tool_def.output_schema.get("properties", {}).items():
                         output_type = output_info.get("type", "any")
                         context_parts.append(f"  - {output_name} ({output_type})")
+                
+                context_parts.append(f"{'='*60}")
                 
             except Exception as e:
                 logger.warning(f"Error formatting tool {tool.name}: {e}")

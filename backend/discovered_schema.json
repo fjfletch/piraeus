@@ -1,0 +1,22 @@
+{
+  "tools": {
+    "schema": "catalog",
+    "exists": true,
+    "columns": [
+      "id",
+      "name",
+      "description",
+      "tool_config",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "prompts": {
+    "schema": "catalog",
+    "exists": true
+  },
+  "flows": {
+    "schema": "orchestration",
+    "exists": true
+  }
+}

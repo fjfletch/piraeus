@@ -58,6 +58,16 @@ class Settings(BaseSettings):
         description="Claude API key (optional)"
     )
     
+    # Supabase settings
+    supabase_url: str = Field(
+        ...,
+        description="Supabase project URL (required)"
+    )
+    supabase_key: str = Field(
+        ...,
+        description="Supabase API key (required)"
+    )
+    
     # HTTP Client settings
     http_timeout: float = Field(
         default=30.0,

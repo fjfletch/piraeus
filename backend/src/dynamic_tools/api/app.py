@@ -2,10 +2,12 @@
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import sys
 from loguru import logger
 
 from .endpoints import router
+from .database_endpoints import router as db_router
 
 # Configure loguru
 logger.remove()  # Remove default handler
@@ -18,8 +20,18 @@ app = FastAPI(
     version="0.1.0"
 )
 
+# Add CORS middleware for frontend access
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify exact origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Include API endpoints
 app.include_router(router)
+app.include_router(db_router)
 
 
 @app.get("/health")

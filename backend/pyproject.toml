@@ -12,11 +12,13 @@ dependencies = [
     "openai>=1.0",
     "tenacity>=8.0",
     "loguru>=0.7",
-    "dotenv>=0.9.9",
+    "python-dotenv>=1.0.0",
     "httpx>=0.28.1",
     "fastapi>=0.121.1",
+    "uvicorn[standard]>=0.30.0",
     "pydantic-settings>=2.11.0",
     "pytest-httpx>=0.35.0",
+    "supabase>=2.0.0",
 ]
 
 [project.optional-dependencies]

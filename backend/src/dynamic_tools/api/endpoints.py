@@ -12,6 +12,7 @@ from ..models.api_requests import (
     WorkflowRequest,
     WorkflowResponse
 )
+from ..models.tool_config import ToolConfig
 from ..models.http_spec import HTTPRequestSpec
 from ..services.prompt_service import PromptService
 from ..services.http_client import HTTPClientService
@@ -21,6 +22,9 @@ from ..config.settings import Settings, get_settings
 
 # Create API router
 router = APIRouter()
+
+# Global tool registry (shared across requests)
+_global_registry = ToolRegistry()
 
 
 @router.post(
@@ -291,8 +295,8 @@ async def workflow_endpoint(
     try:
         logger.info(f"Workflow endpoint called: {request.user_instructions[:50]}...")
         
-        # Initialize services
-        tool_registry = ToolRegistry()
+        # Initialize services (use global registry)
+        tool_registry = _global_registry
         
         prompt_service = PromptService(
             api_key=settings.openai_api_key,
@@ -326,3 +330,62 @@ async def workflow_endpoint(
             error=f"Unexpected workflow error: {str(e)}",
             error_stage="llm_selection"  # Default stage for unexpected errors
         )
+
+
+@router.post(
+    "/tools/register",
+    summary="Register a Tool",
+    description="Register a new tool configuration in the global registry",
+    tags=["Tools"],
+)
+async def register_tool(tool_config: ToolConfig) -> dict:
+    """Register a tool in the global registry.
+    
+    Args:
+        tool_config: Tool configuration
+        
+    Returns:
+        Success message
+    """
+    try:
+        from ..factory.tool_factory import ToolFactory
+        
+        # Create tool from config
+        tool = ToolFactory.create_from_config(tool_config)
+        
+        # Register in global registry
+        _global_registry.register(tool)
+        
+        logger.info(f"Registered tool: {tool_config.name}")
+        return {
+            "status": "success",
+            "message": f"Tool '{tool_config.name}' registered successfully",
+            "tool_id": tool_config.name
+        }
+        
+    except Exception as e:
+        logger.error(f"Tool registration error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to register tool: {str(e)}"
+        )
+
+
+@router.get(
+    "/tools",
+    summary="List Tools",
+    description="List all registered tools",
+    tags=["Tools"],
+)
+async def list_tools() -> dict:
+    """List all registered tools.
+    
+    Returns:
+        List of tool names and count
+    """
+    tool_names = _global_registry.list_tools()
+    return {
+        "status": "success",
+        "count": len(tool_names),
+        "tools": tool_names
+    }

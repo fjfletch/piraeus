@@ -1,6 +1,6 @@
 """HTTP request and response specification models."""
 
-from typing import Any, Dict, Optional, Literal, Union
+from typing import Any, Dict, List, Optional, Literal, Union
 from pydantic import BaseModel, Field, field_validator, model_serializer
 from pydantic.json_schema import JsonSchemaValue
 from pydantic_core import core_schema
@@ -91,12 +91,13 @@ class HTTPResponseSpec(BaseModel):
         default=None,
         description="HTTP response headers as key-value pairs"
     )
-    body: Optional[Union[Dict[str, Any], str]] = Field(
+    body: Optional[Union[Dict[str, Any], List[Any], str]] = Field(
         default=None,
-        description="Response body (JSON object or string)",
+        description="Response body (JSON object, array, or string)",
         json_schema_extra={
             "anyOf": [
                 {"type": "object", "additionalProperties": False},
+                {"type": "array"},
                 {"type": "string"}
             ]
         }
