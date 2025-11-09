@@ -146,7 +146,7 @@ export default function Home() {
                     variant="secondary" 
                     className="text-base px-6 py-2 backdrop-blur-md border border-white/30"
                     style={{ 
-                      backgroundColor: 'rgba(181, 182, 130, 0.7)',
+                      backgroundColor: 'rgba(181, 182, 130, 0.5)',
                       color: '#033F63',
                       fontWeight: '600'
                     }}
