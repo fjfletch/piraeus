@@ -308,11 +308,16 @@ async def workflow_endpoint(
             max_retries=settings.http_max_retries
         )
         
-        # Create orchestrator
+        # Initialize database service for dynamic tool loading
+        from ..services.supabase_service import SupabaseService
+        db_service = SupabaseService(settings.supabase_url, settings.supabase_key)
+        
+        # Create orchestrator with database service
         orchestrator = WorkflowOrchestrator(
             tool_registry=tool_registry,
             prompt_service=prompt_service,
-            http_client=http_client
+            http_client=http_client,
+            db_service=db_service  # NEW: Enables dynamic tool loading from database
         )
         
         # Execute workflow
@@ -389,3 +394,85 @@ async def list_tools() -> dict:
         "count": len(tool_names),
         "tools": tool_names
     }
+
+
+@router.post(
+    "/tools/reload",
+    summary="Reload Tools from Database",
+    description="Reload all tools from the database into the registry",
+    tags=["Tools"],
+)
+async def reload_tools(settings: Settings = Depends(get_settings)) -> dict:
+    """Reload all tools from database into the registry.
+    
+    This endpoint allows dynamic tool registration without restarting the server.
+    When a new tool is created in the frontend, call this endpoint to make it
+    available to the workflow orchestrator.
+    
+    Returns:
+        Status and count of loaded tools
+    """
+    try:
+        from ..services.supabase_service import SupabaseService
+        from ..factory.tool_factory import ToolFactory
+        from ..models.tool_config import ToolConfig, ApiConfig
+        from ..models.enums import HttpMethod
+        
+        db = SupabaseService(settings.supabase_url, settings.supabase_key)
+        tools = await db.get_tools()
+        
+        logger.info(f"🔄 Reloading {len(tools)} tools from database")
+        
+        # Clear existing tools (optional - or we could just add new ones)
+        # For now, we'll just add/update tools
+        
+        factory = ToolFactory(registry=_global_registry)
+        registered_count = 0
+        skipped_count = 0
+        
+        for tool in tools:
+            if tool.method and tool.url and tool.name:
+                try:
+                    method_enum = HttpMethod[tool.method.upper()] if tool.method else HttpMethod.GET
+                    
+                    tool_config = ToolConfig(
+                        name=tool.name,
+                        description=tool.description or f"API tool: {tool.name}",
+                        api=ApiConfig(
+                            base_url=tool.url,
+                            method=method_enum,
+                            headers={},
+                            params={}
+                        ),
+                        input_schema={"type": "object", "properties": {}},
+                        output_schema={"type": "object"}
+                    )
+                    
+                    tool_obj = factory.create_from_config(tool_config)
+                    _global_registry.register(tool_obj)
+                    registered_count += 1
+                    logger.info(f"✅ Registered tool: {tool.name}")
+                    
+                except Exception as e:
+                    logger.warning(f"⚠️  Could not register tool '{tool.name}': {e}")
+                    skipped_count += 1
+            else:
+                logger.debug(f"⏭️  Skipping incomplete tool: {tool.name}")
+                skipped_count += 1
+        
+        logger.info(f"🎉 Reload complete: {registered_count} tools registered, {skipped_count} skipped")
+        
+        return {
+            "status": "success",
+            "message": f"Reloaded {registered_count} tools from database",
+            "registered_count": registered_count,
+            "skipped_count": skipped_count,
+            "total_in_registry": len(_global_registry.list_tools())
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to reload tools: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to reload tools: {str(e)}"
+        )

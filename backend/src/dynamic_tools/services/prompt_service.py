@@ -151,6 +151,10 @@ class PromptService:
             response_format_prompt=request.response_format_prompt
         )
         
+        # Log the actual prompts being sent to LLM for debugging
+        logger.info(f"📝 SYSTEM PROMPT: {system_prompt[:300]}...")
+        logger.info(f"📝 USER PROMPT: {user_prompt[:500]}...")
+        
         # Build messages for structured output
         messages = [
             {"role": "system", "content": system_prompt},

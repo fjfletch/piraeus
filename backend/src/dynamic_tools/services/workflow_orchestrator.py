@@ -6,9 +6,11 @@ from loguru import logger
 from ..core.registry import ToolRegistry
 from ..models.api_requests import WorkflowRequest, WorkflowResponse
 from ..models.http_spec import HTTPRequestSpec
-from ..models.tool_config import ToolConfig
+from ..models.tool_config import ToolConfig, ApiConfig
+from ..models.enums import HttpMethod
 from .prompt_service import PromptService
 from .http_client import HTTPClientService
+from .supabase_service import SupabaseService
 
 
 class WorkflowOrchestrator:
@@ -32,18 +34,21 @@ class WorkflowOrchestrator:
         self,
         tool_registry: ToolRegistry,
         prompt_service: PromptService,
-        http_client: HTTPClientService
+        http_client: HTTPClientService,
+        db_service: Optional[SupabaseService] = None
     ):
         """Initialize the workflow orchestrator.
         
         Args:
-            tool_registry: ToolRegistry instance for tool management
+            tool_registry: ToolRegistry instance for tool management (legacy, deprecated)
             prompt_service: PromptService instance for LLM interactions
             http_client: HTTPClientService instance for API execution
+            db_service: SupabaseService instance for fetching tools from database
         """
         self.tool_registry = tool_registry
         self.prompt_service = prompt_service
         self.http_client = http_client
+        self.db_service = db_service
         logger.info("WorkflowOrchestrator initialized")
     
     async def execute_workflow(
@@ -65,7 +70,7 @@ class WorkflowOrchestrator:
         
         # Stage 1: Retrieve tools
         try:
-            found_tools, missing_ids = self._retrieve_tools(request.tool_ids)
+            found_tools, missing_ids = await self._retrieve_tools(request.tool_ids)
             
             if missing_ids:
                 error_msg = f"Tools not found in registry: {missing_ids}"
@@ -108,15 +113,23 @@ class WorkflowOrchestrator:
                 api_docs=tools_context
             )
             
-            logger.info("Calling LLM for tool selection and HTTP spec generation")
+            logger.info("📤 Calling LLM for tool selection and HTTP spec generation")
+            logger.info(f"   User instructions: '{request.user_instructions}'")
+            logger.info(f"   Tools context: {tools_context[:500]}...")  # Log first 500 chars
             prompt_response = await self.prompt_service.prompt_mcp(mcp_request)
             
             if prompt_response.type != "http_spec":
                 raise ValueError(f"Expected http_spec, got {prompt_response.type}")
             
+            # Log the raw LLM response for debugging
+            logger.info(f"🔍 RAW LLM RESPONSE: {prompt_response.content}")
+            
             # Parse HTTP spec from response
             http_spec = HTTPRequestSpec(**prompt_response.content)
-            logger.info(f"LLM generated HTTP spec: {http_spec.method} {http_spec.url}")
+            logger.info(f"✅ LLM generated HTTP spec: {http_spec.method} {http_spec.url}")
+            logger.info(f"   Headers: {http_spec.headers}")
+            logger.info(f"   Query params: {http_spec.query_params}")
+            logger.info(f"   Body: {http_spec.body}")
             
             # Determine which tool was selected
             selected_tool_name = self._extract_tool_name_from_spec(http_spec, found_tools)
@@ -179,11 +192,14 @@ class WorkflowOrchestrator:
             formatted_response=formatted_response
         )
     
-    def _retrieve_tools(
+    async def _retrieve_tools(
         self,
         tool_ids: list[str]
     ) -> tuple[list, list[str]]:
-        """Retrieve tools from registry.
+        """Retrieve tools from database or registry.
+        
+        Fetches tools directly from the database to ensure we always have
+        the latest tools without requiring server restarts.
         
         Args:
             tool_ids: List of tool identifiers to retrieve
@@ -191,8 +207,73 @@ class WorkflowOrchestrator:
         Returns:
             Tuple of (found_tools, missing_ids)
         """
-        logger.debug(f"Retrieving {len(tool_ids)} tools from registry")
+        logger.info(f"🔍 NEW CODE: Retrieving {len(tool_ids)} tools (db_service={'YES' if self.db_service else 'NO'})")
+        logger.debug(f"Retrieving {len(tool_ids)} tools from database")
         
+        # If database service is available, fetch from database (preferred)
+        if self.db_service:
+            try:
+                # Get all tools from database
+                logger.info("📥 Querying database for tools...")
+                all_tools = await self.db_service.get_tools()
+                logger.info(f"✅ Fetched {len(all_tools)} tools from database")
+                
+                # Filter to only requested tools
+                found_tools = []
+                found_names = set()
+                
+                for db_tool in all_tools:
+                    if db_tool.name in tool_ids:
+                        # Convert database tool to ToolConfig
+                        try:
+                            method_enum = HttpMethod[db_tool.method.upper()] if db_tool.method else HttpMethod.GET
+                            
+                            tool_config = ToolConfig(
+                                name=db_tool.name,
+                                description=db_tool.description or f"API tool: {db_tool.name}",
+                                api=ApiConfig(
+                                    base_url=db_tool.url,
+                                    method=method_enum,
+                                    headers={},
+                                    params={}
+                                ),
+                                input_schema={"type": "object", "properties": {}},
+                                output_schema={"type": "object"}
+                            )
+                            
+                            # Create a simple tool object with the config
+                            class SimpleTool:
+                                def __init__(self, config):
+                                    self.name = config.name
+                                    self.config = config
+                                    self.description = config.description
+                            
+                            tool_obj = SimpleTool(tool_config)
+                            found_tools.append(tool_obj)
+                            found_names.add(db_tool.name)
+                            logger.debug(f"✅ Found tool in database: {db_tool.name}")
+                            
+                        except Exception as e:
+                            logger.warning(f"⚠️ Could not convert tool '{db_tool.name}': {e}")
+                
+                missing_ids = [tid for tid in tool_ids if tid not in found_names]
+                
+                if missing_ids:
+                    logger.warning(f"Missing tools in database: {missing_ids}")
+                else:
+                    logger.info(f"Successfully retrieved all {len(found_tools)} tools from database")
+                
+                return found_tools, missing_ids
+                
+            except Exception as e:
+                logger.error(f"❌ DATABASE QUERY FAILED: {type(e).__name__}: {e}")
+                logger.error(f"Falling back to registry...")
+                import traceback
+                logger.error(f"Traceback: {traceback.format_exc()}")
+                # Fall back to registry if database fails
+        
+        # Fallback: use registry (legacy)
+        logger.debug(f"Using registry fallback for tool retrieval")
         found_tools, missing_ids = self.tool_registry.get_multiple(tool_ids)
         
         if missing_ids:
@@ -226,17 +307,16 @@ class WorkflowOrchestrator:
         context_parts = ["Available Tools:\n"]
         
         for tool in tools:
-            # Get tool definition from registry
+            # Format tool directly (either from database or registry)
             try:
-                tool_def = self.tool_registry.get_definition(tool.name)
-                
                 context_parts.append(f"\n{'='*60}")
-                context_parts.append(f"Tool: {tool_def.name}")
-                context_parts.append(f"Description: {tool_def.description}")
+                context_parts.append(f"Tool: {tool.name}")
+                context_parts.append(f"Description: {tool.description}")
                 
                 # **CRITICAL: Include EXACT API endpoint information**
                 # This prevents the LLM from hallucinating URLs
                 if hasattr(tool, 'config') and hasattr(tool.config, 'api'):
+                    # Tool from registry with full config
                     api_config = tool.config.api
                     context_parts.append(f"\n**EXACT API ENDPOINT (USE THIS EXACT URL):**")
                     context_parts.append(f"  Base URL: {api_config.base_url}")
@@ -257,20 +337,26 @@ class WorkflowOrchestrator:
                     if api_config.params:
                         context_parts.append(f"  Default Query Params: {api_config.params}")
                 
-                # Format input schema
-                if tool_def.input_schema and "properties" in tool_def.input_schema:
+                elif hasattr(tool, 'url') and tool.url:
+                    # Tool from database with simple URL
+                    context_parts.append(f"\n**EXACT API ENDPOINT (USE THIS EXACT URL):**")
+                    context_parts.append(f"  **FULL URL TO USE: {tool.url}**")
+                    context_parts.append(f"  HTTP Method: {tool.method if hasattr(tool, 'method') else 'GET'}")
+                
+                # Format input schema if available
+                if hasattr(tool, 'input_schema') and tool.input_schema and "properties" in tool.input_schema:
                     context_parts.append("\nRequired Parameters:")
-                    for param_name, param_info in tool_def.input_schema.get("properties", {}).items():
+                    for param_name, param_info in tool.input_schema.get("properties", {}).items():
                         param_type = param_info.get("type", "any")
                         param_desc = param_info.get("description", "No description")
-                        required = param_name in tool_def.input_schema.get("required", [])
+                        required = param_name in tool.input_schema.get("required", [])
                         req_marker = " (required)" if required else " (optional)"
                         context_parts.append(f"  - {param_name} ({param_type}){req_marker}: {param_desc}")
                 
-                # Format output schema
-                if tool_def.output_schema and "properties" in tool_def.output_schema:
+                # Format output schema if available
+                if hasattr(tool, 'output_schema') and tool.output_schema and "properties" in tool.output_schema:
                     context_parts.append("\nExpected Output:")
-                    for output_name, output_info in tool_def.output_schema.get("properties", {}).items():
+                    for output_name, output_info in tool.output_schema.get("properties", {}).items():
                         output_type = output_info.get("type", "any")
                         context_parts.append(f"  - {output_name} ({output_type})")
                 
@@ -279,7 +365,7 @@ class WorkflowOrchestrator:
             except Exception as e:
                 logger.warning(f"Error formatting tool {tool.name}: {e}")
                 context_parts.append(f"\nTool: {tool.name}")
-                context_parts.append(f"Description: {tool.description}")
+                context_parts.append(f"Description: {getattr(tool, 'description', 'No description')}")
                 context_parts.append("(Details unavailable)")
         
         formatted_context = "\n".join(context_parts)

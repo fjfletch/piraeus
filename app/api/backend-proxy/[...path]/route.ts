@@ -5,8 +5,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
-// Backend URL - defaults to AWS, can be overridden with BACKEND_URL env var for local development
-const BACKEND_URL = process.env.BACKEND_URL || 'http://3.136.147.20:8000';
+// Backend URL - hardcoded to localhost for development
+const BACKEND_URL = 'http://localhost:8000';
 
 export async function GET(
   request: NextRequest,
@@ -78,7 +78,7 @@ async function proxyRequest(
         'Content-Type': 'application/json',
       },
       body: body || undefined,
-      signal: AbortSignal.timeout(30000), // 30 second timeout
+      signal: AbortSignal.timeout(120000), // 2 minute timeout (for LLM workflows)
     });
 
     console.log(`[Proxy] Response: ${response.status}`);

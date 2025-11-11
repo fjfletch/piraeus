@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertCircle, CheckCircle2, Loader2, PlayCircle, XCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import backendAPI from '@/lib/api/backend';
@@ -21,6 +22,10 @@ interface TestResult {
   output?: string;
   error?: string;
   timestamp: number;
+  // Additional workflow details
+  selectedTool?: string;
+  httpRequest?: any;
+  rawResponse?: any;
 }
 
 export function TestingPanel() {
@@ -219,18 +224,16 @@ export function TestingPanel() {
       console.log('✅ Backend response:', response);
 
       if (response.status === 'success') {
-        // Add success result showing both HTTP response and formatted output
+        // Add success result showing formatted response prominently
         const result: TestResult = {
           stepId: firstMCPStep.id,
           stepType: 'mcp',
           stepName: mcpConfig?.name || 'MCP Workflow',
           status: 'success',
-          output: JSON.stringify({
-            selected_tool: response.selected_tool,
-            http_request: response.http_spec,
-            api_response: response.raw_response,
-            formatted_response: response.formatted_response,
-          }, null, 2),
+          output: response.formatted_response || JSON.stringify(response.raw_response?.body, null, 2),
+          selectedTool: response.selected_tool,
+          httpRequest: response.http_spec,
+          rawResponse: response.raw_response,
           timestamp: Date.now(),
         };
         setTestResults([result]);
@@ -418,12 +421,53 @@ export function TestingPanel() {
                 </CardHeader>
                 <CardContent>
                   {result.status === 'success' && result.output && (
-                    <div className="space-y-2">
-                      <Label className="text-xs text-muted-foreground">Output:</Label>
-                      <pre className="text-xs bg-muted p-2 rounded overflow-x-auto max-h-[200px] overflow-y-auto">
-                        {result.output}
-                      </pre>
-                    </div>
+                    <Tabs defaultValue="formatted" className="w-full">
+                      <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="formatted">Formatted Response</TabsTrigger>
+                        <TabsTrigger value="technical">Technical Details</TabsTrigger>
+                      </TabsList>
+                      
+                      <TabsContent value="formatted" className="space-y-2 mt-2">
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg">
+                          <div className="flex items-center gap-2 mb-3">
+                            <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                            <Label className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+                              LLM-Formatted Response
+                            </Label>
+                          </div>
+                          <div className="text-sm bg-white dark:bg-slate-900 p-4 rounded border border-blue-100 dark:border-blue-900 max-h-[400px] overflow-y-auto whitespace-pre-wrap font-mono leading-relaxed">
+                            {result.output}
+                          </div>
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="technical" className="space-y-3">
+                        {result.selectedTool && (
+                          <div>
+                            <Label className="text-xs text-muted-foreground">Selected Tool:</Label>
+                            <Badge variant="outline" className="mt-1">{result.selectedTool}</Badge>
+                          </div>
+                        )}
+                        
+                        {result.httpRequest && (
+                          <div>
+                            <Label className="text-xs text-muted-foreground">HTTP Request:</Label>
+                            <pre className="text-xs bg-muted p-2 rounded overflow-x-auto max-h-[150px] overflow-y-auto mt-1">
+                              {JSON.stringify(result.httpRequest, null, 2)}
+                            </pre>
+                          </div>
+                        )}
+                        
+                        {result.rawResponse && (
+                          <div>
+                            <Label className="text-xs text-muted-foreground">Raw API Response:</Label>
+                            <pre className="text-xs bg-muted p-2 rounded overflow-x-auto max-h-[150px] overflow-y-auto mt-1">
+                              {JSON.stringify(result.rawResponse, null, 2)}
+                            </pre>
+                          </div>
+                        )}
+                      </TabsContent>
+                    </Tabs>
                   )}
                   {result.status === 'error' && result.error && (
                     <div className="space-y-2">

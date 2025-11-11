@@ -79,6 +79,11 @@ const toolsAPI = {
     apiRequest<void>(`/tools/${id}`, {
       method: 'DELETE',
     }),
+
+  reload: (): Promise<{ status: string; message: string; registered_count: number }> =>
+    apiRequest<{ status: string; message: string; registered_count: number }>(`/tools/reload`, {
+      method: 'POST',
+    }),
 };
 
 // ============================================================================
@@ -222,11 +227,20 @@ export interface WorkflowExecuteResponse {
 }
 
 const workflowAPI = {
-  execute: (data: WorkflowExecuteRequest): Promise<WorkflowExecuteResponse> =>
-    apiRequest<WorkflowExecuteResponse>(`/workflow`, {
+  execute: async (data: WorkflowExecuteRequest): Promise<WorkflowExecuteResponse> => {
+    // Workflow endpoint is at /api/workflow on backend
+    const url = '/api/backend-proxy/api/workflow';
+    const response = await fetch(url, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }),
+    });
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`API Error (${response.status}): ${error}`);
+    }
+    return response.json();
+  },
 };
 
 // ============================================================================

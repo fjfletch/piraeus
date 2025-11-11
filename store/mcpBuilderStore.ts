@@ -682,6 +682,8 @@ export const useMCPBuilderStore = create<MCPBuilderStore>((set, get) => ({
       const localId = addTool(tool);
       
       console.log(`✅ Tool synced to backend: ${created.name} (ID: ${created.numeric_id})`);
+      console.log(`🔄 Tool is immediately available in workflows (no restart needed)`);
+      
       return created.numeric_id;
     } catch (error: any) {
       console.error('❌ Error syncing tool:', error);
